@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Herramienta guiada para diseñar actividades de aula fundamentadas en el Marco AILit de alfabetización en IA (OCDE / Unión Europea, 2026).">
+<title>Taller AILit · Diseña y aprende con el marco de alfabetización en IA</title>
+<style>
+:root{
+  /* Paleta oficial del Marco AILit (muestreada del PDF original) */
+  --int:#01408D; --int-05:#F2F6FB; --int-15:#D6E1EE;
+  --cre:#CFFA7A; --cre-suave:#F1FCDC; --cre-texto:#3E5C12;
+  --ges:#E75234; --ges-suave:#FBE4DF;
+  --mol:#7794CA; --mol-suave:#E7ECF6;
+  /* Neutros */
+  --tinta:#12243A; --tinta-2:#4A5C70; --tinta-3:#64748B;
+  --linea:#DAE1E9; --linea-2:#EDF1F5; --fondo:#F4F7FA; --papel:#FFFFFF;
+  --r:12px; --sombra:0 1px 2px rgba(18,36,58,.05), 0 6px 18px rgba(18,36,58,.06);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--fondo);color:var(--tinta);
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;line-height:1.6;
+}
+h1,h2,h3,h4{line-height:1.25;margin:0 0 .45em;font-weight:700}
+p{margin:0 0 .85em}
+a{color:var(--int)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{
+  outline:3px solid var(--int);outline-offset:2px;border-radius:4px;
+}
+button{font:inherit;cursor:pointer}
+img{max-width:100%}
+
+/* ================= CABECERA ================= */
+.banner-embed{
+  background:var(--cre-suave);border-bottom:2px solid var(--cre);color:var(--cre-texto);
+  padding:10px 16px;font-size:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.banner-embed .btn-banner{
+  margin-left:auto;background:var(--int);color:#fff;text-decoration:none;font-weight:600;
+  padding:7px 14px;border-radius:8px;white-space:nowrap;
+}
+header.app{background:var(--int);color:#fff;border-bottom:5px solid var(--cre)}
+.cabecera{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{
+  width:40px;height:40px;border-radius:50%;flex:0 0 auto;
+  background:conic-gradient(from 225deg,var(--cre) 0 25%,var(--ges) 25% 50%,var(--mol) 50% 75%,#1E5FB4 75% 100%);
+  box-shadow:0 0 0 3px rgba(255,255,255,.22);
+}
+header.app h1{font-size:18px;margin:0}
+header.app .sub{font-size:12.5px;opacity:.85;margin:1px 0 0}
+nav.tabs{background:#013370;overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav.tabs ul{max-width:1240px;margin:0 auto;padding:0 8px;display:flex;gap:2px;list-style:none;white-space:nowrap}
+nav.tabs button{
+  background:transparent;border:0;color:#CBD9EA;padding:12px 15px;font-size:14.5px;font-weight:600;
+  border-bottom:3px solid transparent;
+}
+nav.tabs button:hover{color:#fff}
+nav.tabs button[aria-current="page"]{color:#fff;border-bottom-color:var(--cre)}
+
+main{max-width:1240px;margin:0 auto;padding:20px 16px 80px}
+.vista{display:none}
+.vista.on{display:block}
+.estrecho{max-width:820px;margin:0 auto}
+
+/* ================= TARJETAS ================= */
+.tarjeta{background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);box-shadow:var(--sombra);margin-bottom:18px}
+.tarjeta > .cab{padding:14px 18px;border-bottom:1px solid var(--linea)}
+.tarjeta > .cab h2{font-size:17px;margin:0}
+.tarjeta > .cab .pista{font-size:13px;color:var(--tinta-3);margin:3px 0 0}
+.tarjeta > .cuerpo{padding:18px}
+@media(max-width:560px){.tarjeta > .cuerpo,.tarjeta > .cab{padding:14px}}
+
+/* ================= PORTADA ================= */
+.hero{
+  background:linear-gradient(180deg,var(--int) 0%,#0257B8 100%);color:#fff;border-radius:var(--r);
+  padding:30px 26px;margin-bottom:20px;
+}
+.hero h2{font-size:26px;max-width:22ch}
+.hero p{font-size:16.5px;opacity:.94;max-width:62ch}
+.hero .acciones{margin-top:18px}
+@media(max-width:560px){.hero{padding:22px 18px}.hero h2{font-size:22px}}
+.video-caja{
+  position:relative;width:100%;padding-top:56.25%;background:#0B1B2B;border-radius:10px;overflow:hidden;margin-bottom:6px;
+}
+.video-caja iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-hueco{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#9FB4C9;text-align:center;padding:20px;font-size:14px;
+}
+.video-hueco b{color:#DCE7F2;display:block;margin-bottom:6px;font-size:15.5px}
+.video-hueco code{background:rgba(255,255,255,.1);padding:2px 6px;border-radius:4px;font-size:13px}
+
+.rejilla3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rejilla2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:820px){.rejilla3{grid-template-columns:1fr}}
+@media(max-width:600px){.rejilla2{grid-template-columns:1fr}}
+.bloque-amb{border:1px solid var(--linea);border-radius:10px;overflow:hidden;background:#fff;height:100%}
+.bloque-amb .tit{padding:10px 13px;font-weight:700;font-size:14.5px}
+.bloque-amb .txt{padding:12px 13px;font-size:13.6px;color:var(--tinta-2)}
+
+/* ================= AVISOS ================= */
+.aviso{border-left:4px solid var(--int);background:var(--int-05);padding:12px 14px;border-radius:0 8px 8px 0;margin:0 0 14px;font-size:14.5px}
+.aviso:last-child{margin-bottom:0}
+.aviso b{display:block;margin-bottom:3px}
+.aviso.alerta{border-left-color:var(--ges);background:var(--ges-suave)}
+.aviso.marco{border-left-color:var(--cre);background:var(--cre-suave)}
+.aviso.calma{border-left-color:var(--mol);background:var(--mol-suave)}
+
+/* ================= FORMULARIO ================= */
+label.campo{display:block;margin-bottom:15px}
+label.campo > .et{display:block;font-size:13px;font-weight:700;color:var(--tinta-2);margin-bottom:5px}
+label.campo > .et .opt{font-weight:400;color:var(--tinta-3)}
+input[type=text],input[type=number],select,textarea{
+  width:100%;padding:11px 12px;border:1.5px solid var(--linea);border-radius:8px;
+  font:inherit;font-size:15.5px;color:var(--tinta);background:#fff;
+}
+textarea{resize:vertical;min-height:96px}
+.pista-campo{font-size:13px;color:var(--tinta-3);margin:5px 0 0}
+
+.opcion{
+  display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border:1.5px solid var(--linea);
+  border-radius:10px;margin-bottom:9px;cursor:pointer;background:#fff;
+}
+.opcion:hover{border-color:var(--mol);background:var(--int-05)}
+.opcion input{margin-top:4px;flex:0 0 auto;width:18px;height:18px;accent-color:var(--int)}
+.opcion .txt{font-size:15px;flex:1;min-width:0}
+.opcion.sel{border-color:var(--int);background:var(--int-05);box-shadow:inset 4px 0 0 var(--int)}
+.opcion .def{display:block;font-size:13.4px;color:var(--tinta-2);margin-top:4px}
+.cod{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;padding:2px 8px;
+  border-radius:5px;background:var(--int);color:#fff;margin-right:8px;
+}
+.cod.gris{background:var(--linea-2);color:var(--tinta-2)}
+.et-marco,.et-tuya{
+  display:inline-block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+  padding:2px 8px;border-radius:5px;margin-left:8px;vertical-align:1px;white-space:nowrap;
+}
+.et-marco{background:var(--int);color:#fff}
+.et-tuya{background:#fff;color:var(--tinta-2);border:1.5px dashed var(--tinta-3)}
+
+/* ================= ÁMBITOS ================= */
+.ambitos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:620px){.ambitos{grid-template-columns:1fr}}
+.amb{border:2px solid var(--linea);border-radius:11px;background:#fff;padding:0;overflow:hidden;text-align:left;display:flex;flex-direction:column;width:100%}
+.amb:hover{border-color:var(--mol)}
+.amb .barra{padding:11px 13px;font-weight:700;font-size:15px}
+.amb .n{display:block;font-size:11.5px;font-weight:600;opacity:.85;margin-bottom:2px}
+.amb .lema{padding:11px 13px;font-size:13.4px;color:var(--tinta-2);flex:1}
+.amb .orden{padding:0 13px 11px;font-size:12.5px;color:var(--tinta-3)}
+.amb.sel{border-color:var(--int);box-shadow:0 0 0 3px var(--int-15)}
+.amb.sel .lema{color:var(--tinta)}
+
+.niveles{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+@media(max-width:700px){.niveles{grid-template-columns:1fr}}
+.niv{border:2px solid var(--linea);border-radius:11px;background:#fff;padding:14px;text-align:left;width:100%}
+.niv:hover{border-color:var(--mol)}
+.niv.sel{border-color:var(--int);background:var(--int-05);box-shadow:0 0 0 3px var(--int-15)}
+.niv b{display:block;font-size:15.5px;margin-bottom:4px}
+.niv small{color:var(--tinta-2);font-size:13.2px;display:block}
+
+/* ================= MICROFORMACIÓN ================= */
+.guia{border:1.5px solid var(--int-15);background:var(--int-05);border-radius:11px;padding:16px 17px;margin-bottom:20px}
+.guia h3{font-size:13px;text-transform:uppercase;letter-spacing:.7px;color:var(--int);margin:0 0 10px}
+.guia .fila{display:flex;gap:11px;margin-bottom:11px;font-size:14.6px}
+.guia .fila:last-of-type{margin-bottom:0}
+.guia .fila .ic{
+  flex:0 0 auto;width:24px;height:24px;border-radius:6px;background:var(--int);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px;
+}
+.guia .fila.err .ic{background:var(--ges)}
+.guia .fila strong{display:block}
+.guia .fuente{font-size:12.5px;color:var(--tinta-3);border-top:1px solid var(--int-15);margin-top:12px;padding-top:9px}
+.reflexion{background:#fff;border:1.5px solid var(--cre);border-radius:10px;padding:14px;margin-top:14px}
+.reflexion .et{display:block;font-size:13px;font-weight:700;color:var(--cre-texto);margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
+.reflexion .preg{font-size:15.5px;font-weight:600;margin-bottom:9px;display:block}
+
+/* ================= ASISTENTE ================= */
+.progreso{background:#fff;border:1px solid var(--linea);border-radius:var(--r);padding:14px 16px;margin-bottom:18px;box-shadow:var(--sombra)}
+.progreso .lin{height:8px;background:var(--linea-2);border-radius:99px;overflow:hidden;margin-bottom:9px}
+.progreso .lin i{display:block;height:100%;background:var(--int);border-radius:99px;transition:width .3s}
+.progreso .meta{display:flex;justify-content:space-between;gap:12px;font-size:13.4px;color:var(--tinta-2);flex-wrap:wrap}
+.progreso .meta b{color:var(--tinta)}
+.pasos-mini{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.pasos-mini button{
+  border:1.5px solid var(--linea);background:#fff;color:var(--tinta-3);border-radius:7px;
+  width:30px;height:30px;font-size:13px;font-weight:700;padding:0;
+}
+.pasos-mini button.hecho{border-color:var(--int);color:var(--int)}
+.pasos-mini button.actual{background:var(--int);border-color:var(--int);color:#fff}
+.nav-pasos{
+  position:sticky;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid var(--linea);
+  padding:12px 0;margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  backdrop-filter:blur(6px);
+}
+.btn{border:1.5px solid var(--int);background:var(--int);color:#fff;padding:11px 20px;border-radius:9px;font-weight:600;font-size:15px}
+.btn:hover{filter:brightness(1.12)}
+.btn.sec{background:#fff;color:var(--int)}
+.btn.sec:hover{background:var(--int-05);filter:none}
+.btn.fantasma{background:transparent;border-color:var(--linea);color:var(--tinta-2)}
+.btn.fantasma:hover{background:var(--linea-2)}
+.btn:disabled{opacity:.4;cursor:not-allowed;filter:none}
+.btn.peq{padding:7px 13px;font-size:13.5px;border-radius:7px}
+.acciones{display:flex;gap:10px;flex-wrap:wrap}
+.empuje{margin-left:auto}
+@media(max-width:560px){.empuje{margin-left:0}.nav-pasos .btn{flex:1 1 auto}}
+
+/* ================= FICHA ================= */
+.ficha{background:#fff;border:1px solid var(--linea);border-radius:var(--r);overflow:hidden;box-shadow:var(--sombra)}
+.ficha .encab{padding:20px 22px;color:#fff;background:var(--int)}
+.ficha .encab .kicker{font-size:11.5px;text-transform:uppercase;letter-spacing:1.1px;opacity:.85;font-weight:700}
+.ficha .encab h2{font-size:22px;margin:5px 0 7px}
+.ficha .encab .meta{font-size:13.5px;opacity:.92}
+.ficha .contenido{padding:20px 22px}
+@media(max-width:560px){.ficha .encab,.ficha .contenido{padding:16px}}
+.bl{margin-bottom:22px}
+.bl:last-child{margin-bottom:0}
+.bl > h3{font-size:12px;text-transform:uppercase;letter-spacing:.9px;color:var(--tinta-3);border-bottom:2px solid var(--linea);padding-bottom:5px;margin-bottom:10px}
+.bl ul,.bl ol{margin:0 0 10px;padding-left:22px}
+.bl li{margin-bottom:6px}
+.objetivo{background:var(--cre-suave);border-left:4px solid var(--cre);padding:14px 16px;border-radius:0 9px 9px 0;font-size:16px}
+table.just{width:100%;border-collapse:collapse;font-size:14px}
+table.just th,table.just td{border:1px solid var(--linea);padding:9px 11px;text-align:left;vertical-align:top}
+table.just th{background:var(--linea-2);width:30%;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--tinta-2)}
+@media(max-width:620px){
+  table.just th,table.just td{display:block;width:100%;border-bottom:0}
+  table.just tr{display:block;border-bottom:1px solid var(--linea)}
+  table.just tr:last-child td:last-child{border-bottom:1px solid var(--linea)}
+}
+.chip{display:inline-block;font-size:13px;background:var(--linea-2);border:1px solid var(--linea);border-radius:6px;padding:3px 9px;margin:0 5px 5px 0}
+.chip.marco{background:var(--int-05);border-color:var(--int-15)}
+.chip.tuya{background:#fff;border-style:dashed;border-color:var(--tinta-3)}
+.dialogo{background:var(--int-05);border-radius:9px;padding:12px 14px;margin-bottom:10px;font-size:14.5px}
+.dialogo .p{font-weight:600;color:var(--int);display:block;margin-bottom:4px}
+.fuente{font-size:12.5px;color:var(--tinta-3);border-top:1px solid var(--linea);padding-top:11px;margin-top:8px}
+
+/* ================= EXPLORADOR ================= */
+.buscador{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.buscador input{flex:1;min-width:200px}
+.res{border:1px solid var(--linea);border-left-width:5px;border-radius:9px;padding:13px 15px;margin-bottom:10px;background:#fff}
+.res h4{font-size:15px;margin:0 0 3px}
+.res .ruta{font-size:12.5px;color:var(--tinta-3);margin-bottom:6px}
+.res .frag{font-size:14px;color:var(--tinta-2)}
+.res mark{background:var(--cre);color:var(--tinta);padding:0 2px;border-radius:3px}
+.exp-amb{border:1px solid var(--linea);border-radius:var(--r);overflow:hidden;margin-bottom:16px;background:#fff;box-shadow:var(--sombra)}
+.exp-amb > .tit{padding:14px 18px;font-weight:700}
+.exp-amb .lema-exp{display:block;font-size:13px;font-weight:500;opacity:.92;margin-top:2px}
+.exp-amb .desc{padding:13px 18px;font-size:14px;color:var(--tinta-2);border-bottom:1px solid var(--linea)}
+details.comp{border-bottom:1px solid var(--linea)}
+details.comp:last-child{border-bottom:none}
+details.comp > summary{padding:13px 18px;cursor:pointer;font-size:15px;font-weight:600;list-style:none;display:flex;gap:11px}
+details.comp > summary::-webkit-details-marker{display:none}
+details.comp > summary:hover{background:var(--int-05)}
+details.comp > summary .num{flex:0 0 auto;width:25px;height:25px;border-radius:6px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+details.comp .det{padding:0 18px 18px;font-size:14.3px}
+.niv-exp{border-left:3px solid var(--linea);padding-left:14px;margin:14px 0}
+.niv-exp b{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--tinta-3)}
+.niv-exp .aula{background:var(--linea-2);border-radius:8px;padding:10px 12px;font-size:13.8px;margin-top:6px}
+.niv-exp .aula em{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--tinta-3);font-style:normal;font-weight:700;margin-bottom:3px}
+table.tab{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+table.tab th,table.tab td{border:1px solid var(--linea);padding:9px 11px;text-align:left;vertical-align:top}
+table.tab th{background:var(--linea-2);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--tinta-2)}
+table.tab td.c{width:56px;font-weight:700;color:var(--int);text-align:center}
+
+/* ================= BIBLIOTECA / MODAL ================= */
+.item-bib{border:1px solid var(--linea);border-radius:10px;padding:14px;margin-bottom:10px;background:#fff;display:flex;gap:13px}
+.item-bib .franja{width:6px;border-radius:3px;flex:0 0 auto}
+.item-bib .info{flex:1;min-width:0}
+.item-bib h4{margin:0 0 3px;font-size:15.5px}
+.item-bib .sub{font-size:13px;color:var(--tinta-3)}
+.item-bib .bots{display:flex;gap:6px;flex-direction:column}
+@media(max-width:620px){.item-bib{flex-wrap:wrap}.item-bib .bots{flex-direction:row;width:100%}}
+.velo{position:fixed;inset:0;background:rgba(18,36,58,.6);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.velo .caja{background:#fff;border-radius:12px;max-width:780px;width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden}
+.velo .caja > header{padding:14px 18px;background:var(--int);color:#fff;display:flex;gap:12px;align-items:center}
+.velo .caja > header h3{margin:0;font-size:16px;flex:1}
+.velo .caja > header button{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:7px;padding:6px 13px;font-size:14px}
+.velo .caja .cm{padding:16px 18px;overflow:auto}
+.velo textarea{min-height:320px;font-family:ui-monospace,Consolas,monospace;font-size:13px}
+
+/* ================= COMPROBACIÓN ================= */
+.quiz .item{border:1.5px solid var(--linea);border-radius:10px;padding:13px 15px;margin-bottom:11px;background:#fff}
+.quiz .item p{margin:0 0 9px;font-size:15px}
+.quiz .bots{display:flex;gap:8px}
+.quiz .fb{margin-top:10px;font-size:14px;padding:10px 12px;border-radius:8px;display:none}
+.quiz .fb.on{display:block}
+.quiz .fb.bien{background:var(--cre-suave);border-left:4px solid var(--cre)}
+.quiz .fb.mal{background:var(--ges-suave);border-left:4px solid var(--ges)}
+
+/* ================= IMPRESIÓN ================= */
+@media print{
+  body{background:#fff;font-size:11pt}
+  header.app,nav.tabs,.banner-embed,.nav-pasos,.progreso,.no-print,.guia,.acciones{display:none !important}
+  main{padding:0;max-width:none}
+  .ficha{border:0;box-shadow:none}
+  .ficha .encab{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .objetivo,.chip,table.just th,.dialogo{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bl{break-inside:avoid}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+}
+</style>
+</head>
+<body>
+
+<header class="app">
+  <div class="cabecera">
+    <div class="logo" aria-hidden="true"></div>
+    <div>
+      <h1>Taller AILit</h1>
+      <p class="sub">Aprende el marco de alfabetización en IA diseñando una actividad para tu aula</p>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Secciones">
+  <ul id="listaTabs"></ul>
+</nav>
+
+<main>
+  <section id="v-inicio" class="vista on" aria-labelledby="t-inicio"></section>
+  <section id="v-crear" class="vista" aria-labelledby="t-crear"></section>
+  <section id="v-explorar" class="vista" aria-labelledby="t-explorar"></section>
+  <section id="v-curriculo" class="vista" aria-labelledby="t-curriculo"></section>
+  <section id="v-biblioteca" class="vista" aria-labelledby="t-biblioteca"></section>
+  <section id="v-transparencia" class="vista" aria-labelledby="t-transparencia"></section>
+</main>
+
+<div id="anuncio" role="status" aria-live="polite" class="no-print" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
+
+<script>
+// ============================================================================
+// BASE DE DATOS DEL MARCO AILit
+// Fuente: OECD / Unión Europea (2026). "Cómo preparar a los alumnos para la era
+// de la IA: Marco de competencias sobre IA para la educación primaria y
+// secundaria". OECD Publishing, París. Licencia CC BY 4.0.
+// Todos los textos de competencias, expectativas y escenarios son literales de
+// la edición oficial en español (AILF_es.pdf, pp. 19-43).
+// ============================================================================
+
+const AILIT = {
+  meta: {
+    titulo: "Marco AILit de alfabetización en IA",
+    subtitulo: "Cómo preparar a los alumnos para la era de la IA",
+    fuente: "OECD / Unión Europea (2026). Cómo preparar a los alumnos para la era de la IA: Marco de competencias sobre IA para la educación primaria y secundaria. OECD Publishing, París.",
+    doi: "https://doi.org/10.1787/65cd27d4-en",
+    licencia: "CC BY 4.0",
+    web: "https://ailiteracyframework.org/es/",
+    definicion: "La alfabetización en IA representa los conocimientos técnicos, las habilidades duraderas y las actitudes de cara al futuro que se necesitan para prosperar en un mundo influido por la IA. Permiten a los alumnos interactuar con la IA, crear con ella, gestionarla y moldearla, al tiempo que evalúan de forma crítica sus ventajas, sus riesgos y sus implicaciones éticas."
+  },
+
+  // --------------------------------------------------------------------------
+  // CONOCIMIENTOS: 4 bloques, 17 enunciados
+  // --------------------------------------------------------------------------
+  conocimientos: [
+    {
+      id: "1", titulo: "La naturaleza de la IA",
+      items: [
+        { id: "1.1", texto: "La IA no es humana. Los sistemas de IA utilizan algoritmos para combinar procedimientos paso a paso con inferencias estadísticas (p. ej., ponderaciones y sesgos) con el fin de procesar datos, detectar patrones y generar resultados basados en probabilidades." },
+        { id: "1.2", texto: "Las máquinas «aprenden» infiriendo cómo generar resultados en respuesta a patrones presentes en los datos con los que se las ha entrenado y a la nueva información que reciben. Lo hacen con distintos niveles de autonomía, adaptabilidad y precisión." },
+        { id: "1.3", texto: "La IA generativa utiliza probabilidades para generar resultados avanzados en diversos medios (p. ej., texto, audio, elementos visuales), pero carece de intención y de una verdadera comprensión humana." },
+        { id: "1.4", texto: "Existen numerosos tipos de sistemas de IA, que funcionan de manera diferente en función de su finalidad, su programación y los datos con los que se los ha entrenado. En función del tipo de herramienta, es posible que los usuarios sepan que están interactuando con IA; en otras ocasiones, los sistemas de IA pueden funcionar en segundo plano y su influencia no es evidente." },
+        { id: "1.5", texto: "La IA requiere recursos considerables, como energía, minerales y agua, para satisfacer sus necesidades de potencia de cálculo. La energía y las infraestructuras necesarias para desarrollar y mantener los sistemas de IA contribuyen al aumento de las emisiones de carbono." }
+      ]
+    },
+    {
+      id: "2", titulo: "La IA refleja las decisiones y las perspectivas humanas",
+      items: [
+        { id: "2.1", texto: "Para crear y mantener los sistemas de IA, se necesita que las personas diseñen algoritmos, recopilen, gestionen, evalúen y etiqueten datos y moderen los contenidos dañinos. Estos sistemas reflejan decisiones, supuestos y prácticas laborales humanas." },
+        { id: "2.2", texto: "La IA se entrena con enormes conjuntos de datos procedentes de información disponible públicamente, contenidos generados por los usuarios, bases de datos seleccionadas o datos del mundo real. Estos conjuntos pueden incluir materiales protegidos por derechos de autor, datos sintéticos e información no verificada, así como datos obtenidos de forma poco ética o sin consentimiento." },
+        { id: "2.3", texto: "Los sistemas de IA pueden recopilar datos durante las interacciones con los usuarios y dichos datos influyen en las decisiones, los procesos y los resultados en tiempo real." },
+        { id: "2.4", texto: "Los sistemas de IA están entrenados para identificar patrones entre los elementos de datos que los seres humanos han seleccionado, categorizado y priorizado. Este entrenamiento también puede incluir el aprendizaje por refuerzo." },
+        { id: "2.5", texto: "En los sistemas de IA existe un sesgo intrínseco, que también puede reflejar sesgos sociales inherentes a los datos de entrenamiento o al diseño de los algoritmos. Los seres humanos pueden empeorar o mitigar estos sesgos, de forma accidental o deliberada." }
+      ]
+    },
+    {
+      id: "3", titulo: "Capacidades y limitaciones de la IA",
+      items: [
+        { id: "3.1", texto: "La IA puede realizar tareas como el reconocimiento de patrones, la automatización y la creación de contenidos. Carece de emociones, de razonamiento ético, de pensamiento crítico, de contexto y de originalidad, a pesar de que simula estos aspectos en sus resultados." },
+        { id: "3.2", texto: "La capacidad de la IA generativa, en particular de los grandes modelos de lenguaje (LLM), para producir contenidos muy avanzados puede dificultar la distinción entre hechos e invenciones, lo que aumenta los riesgos de desinformación e información errónea, «alucinaciones», tergiversación y manipulación." },
+        { id: "3.3", texto: "Los sistemas de IA pueden generar resultados diferentes en respuesta a la misma entrada, en función tanto de la entrada en sí como de la forma en que el sistema está diseñado para seleccionar o priorizar características y parámetros específicos." },
+        { id: "3.4", texto: "Los sistemas de IA y sus algoritmos subyacentes funcionan con distintos grados de transparencia e interpretabilidad. En algunos casos es posible determinar cómo se optimiza un algoritmo; en otras ocasiones, esto es difícil o imposible." }
+      ]
+    },
+    {
+      id: "4", titulo: "El papel de la IA en la sociedad",
+      items: [
+        { id: "4.1", texto: "Los sistemas de IA pueden influir en las decisiones de muchos ámbitos de la vida cotidiana: filtrado de información, recomendaciones, clasificaciones y reconocimiento de patrones. En todos los usos de la IA, los seres humanos deben ejercer su voluntad y conservar la facultad de tomar decisiones intencionadas y autónomas." },
+        { id: "4.2", texto: "Los sistemas de IA deben comprenderse, auditarse y regularse para garantizar que su uso maximice los beneficios y minimice los perjuicios para las personas y la sociedad." },
+        { id: "4.3", texto: "El diseño responsable y ético de la IA abarca la equidad, la transparencia, la explicabilidad, la rendición de cuentas, el respeto de la privacidad y el cumplimiento de la legislación." }
+      ]
+    }
+  ],
+
+  // --------------------------------------------------------------------------
+  // HABILIDADES: 7
+  // --------------------------------------------------------------------------
+  habilidades: [
+    { id: "pensamiento crítico", nombre: "Pensamiento crítico", definicion: "Evaluar el uso de la IA y el contenido generado por la IA en cuanto a su exactitud, imparcialidad y sesgo para tomar decisiones fundamentadas y éticas.", pregunta: "¿Cómo sé si el uso de la IA es pertinente, adecuado o responsable? ¿Cómo puedo verificar la precisión de los resultados generados por la IA y reducir el riesgo de sesgos perjudiciales?" },
+    { id: "colaboración", nombre: "Colaboración", definicion: "Orientar las interacciones con la IA comunicándose con claridad, proporcionando valoraciones y gestionando las tareas compartidas.", pregunta: "¿Cómo puedo utilizar la IA de forma iterativa e intencionada para lograr un objetivo?" },
+    { id: "creatividad", nombre: "Creatividad", definicion: "Utilizar la IA para desarrollar ideas originales y reflexionar sobre ellas o para explorar ideas nuevas.", pregunta: "¿Cómo ha evolucionado o cambiado mi idea con la IA? ¿Cómo puedo utilizar la IA de forma responsable para hacer realidad mis visiones creativas?" },
+    { id: "solución de problemas", nombre: "Solución de problemas", definicion: "Determinar si conviene utilizar la IA para una tarea, así como cuándo y cómo hacerlo, evaluando sus capacidades, sus riesgos y sus implicaciones éticas.", pregunta: "¿Cómo sé que la IA es la herramienta adecuada para la tarea en cuestión?" },
+    { id: "pensamiento computacional", nombre: "Pensamiento computacional", definicion: "Descomponer los problemas y proporcionar instrucciones de forma que los sistemas de IA puedan contribuir eficazmente a las soluciones.", pregunta: "¿Cómo planteo mi problema para que la IA pueda ayudar a resolverlo?" },
+    { id: "comunicación", nombre: "Comunicación", definicion: "Describir cómo funciona la IA de forma que se fomente la transparencia, se evite el antropomorfismo y se promueva un uso responsable.", pregunta: "¿Cómo puedo describir la IA para mí y para los demás? ¿Cómo puedo utilizar mis conocimientos en IA para fomentar un uso ético?" },
+    { id: "autoconciencia y conciencia social", nombre: "Autoconciencia y conciencia social", definicion: "Reconocer cómo la IA influye en las decisiones personales, las relaciones y las comunidades y reflexionar sobre sus efectos sociales y medioambientales en general.", pregunta: "¿Cómo me afecta la IA y cómo afecta a mis compañeros de clase, a mi comunidad y al medioambiente?" }
+  ],
+
+  // --------------------------------------------------------------------------
+  // ACTITUDES: 6
+  // --------------------------------------------------------------------------
+  actitudes: [
+    { id: "reflexión", nombre: "Reflexión", definicion: "Los alumnos se cuestionan los supuestos y las narrativas en torno al uso de la IA para determinar cómo la IA puede influir en sus propias vidas. Valoran de forma crítica las herramientas y los resultados de la IA y ponen a prueba las nuevas afirmaciones basándose en el razonamiento y las evidencias." },
+    { id: "responsabilidad", nombre: "Responsabilidad", definicion: "Los alumnos reflexionan detenidamente sobre cómo utilizan la IA y reconocen que son responsables de sus propias decisiones. Comprenden la importancia de la transparencia y de la toma de decisiones fundamentadas, incluida la decisión de no utilizar la IA." },
+    { id: "curiosidad", nombre: "Curiosidad", definicion: "Los alumnos sienten interés por explorar qué puede y qué no puede hacer la IA en la actualidad y cómo podría evolucionar en el futuro. Consideran que el aprendizaje es un proceso continuo y aceptan la experimentación." },
+    { id: "innovación", nombre: "Innovación", definicion: "Los alumnos tratan de utilizar la IA para abordar retos del mundo real y aprovechar nuevas oportunidades. Se ven a sí mismos como usuarios empoderados y creadores activos de un mundo marcado por la IA, y no solo como consumidores." },
+    { id: "adaptabilidad", nombre: "Adaptabilidad", definicion: "Los alumnos demuestran perseverancia y flexibilidad a la hora de trabajar con la IA. Saben cómo replantear los problemas y los enfoques en respuesta a resultados sesgados y comportamientos impredecibles, entendiendo que aprender con IA es un proceso iterativo." },
+    { id: "empatía", nombre: "Empatía", definicion: "Los alumnos analizan detenidamente cómo la IA afecta a las personas, a las comunidades y al medioambiente. Evalúan el efecto que las herramientas de IA pueden tener en su propia salud mental y en el bienestar de los demás, y adoptan los puntos de vista de los demás." }
+  ],
+
+  // --------------------------------------------------------------------------
+  // ÁMBITOS Y COMPETENCIAS
+  // --------------------------------------------------------------------------
+  ambitos: [
+    {
+      id: "INT", codigoOficial: "EwAI", nombre: "Interactuar con la IA",
+      lema: "Convertirse en participantes críticos y responsables en un mundo marcado por la IA",
+      color: "#01408D", colorTexto: "#FFFFFF", colorSuave: "#E4EBF4",
+      descripcion: "Ámbito fundacional del marco. Sienta las bases de lo que todos los alumnos deben saber y ser capaces de hacer al interactuar con la IA en distintos contextos: identificar los sistemas de IA y acceder a ellos, comprender las oportunidades y los riesgos de su uso, evaluar los resultados y tomar decisiones sobre el papel de la IA en la vida cotidiana.",
+      competencias: [
+        {
+          num: 1, enunciado: "Reconocer el papel y la influencia de la IA en diferentes contextos.",
+          conocimientos: ["1.4"], habilidades: ["autoconciencia y conciencia social"], actitudes: ["curiosidad", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos son capaces de identificar en qué aspectos de su vida cotidiana están presentes los distintos tipos de IA.", escenario: "Los alumnos juegan a «IA o no IA» con sus profesores. A partir de ejemplos, como dispositivos domésticos inteligentes, redes sociales o aplicaciones, pueden clasificar cada uno en función de si utiliza IA o no." },
+            intermedio: { expectativa: "Los alumnos comparten ejemplos de cómo los sistemas de IA han influido en sus propias decisiones y experiencias en casa, en la escuela o en Internet.", escenario: "Los alumnos comparan ejemplos de páginas de destino «para ti» en plataformas de redes sociales y reflexionan sobre cómo y por qué les influye lo que aparece en ellas." },
+            avanzado: { expectativa: "Los alumnos son capaces de analizar cómo los sistemas de IA pueden moldear las creencias y los comportamientos de las personas en su calidad de consumidores, estudiantes, trabajadores y ciudadanos.", escenario: "Los alumnos analizan capturas de pantalla de chatbots y aplicaciones de IA para detectar cuándo es posible que estén diseñados para persuadir, en lugar de informar. De la mano de los profesores, analizan cómo se pueden diseñar funciones como el recuento de «rachas», los nombres de los personajes o las respuestas excesivamente complacientes para aumentar la interacción." }
+          }
+        },
+        {
+          num: 2, enunciado: "Describir cómo los sistemas de IA realizan tareas utilizando un lenguaje que aborde y aclare las ideas erróneas más habituales.",
+          conocimientos: ["1.3", "1.4"], habilidades: ["comunicación"], actitudes: ["reflexión", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos saben que la IA es una herramienta no humana que genera resultados basados en patrones de datos y que carece de un contexto o una comprensión auténticos.", escenario: "Los profesores presentan expresiones habituales que se utilizan para describir el uso de la IA (p. ej., «la IA piensa», «la IA entiende») y los alumnos identifican cuáles son engañosas y por qué. Los alumnos elaboran descripciones mejores utilizando un lenguaje técnicamente preciso y adecuado para su edad y, a continuación, reflexionan sobre cómo el lenguaje condiciona su comprensión de lo que la IA puede o no puede hacer." },
+            intermedio: { expectativa: "Los alumnos describen con precisión cómo una herramienta de IA concreta realiza una tarea con el fin de abordar las ideas erróneas más habituales sobre el funcionamiento de la IA.", escenario: "Los alumnos identifican un mito sobre la IA que es común entre sus compañeros (p. ej., «La IA entiende como los humanos» o «La IA siempre acierta»). Crean un producto, como un póster, un vídeo corto o un pódcast, para abordar la idea errónea explicando cómo funciona la IA." },
+            avanzado: { expectativa: "Los alumnos explican cómo funcionan los distintos sistemas de IA utilizando un lenguaje que no les atribuya rasgos o capacidades humanos, conscientes de que la forma en que se expresan influye en la comprensión.", escenario: "Los alumnos analizan distintos tipos de herramientas de IA y comparan las opciones de diseño que hacen que los sistemas parezcan humanos, cercanos o inteligentes. En grupos pequeños, los alumnos practican explicando cómo las herramientas generan resultados, centrándose en los procesos programados en lugar de en las cualidades humanas. Entre todos comparten y perfeccionan sus explicaciones y reflexionan sobre cómo las distintas características de diseño influyen en la comprensión de los sistemas de IA y en la confianza en ellos." }
+          }
+        },
+        {
+          num: 3, enunciado: "Evaluar si los resultados de la IA se deben aceptar, revisar o rechazar.",
+          conocimientos: ["3.1", "3.2"], habilidades: ["pensamiento crítico"], actitudes: ["responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos entienden por qué se deben verificar los resultados generados por la IA y reconocen cómo pueden verificar el contenido por sí mismos.", escenario: "Los alumnos revisan la solución que ofrece una herramienta basada en IA a un problema matemático y la explicación que la acompaña y, a continuación, comparan el contenido generado por la IA con los procesos que sus profesores hayan presentado a la clase." },
+            intermedio: { expectativa: "Los alumnos verifican la precisión y la pertinencia de los resultados generados por la IA consultando fuentes fiables y teniendo en cuenta las expectativas específicas de la tarea.", escenario: "En grupos pequeños, los alumnos planifican un itinerario para un turista que visita las ciudades donde viven. Cuando los profesores proporcionan recomendaciones generadas por IA sobre restaurantes de esas zonas, los alumnos comparan dichas recomendaciones con otras fuentes para determinar si la información está desactualizada, es inexacta o se trata de una «alucinación». A partir de ahí, los alumnos se basan en sus propios conocimientos y en su experiencia para decidir si los lugares resultarían atractivos para un visitante." },
+            avanzado: { expectativa: "Los alumnos evalúan los resultados generados por la IA y justifican sus decisiones de aceptarlos, revisarlos o rechazarlos.", escenario: "Los profesores presentan diferentes interpretaciones generadas por la IA de un acontecimiento histórico y los alumnos recurren a fuentes secundarias o primarias de confianza para verificar la precisión de las interpretaciones y argumentan cuál incluirían en un informe final." }
+          }
+        },
+        {
+          num: 4, enunciado: "Analizar cómo los sistemas de IA predictiva ofrecen recomendaciones que pueden fundamentar o limitar las perspectivas.",
+          conocimientos: ["1.1", "3.2", "4.1"], habilidades: ["autoconciencia y conciencia social"], actitudes: ["curiosidad", "reflexión"],
+          niveles: {
+            basico: { expectativa: "Los alumnos saben que la IA puede utilizar datos sobre un usuario para ofrecerle recomendaciones o predicciones.", escenario: "Los alumnos elaboran una lista de recomendaciones de películas y series de televisión para un personaje literario que les guste y justifican sus elecciones con ejemplos del texto. Entre todos comparten sus listas y comentan lo que saben sobre los personajes y, a continuación, comparan este proceso con la forma en que la IA genera recomendaciones." },
+            intermedio: { expectativa: "Los alumnos reflexionan sobre cuándo las recomendaciones generadas por IA pueden resultarles útiles y cuándo pueden parecer demasiado limitadas y generales.", escenario: "Los alumnos comparan las recomendaciones de una aplicación de música con una lista de sus propias canciones y artistas favoritos y, a continuación, debaten sobre si los algoritmos reforzaron sus preferencias o les presentaron nuevos géneros." },
+            avanzado: { expectativa: "Los alumnos sopesan las ventajas y los inconvenientes de los sistemas de IA que utilizan datos para determinar el acceso a la información y reflexionan sobre cómo esto podría influir en las visiones del mundo, las ideas o los comportamientos.", escenario: "Los alumnos analizan casos prácticos sobre cómo los sistemas de recomendación de las redes sociales han influido en la percepción pública de un tema y, a continuación, debaten sobre cómo esto podría afectar al comportamiento electoral de las personas." }
+          }
+        },
+        {
+          num: 5, enunciado: "Comparar cómo los sistemas de IA consumen energía y recursos naturales.",
+          conocimientos: ["1.5"], habilidades: ["autoconciencia y conciencia social"], actitudes: ["responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos reconocen que los ordenadores y los sistemas de IA necesitan recursos para funcionar.", escenario: "Los alumnos señalan los dispositivos del aula que deben cargarse y refrigerarse y reconocen que los sistemas de IA también necesitan electricidad y «hardware» para funcionar." },
+            intermedio: { expectativa: "Los alumnos describen las distintas formas en que la IA afecta al medioambiente (p. ej., la producción de «hardware», el desarrollo de centros de datos, el consumo de agua, la intensidad energética, etc.).", escenario: "Los alumnos crean un producto informativo (p. ej., un artículo escrito, un pódcast o un vídeo) en el que explican cómo se compara el entrenamiento de grandes modelos de IA con el consumo de energía de los hogares o de las personas." },
+            avanzado: { expectativa: "Los alumnos analizan cómo las decisiones individuales, junto con las distintas decisiones de diseño, implementación o empresariales, pueden influir en el uso general de energía y recursos por parte de la IA.", escenario: "Los alumnos investigan los efectos medioambientales del uso de la IA y del desarrollo de centros de datos en distintas comunidades. A continuación, identifican políticas y estrategias que fomenten el uso y el desarrollo responsables de la IA." }
+          }
+        },
+        {
+          num: 6, enunciado: "Explicar cómo se podría utilizar la IA para amplificar los sesgos sociales.",
+          conocimientos: ["2.1", "2.5", "4.1"], habilidades: ["pensamiento crítico", "autoconciencia y conciencia social"], actitudes: ["empatía", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos entienden que pueden existir sesgos en los datos utilizados para entrenar a la IA y que estos sesgos pueden perpetuarse cuando los seres humanos diseñan, desarrollan y utilizan sistemas de IA.", escenario: "De la mano de sus profesores, los alumnos analizan distintos tipos de datos que se pueden recopilar sobre una persona (p. ej., la estatura o su color favorito). Observan los matices que los datos pueden captar de forma eficaz, pero se basan en lo que saben los unos de los otros para identificar lo que se omite." },
+            intermedio: { expectativa: "Los alumnos explican cómo los sesgos en los datos o en las decisiones de diseño (p. ej., contenidos estereotipados, clasificaciones erróneas o recomendaciones desiguales) pueden hacer que los sistemas de IA generen resultados injustos o sesgados para determinados grupos.", escenario: "Los alumnos analizan cómo y por qué la tecnología de reconocimiento facial funciona de manera diferente en función de los grupos demográficos y debaten las posibles repercusiones en el mundo real cuando se utiliza para la toma de decisiones en la vida cotidiana." },
+            avanzado: { expectativa: "Los alumnos analizan cómo las personas, las empresas o las instituciones pueden crear e implementar sistemas de IA para servir a intereses particulares y cómo estos sistemas pueden determinar las oportunidades, las representaciones o las percepciones del público.", escenario: "De la mano de los profesores, los alumnos evalúan ejemplos del mundo real en los que se utiliza la IA para influir en un acontecimiento (p. ej., la información errónea y la desinformación en las redes sociales). A continuación, analizan cómo las decisiones de una institución en relación con el uso de la IA pueden beneficiar a determinados grupos y, al mismo tiempo, perjudicar a otros." }
+          }
+        },
+        {
+          num: 7, enunciado: "Analizar en qué medida el uso de un sistema de IA se ajusta a los principios éticos y a los valores humanos.",
+          conocimientos: ["1.4", "4.1", "4.3"], habilidades: ["pensamiento crítico", "solución de problemas", "autoconciencia y conciencia social"], actitudes: ["reflexión", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos reconocen que el uso ético de la IA depende de diversos factores, entre los que se encuentran el diseño y el desarrollo del sistema de IA y las propias intenciones del usuario.", escenario: "Los alumnos detectan aspectos reconocibles de la obra de artistas en varios ejemplos generados por IA. De la mano de los profesores, analizan si los ejemplos constituyen un uso justo y adecuado y determinan las consecuencias para los artistas humanos." },
+            intermedio: { expectativa: "Los alumnos detectan cuándo el uso de la IA puede tener efectos o implicaciones no deseados que difieren de los objetivos inmediatos de un usuario.", escenario: "Los alumnos analizan un caso práctico en el que una herramienta de IA utiliza el historial de navegación de una persona para anunciarle descuentos y rebajas en productos que ha consultado en el pasado. Junto con sus profesores, los alumnos sopesan las oportunidades de ahorrar dinero frente a los riesgos que la herramienta de IA supone para la privacidad personal. Debaten sobre las ventajas y los inconvenientes de usar la herramienta a largo y a corto plazo." },
+            avanzado: { expectativa: "Los alumnos evalúan el uso de la IA en función de múltiples principios éticos, teniendo en cuenta las compensaciones y quiénes pueden beneficiarse o verse perjudicados.", escenario: "Los alumnos indagan el uso de la IA para analizar datos climáticos con el fin de detectar patrones y realizar predicciones. Evalúan las compensaciones entre el poder predictivo de la herramienta y la menor transparencia de un modelo de IA. Los alumnos sopesan las oportunidades de obtener pronósticos más claros frente a los riesgos de «alucinaciones» o de que se malinterpreten o se ignoren incertidumbres importantes." }
+          }
+        }
+      ]
+    },
+    {
+      id: "CRE", codigoOficial: "CwAI", nombre: "Crear con la IA",
+      lema: "Utilizar la IA como colaboradora creativa sin renunciar a la agencia humana",
+      color: "#CFFA7A", colorTexto: "#14320A", colorSuave: "#F1FCDC",
+      descripcion: "Sitúa a los alumnos en el papel de creadores imaginativos que utilizan la IA para explorar preguntas abiertas y desarrollar ideas y soluciones novedosas, mediante el uso iterativo de las herramientas. Los alumnos utilizan la IA como medio para materializar sus visiones creativas, en lugar de sustituirlas, y reflexionan sobre la originalidad, la propiedad intelectual y el uso justo.",
+      competencias: [
+        {
+          num: 1, enunciado: "Utilizar sistemas de IA para explorar nuevas perspectivas y enfoques que se basen en ideas originales.",
+          conocimientos: ["3.1"], habilidades: ["creatividad"], actitudes: ["innovación", "adaptabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos analizan cómo las distintas herramientas de IA pueden abrirles la mente o generar nuevas ideas.", escenario: "Los alumnos analizan imágenes generadas por IA para crear escenarios de historias a partir de las ideas de sus compañeros (p. ej., «una selva en el espacio») y, a continuación, escriben nuevas historias inspiradas en resultados inesperados." },
+            intermedio: { expectativa: "Los alumnos comparan las sugerencias generadas por la IA con sus propias ideas durante un proceso de lluvia de ideas.", escenario: "En respuesta a tareas propuestas por los profesores, los alumnos hacen una lluvia de ideas de forma independiente antes de revisar las ideas generadas por la IA. Comparan sus propias ideas con las generadas por la IA y debaten cómo la exposición a las sugerencias de la IA puede influir en la originalidad, la seguridad en sí mismos o la toma de decisiones." },
+            avanzado: { expectativa: "Los alumnos integran con un propósito los resultados generados por la IA con sus propias ideas para desarrollar soluciones integrales y enfoques creativos.", escenario: "Los alumnos elaboran sus propios argumentos para un debate en clase y, a continuación, analizan los contraargumentos generados por IA que les dan los profesores. Reformulan y rechazan los contraargumentos para reforzar su argumento final." }
+          }
+        },
+        {
+          num: 2, enunciado: "Visualizar, prototipar y combinar ideas utilizando distintos tipos de sistemas de IA.",
+          conocimientos: ["1.4"], habilidades: ["colaboración", "creatividad"], actitudes: ["adaptabilidad", "curiosidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos utilizan la IA para generar una imagen, una historia o un modelo que represente una idea.", escenario: "Los alumnos eligen un tema (p. ej., «esperanza», «invierno» o «comunidad») y utilizan un generador de imágenes por IA para crear una representación visual. Generan una imagen y escriben una breve explicación de cómo determinados elementos de su «prompt» han influido en el resultado final, señalando cualquier aspecto inesperado o sorprendente del resultado. Evalúan en qué medida el resultado generado se ajusta a la idea que tenían en mente." },
+            intermedio: { expectativa: "Los alumnos experimentan con herramientas de IA (p. ej., generadores de texto, de imágenes o de música) para desarrollar ideas diversas y producir resultados variados.", escenario: "Los alumnos diseñan un concepto para compartir en relación con un nuevo club de su centro escolar. Generan varios argumentos para la misión, ideas de actividades y estilos visuales utilizando generadores de texto y de imágenes. A continuación, comparan cómo distintos «prompts» y herramientas dan lugar a interpretaciones variadas de la misma idea." },
+            avanzado: { expectativa: "Los alumnos seleccionan e integran los resultados de varios sistemas de IA para desarrollar, perfeccionar o presentar un producto final.", escenario: "Los alumnos utilizan herramientas de IA para diseñar un proyecto interactivo sencillo (p. ej., una instalación de luz activada por el movimiento). Utilizan un generador de texto para definir cómo debe responder el sistema, un generador de imágenes para visualizar la configuración y un asistente de programación con IA para redactar el código de control básico. Generan ejemplos a partir de distintas herramientas, comparan los resultados y revisan sus prototipos. Los alumnos se aseguran de que el plan, los elementos visuales y el código se integren en un prototipo funcional y piden valoraciones a sus compañeros antes de finalizar su trabajo." }
+          }
+        },
+        {
+          num: 3, enunciado: "Dirigir los sistemas de IA generativa para obtener valoraciones, perfeccionar los resultados y favorecer la reflexión.",
+          conocimientos: ["2.3", "3.3"], habilidades: ["pensamiento computacional", "creatividad"], actitudes: ["adaptabilidad", "innovación"],
+          niveles: {
+            basico: { expectativa: "Los alumnos saben cómo escribir «prompts» para los sistemas de IA, de modo que generen valoraciones precisas y respuestas útiles sobre una idea.", escenario: "Se muestran a los alumnos dos versiones diferentes de un «prompt» diseñado para obtener valoraciones sobre la misma idea. Comparan las respuestas generadas por la IA a los dos «prompts» y analizan cuál ha dado lugar a un resultado con una valoración más precisa o útil. A continuación, explican qué características (p. ej., contexto, especificidad, restricciones, etc.) lograron más eficacia." },
+            intermedio: { expectativa: "Los alumnos perfeccionan su trabajo mediante intercambios iterativos con la IA y comparan esos resultados con sus propias ideas para determinar qué les sirve para alcanzar sus objetivos.", escenario: "Los alumnos diseñan un modelo tridimensional de un jardín geométrico utilizando ratios y proporciones. Comparan las dimensiones sugeridas por la IA con sus propios cálculos para garantizar la precisión matemática y barajan nuevos enfoques creativos para fundamentar el diseño." },
+            avanzado: { expectativa: "Los alumnos evalúan de forma crítica cómo las valoraciones generadas por la IA condicionan sus propias ideas y, a continuación, reflexionan sobre cómo les gustaría utilizar la IA en su proceso creativo.", escenario: "Los alumnos comparan un borrador inicial de un trabajo de redacción con la versión final, revisada a partir de las valoraciones de una herramienta de IA. Anotan en el trabajo los cambios clave que indican en qué casos cada revisión se ha visto influida por la herramienta de IA y en qué casos por su propio razonamiento. Redactan una breve reflexión en la que explican cómo decidieron qué sugerencias utilizar, adaptar o ignorar para alcanzar sus objetivos." }
+          }
+        },
+        {
+          num: 4, enunciado: "Analizar cómo la IA puede salvaguardar o vulnerar la autenticidad del contenido y la propiedad intelectual.",
+          conocimientos: ["2.2"], habilidades: ["solución de problemas", "autoconciencia y conciencia social"], actitudes: ["empatía", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos saben que el contenido generado por IA puede reutilizar o copiar obras protegidas por las leyes de propiedad intelectual o derechos de autor y reconocen las consecuencias para las personas que crearon la obra original.", escenario: "Los alumnos analizan ejemplos de música generada con IA para imitar a un artista famoso. De la mano de sus profesores, los alumnos debaten sobre cómo esto plantea cuestiones relacionadas con los derechos de autor, la titularidad y la atribución del reconocimiento adecuado al artista." },
+            intermedio: { expectativa: "Los alumnos reflexionan sobre cuándo es apropiado citar la fuente, pedir permiso o evitar el uso de IA en una tarea creativa y aplican estas decisiones en su propio trabajo.", escenario: "Los alumnos comparan obras originales con poemas generados por IA y, a continuación, debaten con sus profesores sobre qué hace que algo sea «original». A continuación, identifican ciertas directrices del centro escolar para acreditar el uso de la IA." },
+            avanzado: { expectativa: "Los alumnos evalúan las implicaciones éticas de los resultados generados por la IA para el trabajo creativo, distinguen entre la inspiración y la reproducción en sus resultados y justifican cómo su uso de la IA preserva la autenticidad y respeta a los demás creadores.", escenario: "Se presentan a los alumnos ejemplos de obras de arte creadas íntegramente por un humano, generadas por un sistema de IA y creadas por un artista con la ayuda de la IA. Los alumnos reflexionan sobre qué decisiones tomó o no tomó un humano en cada obra, a quién se debería acreditar como artista, qué debería protegerse mediante derechos de autor y cómo la IA podría cambiar la creación artística en el futuro." }
+          }
+        }
+      ]
+    },
+    {
+      id: "GES", codigoOficial: "MAI", nombre: "Gestionar la IA",
+      lema: "Repartir el trabajo de forma deliberada entre las personas y la IA",
+      color: "#E75234", colorTexto: "#FFFFFF", colorSuave: "#FBE4DF",
+      descripcion: "Sitúa a los alumnos en el papel de responsables de la toma de decisiones conscientes que analizan cómo se delega el trabajo humano en las herramientas de IA. Comparan enfoques, descomponen los problemas y deciden cuándo la IA debe automatizar o potenciar las tareas para que el esfuerzo humano se centre en el juicio, la creatividad y la experiencia en el ámbito en cuestión.",
+      competencias: [
+        {
+          num: 1, enunciado: "Decidir si utilizar sistemas de IA en función de la naturaleza de la tarea.",
+          conocimientos: ["3.1", "4.3"], habilidades: ["pensamiento computacional", "solución de problemas"], actitudes: ["innovación", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos identifican diversos sistemas de IA y las tareas para las que están diseñados.", escenario: "Los alumnos siguen las pautas establecidas por sus profesores para relacionar las herramientas adecuadas con las tareas académicas (p. ej., la IA para resumir, los motores de búsqueda para investigar, etc.)." },
+            intermedio: { expectativa: "Los alumnos utilizan sus conocimientos en IA para determinar si la IA es una herramienta digital adecuada para una tarea concreta.", escenario: "Los profesores presentan a los alumnos ejemplos de tareas cotidianas y estos se desplazan a los rincones del aula etiquetados como «Solo IA», «Con ayuda de IA», «Solo humanos» o «No lo sé», en función de cómo creen que se podría utilizar la IA. A continuación, los alumnos defienden y explican sus decisiones a los compañeros que hayan elegido de forma diferente y, si los convencen, cambian de rincón." },
+            avanzado: { expectativa: "Los alumnos determinan si la IA es la herramienta digital adecuada para una tarea concreta comparando la complejidad de la tarea y la necesidad de juicio humano con las implicaciones éticas del uso de la IA.", escenario: "Los alumnos reflexionan sobre los pasos necesarios para redactar un trabajo (es decir, elegir un tema, buscar evidencias, organizar los argumentos, redactar los párrafos, revisar y corregir) y, a continuación, determinan en qué pasos podría ayudarles la IA y en qué pasos es necesario que utilicen su propio punto de vista y su propio razonamiento. Consultan las directrices de su centro escolar sobre el uso de la IA para adaptar su enfoque." }
+          }
+        },
+        {
+          num: 2, enunciado: "Elegir un enfoque de IA adecuado para una tarea comparando cómo funcionan los distintos sistemas de IA y para qué son más adecuados.",
+          conocimientos: ["1.2", "1.4"], habilidades: ["pensamiento computacional", "solución de problemas"], actitudes: ["adaptabilidad", "curiosidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos reconocen que algunos tipos de sistemas de IA se pueden programar con reglas específicas para realizar tareas, mientras que otros pueden aprender patrones a partir de los datos.", escenario: "Los alumnos comparan distintos enfoques para crear sistemas de IA realizando una tarea de clasificación de basura. En primer lugar, reflexionan sobre por qué es poco probable que los resultados aleatorios clasifiquen los elementos de forma fiable. A continuación, dan instrucciones a uno de sus compañeros de clase, que interpreta el papel de un robot, para que clasifique imágenes de basura en función de criterios específicos. Observan cómo responde el «robot» a nuevas imágenes que no se ajustan a los criterios. Por último, analizan cómo un sistema podría utilizar patrones extraídos de los datos recopilados, como p. ej. de una encuesta realizada en clase, para mejorar las decisiones de clasificación y determinar qué enfoque es el más adecuado para las distintas tareas." },
+            intermedio: { expectativa: "Los alumnos identifican las ventajas y los inconvenientes de utilizar un enfoque basado en reglas y un enfoque de aprendizaje automático para resolver un problema.", escenario: "Los alumnos comparan la tecnología que sigue reglas establecidas para ejecutar una tarea (p. ej., calculadoras, semáforos, termostatos, etc.) con tecnologías que se han entrenado a partir de ejemplos extraídos de datos (p. ej., reconocimiento de imágenes, traducción, etc.). De la mano de los profesores, reflexionan sobre por qué cada enfoque es adecuado para la tarea en cuestión." },
+            avanzado: { expectativa: "Los alumnos evalúan cuándo la IA es un enfoque eficaz para una tarea teniendo en cuenta factores como el contexto, la disponibilidad y la calidad de los datos, la eficiencia, la transparencia, los resultados deseados y las posibles repercusiones.", escenario: "Los alumnos analizan ejemplos del mundo real en los que se utiliza la IA (p. ej., la planificación de rutas, la moderación de contenidos o la asignación de recursos). Justifican si es más adecuado un enfoque basado en reglas o un enfoque de aprendizaje automático, o si se debe utilizar siquiera la IA, en función de los requisitos, las limitaciones y las compensaciones en juego. Elaboran argumentos para formular una recomendación y, a continuación, presentan los enfoques que han elegido a sus compañeros en un debate en clase." }
+          }
+        },
+        {
+          num: 3, enunciado: "Descomponer un problema para determinar cuándo y cómo se deben utilizar los sistemas de IA para automatizar o potenciar las tareas.",
+          conocimientos: ["1.1", "3.1"], habilidades: ["colaboración", "pensamiento computacional", "solución de problemas"], actitudes: ["adaptabilidad", "innovación"],
+          niveles: {
+            basico: { expectativa: "Los alumnos identifican el tipo de problema en cuestión y valoran si la IA podría ayudar a resolverlo.", escenario: "Se proporcionan a los alumnos ejemplos de distintos problemas para que los identifiquen (p. ej., predecir el tiempo, consolar a un amigo, detectar plagios, etc.) y los clasifiquen en función del tipo de problema (p. ej., basado en datos, emocional, creativo, etc.). Entre todos analizan si la IA podría ayudar a resolver el problema y si las soluciones de la IA son siempre necesarias para lograr un objetivo." },
+            intermedio: { expectativa: "Los alumnos desglosan un problema en sus componentes y analizan cómo la IA podría ayudar en pasos concretos.", escenario: "Los alumnos desglosan los pasos necesarios para llevar a cabo un proyecto de investigación complejo y determinan en qué pasos podría ayudarles la IA (p. ej., para resumir las fuentes primarias y localizar comentarios relevantes). Trabajan de forma independiente para verificar afirmaciones, evaluar posibles sesgos en los resultados de la IA y elaborar sus propios argumentos e interpretaciones." },
+            avanzado: { expectativa: "Los alumnos asignan deliberadamente tareas dentro de un proceso de varios pasos en función de las fortalezas humanas adecuadas y de las capacidades pertinentes de la IA.", escenario: "A los alumnos se les plantea un reto con un límite de tiempo para crear dos versiones del mismo producto, con y sin IA. Antes de iniciar la tarea con el apoyo de la IA, los equipos deciden exactamente qué pasos se basarán en las capacidades de la IA y cuáles dependerán de las fortalezas humanas. Después de comparar los resultados, los alumnos revisan sus asignaciones de tareas y explican cómo la modificación de las funciones de los humanos y de la IA ha afectado a la calidad, la fiabilidad y la finalidad del producto final." }
+          }
+        },
+        {
+          num: 4, enunciado: "Supervisar y evaluar el uso de la IA a lo largo de un proceso de solución de problemas.",
+          conocimientos: ["4.1"], habilidades: ["colaboración", "solución de problemas"], actitudes: ["adaptabilidad", "reflexión", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos reconocen que deben tomar decisiones sobre el uso de la IA que favorezcan la rendición de cuentas, el aprendizaje y la equidad.", escenario: "Los alumnos analizan ejemplos del uso de herramientas de IA en distintos sectores (p. ej., deportes, periodismo, música, etc.) para determinar si hay tareas en las que el uso de la IA podría resultar ventajoso y cuándo un ser humano debería desempeñar un papel más activo." },
+            intermedio: { expectativa: "Los alumnos comparan los resultados de la IA con los resultados deseados y saben cuándo deben redirigir los sistemas de IA o mejorar los resultados por sí mismos.", escenario: "Los alumnos ven vídeos breves de coches autónomos en distintas situaciones de conducción. Entre todos comparan cómo un ser humano podría tomar una decisión diferente a la de un coche autónomo y analizan en qué casos el criterio humano debería prevalecer sobre el algoritmo." },
+            avanzado: { expectativa: "Los alumnos establecen puntos de control basados en las funciones de los humanos y de la IA, supervisan el progreso en función de los criterios de éxito y ajustan las funciones en consecuencia.", escenario: "Los alumnos trabajan en equipo para crear una campaña de concienciación pública sobre un problema local (p. ej., reducir el desperdicio de alimentos o diseñar rutas seguras para bicicletas). Utilizan herramientas de IA para generar mensajes o elementos visuales, pero hacen una pausa para comparar los resultados con las necesidades del público y los objetivos del proyecto. Cuando el contenido generado por IA es engañoso o no se corresponde con el objetivo, los alumnos ajustan las funciones o los flujos de trabajo para crear un mensaje preciso y auténtico." }
+          }
+        }
+      ]
+    },
+    {
+      id: "MOL", codigoOficial: "SAI", nombre: "Moldear la IA",
+      lema: "Mejorar los sistemas de IA para que reflejen los valores humanos",
+      color: "#7794CA", colorTexto: "#FFFFFF", colorSuave: "#E7ECF6",
+      descripcion: "Ámbito culminante. Permite a los alumnos analizar la relación entre los fundamentos técnicos de los sistemas de IA y las decisiones humanas que influyen en su comportamiento e impacto. El objetivo no es desarrollar productos comerciales, sino preparar a los jóvenes para crear o mejorar sistemas que reflejen los valores humanos, la diversidad de perspectivas y el bien común. Requiere las competencias de los tres ámbitos anteriores.",
+      competencias: [
+        {
+          num: 1, enunciado: "Investigar cómo está previsto que funcione un sistema de IA, para quién está diseñado y cuáles son sus limitaciones.",
+          conocimientos: ["1.2", "2.1"], habilidades: ["comunicación", "solución de problemas", "autoconciencia y conciencia social"], actitudes: ["curiosidad", "reflexión", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos identifican para qué están diseñados los distintos sistemas de IA.", escenario: "Los alumnos revisan fichas de los modelos que describen cómo funciona un sistema de IA, sus datos de entrenamiento, sus usos previstos y sus posibles limitaciones. Entre todos analizan los usos adecuados del sistema de IA." },
+            intermedio: { expectativa: "Los alumnos describen la finalidad, los usuarios previstos y las limitaciones básicas de una herramienta de IA concreta.", escenario: "Los alumnos analizan varios ejemplos de herramientas de IA (p. ej., un chatbot, un sistema de recomendaciones o una aplicación de planificación de rutas). Para cada una de ellas, los alumnos identifican su tarea principal y explican en términos sencillos qué datos de entrada utiliza y cómo los resultados permiten llevar a cabo la tarea." },
+            avanzado: { expectativa: "Los alumnos evalúan los puntos fuertes y las limitaciones de una herramienta de IA teniendo en cuenta su finalidad, los usuarios a los que va dirigida, sus limitaciones y sus posibles repercusiones.", escenario: "Los alumnos analizan cómo una aplicación de navegación basada en IA utiliza datos de tráfico para sugerir rutas eficientes. Debaten sobre cómo la aplicación podría reducir la duración de los trayectos para algunas personas, al tiempo que aumenta la congestión, el ruido o los riesgos para la seguridad en determinados barrios." }
+          }
+        },
+        {
+          num: 2, enunciado: "Evaluar los sistemas de IA utilizando criterios definidos, resultados esperados, casos de prueba y valoraciones de los usuarios.",
+          conocimientos: ["1.2", "1.4"], habilidades: ["colaboración", "pensamiento computacional"], actitudes: ["adaptabilidad", "innovación", "reflexión"],
+          niveles: {
+            basico: { expectativa: "Los alumnos definen criterios para determinar si un sistema de IA ha realizado una tarea.", escenario: "Los alumnos analizan un sistema de IA que recomienda música nueva. En grupos pequeños, definen criterios para determinar qué haría que el sistema tuviera éxito y comparan las recomendaciones del sistema para usuarios con distintos intereses o historiales de interacción." },
+            intermedio: { expectativa: "Los alumnos evalúan el rendimiento de un sistema de IA en una tarea determinada utilizando criterios definidos y valoraciones procedentes de revisiones humanas o de pruebas de referencia.", escenario: "Los alumnos identifican las estrategias que utilizarían para resolver un acertijo de palabras. Los profesores presentan un algoritmo de ejemplo para la misma tarea. Utilizando criterios definidos (p. ej., eficiencia, coherencia, claridad, etc.), los alumnos comparan las estrategias de sus compañeros con el algoritmo e identifican los puntos fuertes, las limitaciones y las compensaciones de cada enfoque." },
+            avanzado: { expectativa: "Los alumnos diseñan sus propios criterios de evaluación para un sistema de IA, comparan el rendimiento con distintas entradas y distintos usuarios y los utilizan para proponer mejoras.", escenario: "Por parejas, los alumnos redactan propuestas para una herramienta de IA y comparten sus ideas. Cada uno de ellos formula a su compañero una serie de preguntas sobre su propuesta. A continuación, cada compañero rellena una ficha del modelo para identificar los usuarios previstos y no previstos, los impactos y los casos de uso de la idea del otro. Se intercambian valoraciones basadas en las fichas del modelo y revisan sus propias propuestas de herramientas en consecuencia." }
+          }
+        },
+        {
+          num: 3, enunciado: "Diseñar sistemas de IA prestando atención a cómo las fuentes de datos, la selección y el flujo de información influyen en el comportamiento y los resultados.",
+          conocimientos: ["1.2", "2.2", "2.4"], habilidades: ["pensamiento computacional", "autoconciencia y conciencia social"], actitudes: ["innovación", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos identifican ejemplos de datos que podrían utilizarse para entrenar sistemas de IA.", escenario: "Se encarga a los alumnos que diseñen una herramienta de IA capaz de clasificar materiales reciclables. En grupos pequeños, deciden qué datos podrían recopilar en Internet para entrenar la herramienta de IA. Con el apoyo de los profesores, analizan qué aspectos de los datos serían más importantes para entrenar una herramienta de IA eficaz y precisa." },
+            intermedio: { expectativa: "Los alumnos comparan la importancia de los métodos de selección y recopilación de datos en los casos en que se utiliza la IA para tomar decisiones que afectan a otras personas.", escenario: "Los alumnos comparan distintos métodos para organizar un conjunto de animales, como agruparlos en función de sus características físicas. Debaten sobre qué sucede cuando se incorporan al conjunto nuevos animales que no encajan en los grupos existentes." },
+            avanzado: { expectativa: "Los alumnos evalúan cómo determinadas propiedades de un conjunto de datos (p. ej., el tamaño, las características o los sesgos) afectan al rendimiento y al impacto de un modelo de IA.", escenario: "Los alumnos realizan una encuesta en clase para elegir una mascota para la clase y representan los resultados mediante un gráfico de barras. Comparan estos resultados con sus preferencias individuales, así como con los datos de una encuesta realizada en su curso y de otra realizada en toda la escuela. Los alumnos debaten sobre cómo el aumento del tamaño y la diversidad del conjunto de datos modifica los resultados de la encuesta y reflexionan sobre cómo un sistema de IA podría ofrecer recomendaciones diferentes en función de sus datos de entrenamiento." }
+          }
+        },
+        {
+          num: 4, enunciado: "Mejorar los sistemas de IA para abordar y promover el bienestar humano y el beneficio para la sociedad.",
+          conocimientos: ["4.1", "4.2", "4.3"], habilidades: ["pensamiento computacional", "solución de problemas", "autoconciencia y conciencia social"], actitudes: ["empatía", "innovación", "responsabilidad"],
+          niveles: {
+            basico: { expectativa: "Los alumnos reconocen que los sistemas de IA se pueden diseñar o adaptar para beneficiar más a las personas, a las comunidades y al medioambiente.", escenario: "Los alumnos analizan los retos cotidianos de su aula o de su centro escolar, como encontrar recursos de estudio o compartir información a tiempo. Analizan ejemplos de herramientas de IA e identifican cambios sencillos que podrían hacer que estas herramientas fueran más útiles o inclusivas, como instrucciones más claras, resultados adecuados para la edad u opciones para distintas necesidades. Los alumnos explican quién se beneficiaría de estas mejoras y por qué." },
+            intermedio: { expectativa: "Los alumnos proponen cambios de diseño específicos para mejorar un sistema de IA para ellos y para los demás.", escenario: "Los alumnos estudian la posibilidad de utilizar una herramienta de IA que prediga qué libros de la biblioteca tienen más demanda. Analizan cómo las decisiones de diseño relativas a las fuentes de datos, las categorías y las recomendaciones influyen en los intereses que se representan. Los alumnos sugieren y planifican cambios concretos (p. ej., añadir aportaciones de los usuarios, ajustar las categorías o incluir circuitos de valoraciones) para mejorar variables como el acceso, la inclusión o la utilidad. Identifican características que garanticen que las recomendaciones y las interfaces sean accesibles y resulten útiles para alumnos con diferentes capacidades o necesidades de aprendizaje." },
+            avanzado: { expectativa: "Los alumnos diseñan y justifican mejoras para un sistema de IA en función de las limitaciones técnicas, las consideraciones éticas y las necesidades de los usuarios.", escenario: "Trabajando por equipos, los alumnos diseñan o modifican un modelo que utilice datos medioambientales locales para alertar a los miembros con asma de la comunidad sobre los riesgos para la salud. Practican la toma de decisiones de diseño deliberadas sobre qué datos incluir, cómo se generan las predicciones y cómo reciben los usuarios las alertas del modelo. Los alumnos prueban y perfeccionan su sistema basándose en las valoraciones recibidas para explicar cómo sus mejoras contribuyen en mayor medida al bienestar humano y a la confianza de la comunidad." }
+          }
+        }
+      ]
+    }
+  ],
+
+  // --------------------------------------------------------------------------
+  // NIVELES DE PROGRESIÓN
+  // --------------------------------------------------------------------------
+  niveles: [
+    { id: "basico", nombre: "Básico", verbo: "reconocer, identificar, saber", descripcion: "Primer contacto guiado. El alumnado reconoce, identifica y describe con apoyo docente." },
+    { id: "intermedio", nombre: "Intermedio", verbo: "describir, comparar, aplicar", descripcion: "Aplicación con autonomía creciente. El alumnado compara, explica y aplica criterios en contextos conocidos." },
+    { id: "avanzado", nombre: "Avanzado", verbo: "analizar, evaluar, justificar", descripcion: "Transferencia autónoma. El alumnado analiza, evalúa, justifica decisiones y transfiere a contextos nuevos." }
+  ],
+
+  // --------------------------------------------------------------------------
+  // NIVELES EDUCATIVOS (sistema educativo español)
+  // El marco advierte expresamente que sus niveles de progresión NO se
+  // corresponden con franjas de edad ni cursos concretos.
+  // --------------------------------------------------------------------------
+  etapas: [
+    { id: "primaria", nombre: "Educación Primaria", edades: "aproximadamente 6 a 12 años" },
+    { id: "secundaria", nombre: "Educación Secundaria", edades: "aproximadamente 12 a 18 años" }
+  ]
+};
+
+// ============================================================================
+// CAPA FORMATIVA
+// Salvo los nombres de botones de la interfaz, las citas entre comillas
+// angulares son literales de la edición oficial en español del Marco AILit. El resto son indicaciones didácticas de esta
+// herramienta, señaladas como tales en la ficha final.
+// ============================================================================
+
+const ENLACES = {
+  marcoWeb: "https://ailiteracyframework.org/es/",
+  interactivo: "https://ailiteracyframework.org/es/marco-interactivo-ailit/",
+  doi: "https://doi.org/10.1787/65cd27d4-en"
+};
+
+// Identificador de YouTube del vídeo de presentación.
+// Para activarlo, sustituye la cadena vacía por el identificador del vídeo,
+// por ejemplo: const VIDEO_YOUTUBE = "dQw4w9WgXcQ";
+const VIDEO_YOUTUBE = "";
+
+const GUIA = {
+  contexto: {
+    que: "Sitúas la actividad: etapa, edad orientativa del grupo, el nombre que recibe el curso en tu país, la materia y el número de sesiones.",
+    porque: "El marco AILit se dirige a la educación primaria y secundaria de cualquier sistema educativo y está pensado para adaptarse. El propio documento lo dice: «La adaptación del contenido del marco es deseable y recomendable, de modo que se garantice que las estrategias de implementación sean adecuadas y pertinentes para cada contexto».",
+    error: "Dar por hecho que la edad determina el nivel de desempeño. El marco advierte que sus niveles «no están vinculados a cursos o edades específicos, ya que los alumnos parten de distintos conocimientos previos sobre la IA y de distinta exposición a ella».",
+    preg: "¿Qué sabe ya tu grupo sobre la IA? Describe de dónde partes realmente, no de dónde te gustaría partir.",
+    fuente: "Marco AILit, introducción y sección «Expectativas de los alumnos»."
+  },
+  partida: {
+    que: "Escribes con tus palabras, sin tecnicismos, qué quieres conseguir en tu clase.",
+    porque: "El marco no ofrece actividades cerradas: ofrece expectativas de aprendizaje y escenarios que el docente debe traducir a su contexto. Tu intención es el punto de partida y el marco aporta el fundamento, no al revés.",
+    error: "Empezar por la herramienta, decidiendo que usarán un chatbot antes de saber para qué, en lugar de empezar por el aprendizaje. El marco es tajante: «Alfabetización en IA no es lo mismo que el uso de herramientas de IA». La mera interacción con herramientas no desarrolla estas competencias.",
+    preg: "¿Qué problema, duda o necesidad real de tu aula te lleva a plantear esto?",
+    fuente: "Marco AILit, «¿Qué es alfabetización en IA y por qué es importante?»."
+  },
+  ambito: {
+    que: "Eliges uno de los cuatro ámbitos o dimensiones en que el marco agrupa las competencias.",
+    porque: "«Los ámbitos se presentan de forma secuencial para reflejar un posible enfoque de aprendizaje». Interactuar con la IA es el ámbito fundacional; Crear y Gestionar se desarrollan en paralelo sobre esa base; Moldear la IA es el ámbito culminante y «puede alcanzarse cuando los alumnos poseen las competencias de los tres ámbitos anteriores».",
+    error: "Elegir Moldear la IA porque suena más ambicioso. Si tu alumnado todavía no reconoce dónde hay IA en su vida diaria ni sabe evaluar un resultado, ese ámbito le quedará lejos.",
+    preg: "¿Por qué este ámbito y no otro, para este grupo y en este momento del curso?",
+    fuente: "Marco AILit, «Sobre el Marco AILit» y presentación de cada ámbito."
+  },
+  competencia: {
+    que: "Dentro del ámbito, eliges la competencia concreta que tu actividad va a desarrollar.",
+    porque: "«Las competencias del marco establecen descripciones concretas de los conocimientos y las medidas clave que contribuyen a que los alumnos prosperen en contextos influidos por la IA». La competencia es la unidad que hace que tu actividad sea justificable: sin ella, tienes una idea; con ella, tienes un diseño fundamentado.",
+    error: "Elegir la competencia que mejor suena en el papel en lugar de la que describe lo que tu alumnado va a hacer de verdad. Si al leer el enunciado no ves a tus alumnos haciendo eso, no es la tuya.",
+    preg: "¿Qué hará exactamente tu alumnado, con verbos observables, que demuestre esta competencia?",
+    fuente: "Marco AILit, «Competencias y expectativas de los alumnos»."
+  },
+  nivel: {
+    que: "Sitúas la actividad en uno de los tres niveles de desempeño: básico, intermedio o avanzado.",
+    porque: "«Las expectativas de los alumnos dividen cada competencia en progresiones de desarrollo para ilustrar cómo la comprensión y la capacidad de los alumnos pueden aumentar con el tiempo». Sirven de «andamiaje para que los profesores y los educadores puedan adaptarse al nivel de los alumnos».",
+    error: "Elegir «avanzado» por prestigio o porque el grupo es mayor. El nivel depende de la experiencia previa con la IA, no de la edad ni del curso.",
+    preg: "¿En qué evidencia concreta te basas para situar a tu grupo en este nivel? Piensa en algo que hayas observado, no en una intuición.",
+    fuente: "Marco AILit, «Expectativas de los alumnos»."
+  },
+  cha: {
+    que: "Revisas los conocimientos, las habilidades y las actitudes que el marco vincula a la competencia elegida. Puedes ajustar la selección, pero cada cambio queda registrado.",
+    porque: "Las tres secciones tienen funciones distintas: los conocimientos son «hechos y conceptos esenciales para comprender los sistemas de IA»; las habilidades son «capacidades humanas fundamentales aplicadas a un contexto de IA»; las actitudes son «las mentalidades y las disposiciones que los alumnos deben adoptar». Una actividad sin las tres se queda coja.",
+    error: "Marcarlo todo. El propio marco reconoce que «puede que no siempre sea realista que un único educador aborde todos los aspectos en profundidad». Una actividad que lo trabaja todo no trabaja nada.",
+    preg: "Si tuvieras que renunciar a todo menos a un conocimiento, una habilidad y una actitud, ¿cuáles conservarías y por qué?",
+    fuente: "Marco AILit, secciones «Conocimientos», «Habilidades» y «Actitudes»."
+  },
+  diseno: {
+    que: "Concretas qué va a pasar en tu aula: descripción, agrupamiento, producto final y recursos.",
+    porque: "Los escenarios «en el aula» del marco son ejemplos, no prescripciones: «deben adaptarse a los contextos, las directrices y la legislación locales, especialmente en lo que respecta a las redes sociales o al uso de la tecnología en el aula».",
+    error: "Copiar el escenario del marco tal cual. Está escrito para un aula genérica que no es la tuya: ni tu material, ni tu horario, ni tu alumnado.",
+    preg: "¿Qué tendrás que cambiar del escenario del marco para que funcione con tu grupo y tus medios?",
+    fuente: "Marco AILit, «Competencias y expectativas de los alumnos»."
+  },
+  etica: {
+    que: "Tomas y dejas por escrito las decisiones éticas y académicas de la actividad. Este paso es formación para ti tanto como diseño.",
+    porque: "El marco define el diseño responsable de la IA a partir de «la equidad, la transparencia, la explicabilidad, la rendición de cuentas, el respeto de la privacidad y el cumplimiento de la legislación» (conocimiento 4.3). Y sitúa la responsabilidad en el usuario: la actitud de responsabilidad incluye expresamente «la decisión de no utilizar la IA».",
+    error: "Tratar la ética como un párrafo de relleno al final. Si no decides antes qué datos se introducen, cómo se cita el uso de IA y cómo se verifican los resultados, esas decisiones las tomará el azar.",
+    preg: "¿Qué le explicarás a tu alumnado sobre por qué usáis, o por qué no usáis, la IA en esta actividad?",
+    fuente: "Marco AILit, conocimientos 1.5, 2.2, 2.3, 3.2 y 4.3; habilidades de colaboración y comunicación; actitudes de responsabilidad y empatía."
+  },
+  curriculo: {
+    que: "Conectas la actividad con el currículo oficial de tu país o de tu centro.",
+    porque: "El marco AILit «no es vinculante»: no sustituye a ningún currículo. Es una capa de fundamentación sobre alfabetización en IA que tú debes anclar en la normativa que sí te obliga.",
+    error: "Forzar la correspondencia. Si la conexión con tu currículo es artificial, el problema no es la redacción: probablemente esta actividad no encaja todavía donde la quieres meter.",
+    preg: "¿Con qué elemento de tu currículo se conecta esta actividad de forma natural, sin forzarlo?",
+    fuente: "Marco AILit, nota de alcance en la presentación del documento."
+  }
+};
+
+// ---------------------------------------------------------------------------
+// Preguntas del paso de decisiones éticas y académicas.
+// Cada una indica el elemento del marco del que se deriva.
+// ---------------------------------------------------------------------------
+const ETICA = [
+  { id:"usoAlumnado", tipo:"opcion", preg:"¿Va a interactuar tu alumnado directamente con herramientas de IA?",
+    ops:["Sí, cada alumno o grupo usará la herramienta","No: la IA la manejo yo y muestro los resultados","No se usa ninguna herramienta de IA en esta actividad"],
+    ancla:"El marco recuerda que la alfabetización en IA no depende de usar herramientas: muchas de sus competencias se trabajan sin ellas." },
+  { id:"edadDatos", tipo:"texto", preg:"Si tu alumnado va a usar herramientas, ¿cumples la edad mínima y las condiciones de uso del servicio y la normativa de tu país sobre datos de menores?",
+    ph:"Ej.: la herramienta exige 13 años y mi grupo tiene 11, así que la manejo yo desde el proyector y nadie crea cuenta.",
+    ancla:"Conocimiento 4.3: el diseño responsable incluye «el respeto de la privacidad y el cumplimiento de la legislación». El marco pide adaptar todo escenario «a los contextos, las directrices y la legislación locales»." },
+  { id:"datos", tipo:"texto", preg:"¿Qué información se va a introducir en la herramienta y cuál queda expresamente prohibida?",
+    ph:"Ej.: solo texto inventado sobre el tema. Prohibido: nombres, fotos, datos del centro o de compañeros.",
+    ancla:"Conocimiento 2.3: los sistemas «pueden recopilar datos durante las interacciones con los usuarios». La habilidad de colaboración exige que el alumnado entienda «qué información se debe compartir con los sistemas de IA y cuál no»." },
+  { id:"citar", tipo:"texto", preg:"¿Cómo van a declarar y citar tus alumnos el uso que han hecho de la IA?",
+    ph:"Ej.: al final del trabajo, un apartado con la herramienta usada, para qué la usaron y qué cambiaron ellos.",
+    ancla:"Competencia Crear con la IA 4 y conocimiento 2.2: los contenidos generados pueden reutilizar obras protegidas, con consecuencias para quien creó la obra original." },
+  { id:"verificar", tipo:"texto", preg:"¿Cómo se van a verificar los resultados que devuelva la IA?",
+    ph:"Ej.: cada afirmación se contrasta con el libro de texto o con una fuente que yo facilito.",
+    ancla:"Conocimiento 3.2: la IA generativa dificulta «la distinción entre hechos e invenciones», con riesgo de desinformación y «alucinaciones»." },
+  { id:"alternativa", tipo:"texto", preg:"¿Existe una forma de conseguir el mismo aprendizaje sin IA? Si la hay, ¿por qué eliges usarla igualmente?",
+    ph:"Ej.: sí, podría hacerse con recortes de prensa. Uso la IA porque el objetivo es justamente que vean cómo genera resultados distintos.",
+    ancla:"La actitud de responsabilidad incluye «la decisión de no utilizar la IA». Y sobre el impacto ambiental, el marco plantea la pregunta literal: «¿existe una alternativa más ecológica?»." },
+  { id:"bienestar", tipo:"texto", preg:"¿Qué riesgos para el bienestar de tu alumnado has previsto y cómo los abordas?",
+    ph:"Ej.: hablaremos de que un chatbot no es un amigo y de por qué no hay que contarle cosas personales.",
+    ancla:"El marco dedica un apartado a los «compañeros» de IA y sus implicaciones sociales y emocionales, y pide «enseñar prácticas saludables» para evitar la dependencia excesiva." }
+];
+
+// ---------------------------------------------------------------------------
+// Comprobación final de comprensión. Todas las respuestas se justifican con el
+// texto del marco.
+// ---------------------------------------------------------------------------
+const QUIZ = [
+  { af:"Los niveles básico, intermedio y avanzado del marco AILit se corresponden con cursos o franjas de edad concretas.",
+    ok:false, exp:"Falso. El marco afirma que «estos niveles no están vinculados a cursos o edades específicos, ya que los alumnos parten de distintos conocimientos previos sobre la IA y de distinta exposición a ella»." },
+  { af:"Enseñar a usar una herramienta de IA equivale a desarrollar la alfabetización en IA.",
+    ok:false, exp:"Falso. «Alfabetización en IA no es lo mismo que el uso de herramientas de IA»: la mera interacción no desarrolla los conocimientos, las habilidades ni las competencias del marco." },
+  { af:"Los escenarios «en el aula» del marco son ejemplos que el docente debe adaptar a su contexto y a su legislación.",
+    ok:true, exp:"Verdadero. El marco pide que se adapten «a los contextos, las directrices y la legislación locales, especialmente en lo que respecta a las redes sociales o al uso de la tecnología en el aula»." },
+  { af:"Decidir no utilizar la IA en una tarea es una decisión inmadura desde el punto de vista del marco.",
+    ok:false, exp:"Falso. La actitud de responsabilidad incluye expresamente «la decisión de no utilizar la IA» como una toma de decisión fundamentada." },
+  { af:"El ámbito Moldear la IA se apoya en los tres ámbitos anteriores.",
+    ok:true, exp:"Verdadero. «Este ámbito puede alcanzarse cuando los alumnos poseen las competencias de los tres ámbitos anteriores: Interactuar con la IA, Crear con la IA y Gestionar la IA»." }
+];
+
+// ---------------------------------------------------------------------------
+// Guía de vinculación curricular (genérica y panhispánica)
+// ---------------------------------------------------------------------------
+const CURRICULO = {
+  intro: "El Marco AILit «no es vinculante» y no sustituye al currículo de ningún país. Para que tu actividad sea utilizable en tu programación, necesitas anclarla también en la normativa que sí te obliga. Esta guía es genérica a propósito: sirve igual en España, México, Colombia, Argentina, Chile, Perú, Uruguay o cualquier otro sistema, porque se apoya en elementos que aparecen, con nombres distintos, en casi todos los currículos.",
+  pasos: [
+    { t:"1. Localiza el área o asignatura", d:"Busca en tu currículo oficial el área desde la que vas a trabajar. La alfabetización en IA rara vez es una asignatura propia: normalmente entra por lengua, ciencias sociales, ciencias, matemáticas, arte, tecnología o tutoría." },
+    { t:"2. Busca el objetivo o propósito de aprendizaje", d:"Casi todos los currículos tienen un nivel de objetivos, propósitos o aprendizajes esperados. Localiza el que más se aproxime a lo que tu actividad hace de verdad." },
+    { t:"3. Identifica la competencia o capacidad", d:"Muchos currículos hispanoamericanos trabajan por competencias, capacidades o desempeños. Busca las relacionadas con pensamiento crítico, comunicación, ciudadanía digital, resolución de problemas o manejo de información." },
+    { t:"4. Señala los contenidos o saberes", d:"Anota el bloque de contenidos, saberes básicos o ejes temáticos con el que conecta. Si no conecta con ninguno, reconsidera el encaje de la actividad." },
+    { t:"5. Enlaza con los criterios de evaluación", d:"Este es el paso que más se olvida y el que da validez a la actividad ante una inspección o una coordinación. Comprueba que lo que vas a evaluar figura en tus criterios oficiales." }
+  ],
+  espana: {
+    intro: "Si trabajas en España, la terminología de la LOMLOE tiene una correspondencia bastante directa con los elementos anteriores. Este bloque es una orientación terminológica: la redacción concreta de cada elemento depende del real decreto de enseñanzas mínimas y del decreto de tu comunidad autónoma, que debes consultar directamente.",
+    filas: [
+      ["Perfil de salida y descriptores operativos", "Es el nivel más alto. Los descriptores de competencia digital (CD) y de competencia ciudadana (CC) son los que suelen conectar mejor con la alfabetización en IA."],
+      ["Competencias específicas del área", "Formuladas por área y etapa. Localiza la que incluya análisis crítico de la información, uso de recursos digitales o argumentación."],
+      ["Criterios de evaluación", "Van asociados a cada competencia específica. Es la referencia obligatoria para calificar."],
+      ["Saberes básicos", "El equivalente a los contenidos. Busca los bloques sobre tecnología, información, medios de comunicación o ciudadanía digital."],
+      ["Situación de aprendizaje", "Es el formato en el que la LOMLOE espera que se concrete una actividad como esta. La ficha que genera esta herramienta puede servirte de base, pero deberás completarla con los elementos que exija tu comunidad autónoma."]
+    ],
+    aviso: "Esta herramienta no incorpora el texto del currículo español ni el de ningún otro país, y no puede verificar tu redacción. La correspondencia la estableces y la firmas tú."
+  }
+};
+
+// ---------------------------------------------------------------------------
+// Transparencia: qué aporta, qué no aporta y limitaciones no subsanables
+// ---------------------------------------------------------------------------
+const TRANSPARENCIA = {
+  aporta: [
+    { t:"Traduce un marco descriptivo en un procedimiento de diseño", d:"El Marco AILit describe qué debe aprender el alumnado, pero no dice cómo diseñar una actividad. Esta herramienta convierte esa descripción en un itinerario de nueve pasos con una decisión justificada en cada uno." },
+    { t:"Deja trazabilidad de cada decisión", d:"La ficha final distingue lo que procede literalmente del marco, lo que has decidido tú y lo que es una plantilla de esta herramienta. Puedes defender la actividad ante una coordinación, un tribunal o un claustro señalando el origen de cada elemento." },
+    { t:"Forma mientras produces", d:"Cada paso explica qué es ese elemento del marco, por qué importa y cuál es el error más frecuente, y te pide una decisión razonada que queda registrada en la ficha como diario de decisiones. Al terminar tienes una actividad y, sobre todo, has entendido el marco por dentro." },
+    { t:"Trabaja en castellano y sin ataduras de sistema educativo", d:"Los 133 textos del marco están verificados uno a uno contra la edición oficial en español. El nivel educativo se indica por etapa, edad orientativa y nombre libre del curso, de modo que sirve igual en España y en cualquier país de América Latina." },
+    { t:"Obliga a decidir la ética antes de entrar en el aula", d:"Un paso completo, derivado de los conocimientos y las actitudes del propio marco, te hace resolver por escrito la edad mínima, los datos que se introducen, la declaración del uso de IA, la verificación de resultados, la alternativa sin IA y el bienestar del alumnado." },
+    { t:"Se usa directamente desde la web y no envía nada", d:"No hay que instalar ni descargar nada: se abre desde la página y funciona igual en un ordenador del aula, en una tableta o en un móvil. El progreso se guarda en el propio dispositivo del docente, nunca en un servidor, y se puede borrar con un botón." }
+  ],
+  noAporta: [
+    { t:"No sustituye al marco original ni a su web interactiva", d:"Es una capa de trabajo sobre él. Para explorar el marco por áreas curriculares, consideraciones éticas, impacto social o nivel tecnológico, la herramienta oficial sigue siendo la referencia y está enlazada desde aquí." },
+    { t:"No genera contenido con inteligencia artificial", d:"Puede sonar paradójico en una herramienta sobre IA, y es deliberado. Todo lo que aparece en la ficha o es texto literal del marco, o lo has escrito tú, o es una plantilla fija visible en el código. Así se garantiza que nada esté inventado." },
+    { t:"No evalúa la calidad de tu actividad", d:"Comprueba la coherencia formal con el marco, no el acierto pedagógico. Una actividad puede estar perfectamente anclada y ser mala. Ese juicio es tuyo y de tus compañeros." },
+    { t:"No conoce ningún currículo oficial", d:"Ni el español ni el de ningún otro país. La vinculación curricular la redactas tú; la herramienta solo te guía sobre qué buscar." },
+    { t:"No es una rúbrica de evaluación", d:"Los indicadores de logro son un punto de partida. El marco recomienda al profesorado «elaborar sus propias rúbricas de evaluación» a partir de las expectativas de los alumnos." }
+  ],
+  limites: [
+    { t:"Las facetas del marco interactivo no se pueden reproducir", d:"La web oficial permite filtrar por áreas curriculares, consideraciones éticas, impacto social y nivel tecnológico (low-tech, no tech). Ese etiquetado no está publicado escenario por escenario: solo existe como filtro agregado en su barra lateral. Reproducirlo aquí exigiría inventar la clasificación, así que no se ha hecho. En su lugar hay un buscador de texto libre sobre los textos literales y un enlace directo al filtro oficial.", grave:true },
+    { t:"El marco original es en inglés", d:"Se trabaja con la traducción oficial al español, pero la propia obra advierte: «En caso de discrepancia entre la obra original y la traducción, solo se considerará válido el texto de la obra original». Ante cualquier duda de matiz, manda el inglés.", grave:true },
+    { t:"El guardado vive en un único navegador", d:"El progreso se guarda automáticamente en el dispositivo desde el que trabajas. No se sincroniza entre equipos, se pierde si vacías los datos del navegador o usas el modo incógnito, y puede estar bloqueado cuando la herramienta se ve incrustada en otra página. Para llevártelo a otro sitio, exporta el archivo .json.", grave:false },
+    { t:"Una competencia por actividad", d:"Las actividades reales suelen tocar dos o tres competencias. La herramienta obliga a elegir una principal para forzar el foco; si tu actividad trabaja más, genera una ficha por cada una y enlázalas en tu programación.", grave:false },
+    { t:"No está validada con docentes", d:"Es un prototipo fundamentado, no una herramienta con evidencia de eficacia. Si la usas en un máster o en una formación, trátala como objeto de análisis y crítica, no como autoridad.", grave:true }
+  ],
+  comoSeHizo: [
+    "Los 4 ámbitos, las 19 competencias, los 17 enunciados de conocimiento, las 7 habilidades, las 6 actitudes, las 57 expectativas y los 57 escenarios se transcribieron de la edición oficial en español del marco.",
+    "Cada una de las 133 cadenas de texto se verificó automáticamente contra el PDF original: todas coinciden palabra por palabra.",
+    "Los colores de los cuatro ámbitos se obtuvieron muestreando directamente los píxeles del PDF oficial, no por aproximación visual.",
+    "El guardado automático emplea el almacenamiento local del navegador: los datos permanecen en el dispositivo del usuario y no existe ningún servidor que pueda recibirlos.",
+    "La secuencia didáctica, los indicadores de logro, las preguntas de reflexión y las preguntas éticas son elaboración propia derivada del marco. Cada una indica el elemento del que procede y se identifican como tales en la ficha."
+  ]
+};
+
+// ============================================================================
+// LÓGICA DE LA APLICACIÓN
+// ============================================================================
+
+const esc = t => String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const nrm = t => String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const minus = t => t ? t.charAt(0).toLowerCase()+t.slice(1) : t;
+const sinPunto = t => String(t||"").replace(/\.\s*$/,"");
+const $ = id => document.getElementById(id);
+
+const ENTORNO = (function(){
+  let embebido=false, almacenBloqueado=false;
+  const local = (location.protocol === "file:");
+  try{ embebido = window.self !== window.top; }catch(e){ embebido = true; }
+  try{ void window.localStorage; }catch(e){ almacenBloqueado = true; }
+  return { embebido:embebido, archivoLocal:local, restringido: embebido || (almacenBloqueado && !local) };
+})();
+
+// ---------------------------------------------------------------------------
+// ESTADO
+// ---------------------------------------------------------------------------
+const S = {
+  titulo:"", etapa:"primaria", edad:"", curso:"", area:"", sesiones:"", conocePrevio:"",
+  partida:"", descripcion:"", agrupamiento:"", producto:"", recursos:"",
+  ambito:null, comp:null, nivel:null,
+  con:new Set(), hab:new Set(), act:new Set(),
+  etica:{}, curriculo:"", ref:{}, quiz:{}
+};
+let BIBLIOTECA = [];
+let PASO = 0;
+
+const nivObj = id => AILIT.niveles.find(n=>n.id===id);
+const conObj = id => { for(const b of AILIT.conocimientos){ const i=b.items.find(x=>x.id===id); if(i) return Object.assign({bloque:b.titulo}, i); } return null; };
+const habObj = id => AILIT.habilidades.find(h=>h.id===id);
+const actObj = id => AILIT.actitudes.find(a=>a.id===id);
+const codigo = () => (S.ambito && S.comp) ? S.ambito.id+"-"+S.comp.num : "";
+const etapaObj = () => AILIT.etapas.find(e=>e.id===S.etapa) || AILIT.etapas[0];
+
+function setCampo(k,v){ S[k]=v; autoguardar(); }
+function setRef(k,v){ S.ref[k]=v; autoguardar(); }
+function setEtica(k,v){ S.etica[k]=v; autoguardar(); }
+
+// ---------------------------------------------------------------------------
+// GUARDADO AUTOMÁTICO EN EL DISPOSITIVO DEL USUARIO
+// Se usa el almacenamiento local del navegador. Nunca sale del equipo: no hay
+// servidor al que enviarlo. Si el navegador lo bloquea (por ejemplo, cuando la
+// herramienta va incrustada en otra página), se degrada sin romper nada.
+// ---------------------------------------------------------------------------
+const CLAVE_ALMACEN = "tallerAILit.v1";
+const ALMACEN = (function(){
+  try{ const k="__ailit_test"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }
+  catch(e){ return false; }
+})();
+let tempGuardado=null;
+function snapshot(){
+  return { titulo:S.titulo, etapa:S.etapa, edad:S.edad, curso:S.curso, area:S.area, sesiones:S.sesiones,
+    partida:S.partida, descripcion:S.descripcion, agrupamiento:S.agrupamiento, producto:S.producto,
+    recursos:S.recursos, ambito:S.ambito?S.ambito.id:null, comp:S.comp?S.comp.num:null, nivel:S.nivel,
+    con:[...S.con], hab:[...S.hab], act:[...S.act], etica:S.etica, curriculo:S.curriculo, ref:S.ref, quiz:S.quiz };
+}
+function restaurar(d){
+  if(!d) return;
+  ["titulo","edad","curso","area","sesiones","partida","descripcion","agrupamiento","producto","recursos","curriculo"].forEach(k=>S[k]=d[k]||"");
+  S.etapa = d.etapa || "primaria";
+  S.ambito = d.ambito ? AILIT.ambitos.find(x=>x.id===d.ambito) : null;
+  S.comp = (S.ambito && d.comp) ? S.ambito.competencias.find(x=>x.num===d.comp) : null;
+  S.nivel = d.nivel || null;
+  S.con=new Set(d.con||[]); S.hab=new Set(d.hab||[]); S.act=new Set(d.act||[]);
+  S.etica=d.etica||{}; S.ref=d.ref||{}; S.quiz=d.quiz||{};
+}
+function hayTrabajo(d){ return !!(d && (d.partida || d.titulo || d.ambito || d.descripcion)); }
+function guardarLocal(){
+  if(!ALMACEN) return;
+  try{ localStorage.setItem(CLAVE_ALMACEN, JSON.stringify({v:1, ts:Date.now(), paso:PASO, estado:snapshot(), biblioteca:BIBLIOTECA})); }catch(e){}
+}
+function autoguardar(){ if(!ALMACEN) return; clearTimeout(tempGuardado); tempGuardado=setTimeout(guardarLocal,700); }
+function leerLocal(){
+  if(!ALMACEN) return null;
+  try{ return JSON.parse(localStorage.getItem(CLAVE_ALMACEN)||"null"); }catch(e){ return null; }
+}
+function borrarLocal(preguntar){
+  if(preguntar && !confirm("¿Borrar de este dispositivo el trabajo en curso y las actividades guardadas? Esta acción no se puede deshacer. Exporta antes tu archivo .json si quieres conservarlo.")) return;
+  try{ localStorage.removeItem(CLAVE_ALMACEN); }catch(e){}
+  if(preguntar){ RECUPERADO=null; reiniciar(true); BIBLIOTECA=[]; pintarBiblioteca(); pintarTransparencia();
+    alert("Se han borrado los datos guardados en este dispositivo."); }
+}
+let RECUPERADO=null;
+
+// ---------------------------------------------------------------------------
+// NAVEGACIÓN GENERAL
+// ---------------------------------------------------------------------------
+const TABS = [
+  {id:"inicio",       et:"Inicio"},
+  {id:"crear",        et:"Crear actividad"},
+  {id:"explorar",     et:"Explorar el marco"},
+  {id:"curriculo",    et:"Currículo"},
+  {id:"biblioteca",   et:"Mis actividades"},
+  {id:"transparencia",et:"Qué aporta y qué no"}
+];
+
+function pintarTabs(){
+  $("listaTabs").innerHTML = TABS.map(t =>
+    '<li><button id="tab-'+t.id+'" onclick="verVista(\''+t.id+'\')">'+esc(t.et)+
+    (t.id==="biblioteca"?' <span id="contBib"></span>':'')+'</button></li>').join("");
+}
+
+function verVista(v){
+  document.querySelectorAll(".vista").forEach(s=>s.classList.remove("on"));
+  $("v-"+v).classList.add("on");
+  TABS.forEach(t=>$("tab-"+t.id).removeAttribute("aria-current"));
+  $("tab-"+v).setAttribute("aria-current","page");
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(v==="biblioteca") pintarBiblioteca();
+}
+
+function anunciar(t){ $("anuncio").textContent = t; }
+
+function modalTexto(titulo, texto){
+  const v=document.createElement("div"); v.className="velo no-print";
+  v.innerHTML = '<div class="caja" role="dialog" aria-modal="true"><header><h3></h3>'
+    +'<button type="button" data-x>Cerrar</button></header><div class="cm">'
+    +'<p style="margin-top:0;font-size:14px;color:var(--tinta-2)">El navegador ha bloqueado la acción automática. '
+    +'Selecciona el texto y cópialo a mano, o abre la herramienta a pantalla completa.</p>'
+    +'<textarea readonly></textarea></div></div>';
+  v.querySelector("h3").textContent=titulo;
+  const ta=v.querySelector("textarea"); ta.value=texto;
+  v.querySelector("[data-x]").onclick=()=>v.remove();
+  v.onclick=e=>{ if(e.target===v) v.remove(); };
+  document.body.appendChild(v); ta.focus(); ta.select();
+}
+
+function pintarBanner(){
+  if(!ENTORNO.embebido) return;
+  const d=document.createElement("div"); d.className="banner-embed no-print";
+  d.innerHTML='<span><b>Estás viendo la herramienta incrustada en otra página.</b> Para imprimir, descargar o copiar sin restricciones, ábrela en su propia pestaña.</span>'
+    +'<a class="btn-banner" href="'+location.href+'" target="_blank" rel="noopener">Abrir a pantalla completa</a>';
+  document.body.insertBefore(d, document.body.firstChild);
+}
+
+// ---------------------------------------------------------------------------
+// PORTADA
+// ---------------------------------------------------------------------------
+function pintarInicio(){
+  const video = VIDEO_YOUTUBE
+    ? '<div class="video-caja"><iframe src="https://www.youtube-nocookie.com/embed/'+esc(VIDEO_YOUTUBE)+'" title="Vídeo de presentación del Taller AILit" allowfullscreen loading="lazy"></iframe></div>'
+    : '<div class="video-caja"><div class="video-hueco"><b>Espacio reservado para el vídeo de presentación</b>'
+      +'<span>Para activarlo, abre el archivo con un editor de texto, busca <code>const VIDEO_YOUTUBE = ""</code> '
+      +'y escribe entre las comillas el identificador del vídeo de YouTube.</span></div></div>';
+
+  $("v-inicio").innerHTML = `
+  <h2 id="t-inicio" class="oculto" style="position:absolute;left:-9999px">Inicio</h2>
+  <div class="hero">
+    <h2>Aprende el marco de alfabetización en IA diseñando una actividad para tu aula</h2>
+    <p>Esta herramienta no te pide que conozcas el Marco AILit: te lo enseña mientras lo usas. En nueve pasos guiados, más una ficha final,
+    tomarás las mismas decisiones que toma un experto en diseño curricular, entendiendo en cada momento qué eliges,
+    por qué y con qué fundamento. Al terminar tendrás dos cosas: una actividad lista para llevar a clase y una
+    comprensión real del marco.</p>
+    <div class="acciones">
+      <button class="btn" style="background:#fff;color:var(--int);border-color:#fff" onclick="verVista('crear')">Empezar el itinerario</button>
+      <button class="btn" style="background:transparent;border-color:rgba(255,255,255,.6);color:#fff" onclick="verVista('transparencia')">Qué aporta y qué no</button>
+    </div>
+  </div>
+
+  <div class="tarjeta"><div class="cuerpo">${video}
+    <p class="pista-campo" style="margin-top:8px">Si prefieres ir directamente a la práctica, puedes saltarte el vídeo: cada paso del itinerario explica lo que necesitas saber en ese momento.</p>
+    <div class="aviso marco" style="margin-top:12px"><b>No necesitas instalar ni descargar nada</b>
+    Se usa aquí mismo, desde el navegador, sin cuenta ni registro. Tu progreso se guarda automáticamente en tu propio
+    dispositivo para que no pierdas el trabajo, y no se envía a ningún servidor.</div>
+  </div></div>
+
+  <div class="tarjeta">
+    <div class="cab"><h2>Qué es el Marco AILit</h2><p class="pista">Iniciativa conjunta de la Comisión Europea y la OCDE, 2026</p></div>
+    <div class="cuerpo">
+      <div class="aviso marco"><b>Definición oficial de alfabetización en IA</b>${esc(AILIT.meta.definicion)}</div>
+      <p>El marco organiza la alfabetización en IA en <b>cuatro ámbitos</b> que agrupan <b>19 competencias</b>. Cada
+      competencia se apoya en <b>conocimientos</b> (17 enunciados), <b>habilidades</b> (7) y <b>actitudes</b> (6), y se
+      despliega en <b>tres niveles de desempeño</b> con su expectativa de aprendizaje y un escenario de aula.</p>
+      <div class="rejilla3" style="margin-top:14px">
+        ${AILIT.ambitos.map((a,i)=>`
+          <div class="bloque-amb">
+            <div class="tit" style="background:${a.color};color:${a.colorTexto}">${i+1}. ${esc(a.nombre)}</div>
+            <div class="txt"><b>${esc(a.lema)}</b><br>${a.competencias.length} competencias</div>
+          </div>`).join("")}
+        <div class="bloque-amb" style="border-style:dashed">
+          <div class="tit" style="background:var(--linea-2)">Orden de aprendizaje</div>
+          <div class="txt">Interactuar es la base. Crear y Gestionar avanzan en paralelo. Moldear culmina y requiere los tres anteriores.</div>
+        </div>
+      </div>
+      <div class="acciones" style="margin-top:16px">
+        <a class="btn sec" href="${ENLACES.marcoWeb}" target="_blank" rel="noopener">Consultar el marco original</a>
+        <a class="btn sec" href="${ENLACES.interactivo}" target="_blank" rel="noopener">Abrir el marco interactivo oficial</a>
+        <button class="btn fantasma" onclick="verVista('explorar')">Explorar el marco aquí</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tarjeta">
+    <div class="cab"><h2>Cómo funciona el itinerario</h2><p class="pista">Entre 20 y 40 minutos la primera vez</p></div>
+    <div class="cuerpo">
+      <p>Cada paso tiene la misma estructura, para que sepas siempre dónde estás:</p>
+      <div class="guia" style="margin-bottom:0">
+        <h3>Estructura de cada paso</h3>
+        <div class="fila"><span class="ic">?</span><div><strong>Qué es</strong>Qué elemento del marco estás manejando.</div></div>
+        <div class="fila"><span class="ic">!</span><div><strong>Por qué importa</strong>Con la cita literal del marco que lo respalda.</div></div>
+        <div class="fila err"><span class="ic">×</span><div><strong>Error frecuente</strong>El fallo que se comete casi siempre en ese punto.</div></div>
+        <div class="fila"><span class="ic">✎</span><div><strong>Pregunta para pensar</strong>Tu respuesta queda registrada en la ficha final como diario de decisiones.</div></div>
+      </div>
+      <div class="aviso calma" style="margin-top:16px"><b>Para formadores y coordinadores de máster</b>
+      El diario de decisiones convierte la ficha en una evidencia de razonamiento, no solo en un producto. Permite
+      evaluar cómo ha pensado el docente, no únicamente qué ha entregado.</div>
+    </div>
+  </div>`;
+}
+
+// ---------------------------------------------------------------------------
+// ASISTENTE: DEFINICIÓN DE PASOS
+// ---------------------------------------------------------------------------
+const PASOS = [
+  {id:"contexto",    et:"Contexto del aula",        guia:"contexto"},
+  {id:"partida",     et:"Tu punto de partida",      guia:"partida"},
+  {id:"ambito",      et:"Dimensión del marco",      guia:"ambito"},
+  {id:"competencia", et:"Competencia",              guia:"competencia"},
+  {id:"nivel",       et:"Nivel de desempeño",       guia:"nivel"},
+  {id:"cha",         et:"Conocimientos, habilidades y actitudes", guia:"cha"},
+  {id:"diseno",      et:"Diseño de la actividad",   guia:"diseno"},
+  {id:"etica",       et:"Decisiones éticas y académicas", guia:"etica"},
+  {id:"curriculo",   et:"Vinculación curricular",   guia:"curriculo"},
+  {id:"ficha",       et:"Tu ficha de actividad",    guia:null}
+];
+
+function bloqueGuia(clave, refClave){
+  const g = GUIA[clave]; if(!g) return "";
+  return `<div class="guia">
+    <h3>Antes de decidir</h3>
+    <div class="fila"><span class="ic">?</span><div><strong>Qué es</strong>${esc(g.que)}</div></div>
+    <div class="fila"><span class="ic">!</span><div><strong>Por qué importa</strong>${esc(g.porque)}</div></div>
+    <div class="fila err"><span class="ic">×</span><div><strong>Error frecuente</strong>${esc(g.error)}</div></div>
+    <div class="fuente">Fundamento: ${esc(g.fuente)}</div>
+    <div class="reflexion">
+      <span class="et">Pregunta para pensar</span>
+      <label><span class="preg">${esc(g.preg)}</span>
+      <textarea rows="3" placeholder="Escribe tu respuesta. Quedará recogida en la ficha final."
+        oninput="setRef('${refClave}',this.value)">${esc(S.ref[refClave]||"")}</textarea></label>
+    </div>
+  </div>`;
+}
+
+function pintarCrear(){
+  const p = PASOS[PASO];
+  const pct = Math.round((PASO/(PASOS.length-1))*100);
+  $("v-crear").innerHTML = `
+    <h2 id="t-crear" style="position:absolute;left:-9999px">Crear actividad</h2>
+    <div class="progreso no-print">
+      <div class="lin"><i style="width:${pct}%"></i></div>
+      <div class="meta"><span>Paso <b>${PASO+1}</b> de ${PASOS.length}: <b>${esc(p.et)}</b></span><span>${pct}% completado</span></div>
+      <div class="pasos-mini">${PASOS.map((x,i)=>
+        `<button onclick="irPaso(${i})" title="${esc(x.et)}" aria-label="Paso ${i+1}: ${esc(x.et)}"
+         class="${i===PASO?'actual':(i<PASO?'hecho':'')}">${i+1}</button>`).join("")}</div>
+    </div>
+    <div class="estrecho">
+      <div class="tarjeta"><div class="cab"><h2>${PASO+1}. ${esc(p.et)}</h2></div>
+      <div class="cuerpo" id="cuerpoPaso"></div></div>
+      <div class="nav-pasos no-print">
+        <button class="btn fantasma" onclick="irPaso(${PASO-1})" ${PASO===0?"disabled":""}>← Anterior</button>
+        <span id="avisoPaso" style="font-size:13.5px;color:var(--ges)"></span>
+        ${PASO<PASOS.length-1
+          ? '<button class="btn empuje" onclick="siguiente()">Siguiente →</button>'
+          : '<button class="btn empuje" onclick="verVista(\'biblioteca\');guardarActividad()">Guardar en mis actividades</button>'}
+      </div>
+    </div>`;
+  $("cuerpoPaso").innerHTML = avisoRecuperacion() + (p.guia ? bloqueGuia(p.guia, p.id) : "") + RENDER[p.id]();
+  anunciar("Paso "+(PASO+1)+" de "+PASOS.length+": "+p.et);
+}
+
+function avisoRecuperacion(){
+  if(!RECUPERADO) return "";
+  const f = new Date(RECUPERADO).toLocaleString("es-ES",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"});
+  return '<div class="aviso marco no-print"><b>Hemos recuperado tu trabajo</b>'
+    +'Continúas donde lo dejaste el '+esc(f)+'. Se guarda solo, en este dispositivo y en este navegador: no se envía a ningún servidor. '
+    +'<button class="btn peq fantasma" style="margin-top:8px" onclick="RECUPERADO=null;reiniciar()">Prefiero empezar de cero</button></div>';
+}
+
+function irPaso(i){
+  if(i<0||i>=PASOS.length) return;
+  PASO=i; guardarLocal(); pintarCrear(); window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function siguiente(){
+  const p=PASOS[PASO], falta=validar(p.id);
+  if(falta){ $("avisoPaso").textContent = falta; return; }
+  irPaso(PASO+1);
+}
+
+function validar(id){
+  if(id==="partida" && !S.partida.trim()) return "Escribe tu punto de partida antes de seguir.";
+  if(id==="ambito" && !S.ambito) return "Elige una dimensión.";
+  if(id==="competencia" && !S.comp) return "Elige una competencia.";
+  if(id==="nivel" && !S.nivel) return "Elige un nivel de desempeño.";
+  return "";
+}
+
+// ---------------------------------------------------------------------------
+// RENDER DE CADA PASO
+// ---------------------------------------------------------------------------
+const RENDER = {};
+
+RENDER.contexto = () => `
+  <label class="campo"><span class="et">Título provisional de la actividad <span class="opt">(puedes cambiarlo al final)</span></span>
+    <input type="text" value="${esc(S.titulo)}" oninput="setCampo('titulo',this.value)"
+      placeholder="Ej.: ¿Por qué mi móvil no me enseña lo mismo que a ti?"></label>
+  <div class="rejilla2">
+    <label class="campo"><span class="et">Etapa educativa</span>
+      <select onchange="setCampo('etapa',this.value)">
+        ${AILIT.etapas.map(e=>`<option value="${e.id}" ${S.etapa===e.id?'selected':''}>${esc(e.nombre)} (${esc(e.edades)})</option>`).join("")}
+      </select></label>
+    <label class="campo"><span class="et">Edad orientativa del grupo</span>
+      <input type="text" value="${esc(S.edad)}" oninput="setCampo('edad',this.value)" placeholder="Ej.: 13-14 años"></label>
+    <label class="campo"><span class="et">Curso, tal como se llama en tu país</span>
+      <input type="text" value="${esc(S.curso)}" oninput="setCampo('curso',this.value)"
+        placeholder="Ej.: 2.º de ESO / 8.º básico / 2.º de secundaria"></label>
+    <label class="campo"><span class="et">Área o materia</span>
+      <input type="text" value="${esc(S.area)}" oninput="setCampo('area',this.value)" placeholder="Ej.: Ciencias Sociales"></label>
+  </div>
+  <label class="campo"><span class="et">Sesiones previstas</span>
+    <input type="text" value="${esc(S.sesiones)}" oninput="setCampo('sesiones',this.value)" placeholder="Ej.: 2 sesiones de 50 minutos"></label>
+  <div class="aviso"><b>Por qué no te pedimos un curso de una lista cerrada</b>
+    Esta herramienta se usa en España y en toda América Latina, donde los cursos reciben nombres distintos. En lugar de
+    imponer una nomenclatura que sería incorrecta para muchos, se te pide la etapa del marco, la edad y el nombre real de
+    tu curso. Así la ficha es válida en cualquier sistema educativo.</div>`;
+
+RENDER.partida = () => `
+  <label class="campo"><span class="et">¿Qué quieres conseguir en tu clase? Escríbelo con tus palabras</span>
+    <textarea rows="5" oninput="setCampo('partida',this.value)"
+      placeholder="Ej.: Quiero que se den cuenta de que las recomendaciones que ven en sus redes no son iguales para todos y de que eso lo decide un sistema que aprende de lo que hacen. Tengo dos sesiones y en clase no pueden usar el móvil.">${esc(S.partida)}</textarea></label>
+  <p class="pista-campo">Este texto se conserva literalmente en la ficha final. La herramienta no lo reescribe ni lo interpreta: lo enmarca dentro de la competencia que elijas después.</p>
+  <div class="aviso calma"><b>Consejo si no sabes por dónde empezar</b>
+    Piensa en algo que hayas oído decir a tu alumnado sobre la IA y que te haya chirriado. Ese comentario suele ser un
+    punto de partida mucho mejor que un objetivo abstracto.</div>`;
+
+RENDER.ambito = () => `<div id="cajaAmbito">${vistaAmbitos()}</div>`;
+function vistaAmbitos(){
+  const orden = {INT:"Ámbito fundacional: empieza por aquí si tu grupo no ha trabajado antes la IA.",
+                 CRE:"Se desarrolla en paralelo con Gestionar, sobre la base de Interactuar.",
+                 GES:"Se desarrolla en paralelo con Crear, sobre la base de Interactuar.",
+                 MOL:"Ámbito culminante: requiere las competencias de los tres anteriores."};
+  let h = '<div class="ambitos">'+AILIT.ambitos.map(a=>`
+    <button class="amb ${S.ambito&&S.ambito.id===a.id?'sel':''}" onclick="elegirAmbito('${a.id}')" aria-pressed="${S.ambito&&S.ambito.id===a.id}">
+      <span class="barra" style="background:${a.color};color:${a.colorTexto}">
+        <span class="n">${a.competencias.length} competencias</span>${esc(a.nombre)}</span>
+      <span class="lema">${esc(a.lema)}</span>
+      <span class="orden">${esc(orden[a.id])}</span>
+    </button>`).join("")+'</div>';
+  if(S.ambito){
+    h += `<div class="aviso" style="margin-top:14px;border-left-color:${S.ambito.color}"><b>${esc(S.ambito.nombre)}</b>${esc(S.ambito.descripcion)}</div>`;
+    if(S.ambito.id==="MOL") h += `<div class="aviso alerta"><b>Comprueba que tu grupo está preparado</b>
+      El marco sitúa Moldear la IA como ámbito culminante: «puede alcanzarse cuando los alumnos poseen las competencias de
+      los tres ámbitos anteriores». Si tu grupo aún no reconoce dónde hay IA ni sabe evaluar sus resultados, plantéate
+      empezar por Interactuar con la IA.</div>`;
+  }
+  return h;
+}
+function elegirAmbito(id){
+  S.ambito=AILIT.ambitos.find(a=>a.id===id);
+  S.comp=null; S.nivel=null; S.con.clear(); S.hab.clear(); S.act.clear();
+  guardarLocal(); $("cajaAmbito").innerHTML=vistaAmbitos(); $("avisoPaso").textContent="";
+}
+
+RENDER.competencia = () => {
+  if(!S.ambito) return '<div class="aviso alerta">Vuelve al paso anterior y elige una dimensión.</div>';
+  return `<p class="pista-campo" style="margin-top:0">Competencias del ámbito <b>${esc(S.ambito.nombre)}</b>. Lee los enunciados completos: la diferencia entre unos y otros está en el verbo.</p>
+    <div id="cajaComp">${vistaComp()}</div>`;
+};
+function vistaComp(){
+  return S.ambito.competencias.map(c=>`
+    <label class="opcion ${S.comp&&S.comp.num===c.num?'sel':''}">
+      <input type="radio" name="comp" ${S.comp&&S.comp.num===c.num?'checked':''} onchange="elegirComp(${c.num})">
+      <span class="txt"><span class="cod">${S.ambito.id}-${c.num}</span>${esc(c.enunciado)}</span>
+    </label>`).join("")
+    + (S.comp?`<div class="aviso marco"><b>Has elegido ${S.ambito.id}-${S.comp.num}</b>
+      El marco vincula a esta competencia estos elementos, que se marcarán automáticamente en el paso 6:
+      conocimientos ${S.comp.conocimientos.join(", ")}; habilidades: ${S.comp.habilidades.map(h=>habObj(h).nombre.toLowerCase()).join(", ")};
+      actitudes: ${S.comp.actitudes.map(a=>actObj(a).nombre.toLowerCase()).join(", ")}.</div>`:"");
+}
+function elegirComp(n){
+  S.comp=S.ambito.competencias.find(c=>c.num===n);
+  S.con=new Set(S.comp.conocimientos); S.hab=new Set(S.comp.habilidades); S.act=new Set(S.comp.actitudes);
+  if(!S.nivel) S.nivel="basico";
+  guardarLocal(); $("cajaComp").innerHTML=vistaComp(); $("avisoPaso").textContent="";
+}
+
+RENDER.nivel = () => {
+  if(!S.comp) return '<div class="aviso alerta">Vuelve atrás y elige una competencia.</div>';
+  return `<p class="pista-campo" style="margin-top:0">Competencia <b>${codigo()}</b>: ${esc(S.comp.enunciado)}</p>
+    <div id="cajaNivel">${vistaNivel()}</div>`;
+};
+function vistaNivel(){
+  let h='<div class="niveles">'+AILIT.niveles.map(n=>`
+    <button class="niv ${S.nivel===n.id?'sel':''}" onclick="elegirNivel('${n.id}')" aria-pressed="${S.nivel===n.id}">
+      <b>${esc(n.nombre)}</b><small>${esc(n.descripcion)}</small></button>`).join("")+'</div>';
+  if(S.nivel){
+    const d=S.comp.niveles[S.nivel];
+    h+=`<div class="aviso marco" style="margin-top:14px"><b>Expectativa del alumnado (texto literal del marco)</b>${esc(d.expectativa)}</div>
+        <div class="aviso"><b>Escenario «en el aula» que propone el marco</b>${esc(d.escenario)}
+        <br><br><i style="color:var(--tinta-3)">Es un ejemplo adaptable, no una prescripción. En el paso 7 lo ajustarás a tu contexto.</i></div>`;
+  }
+  return h;
+}
+function elegirNivel(id){ S.nivel=id; guardarLocal(); $("cajaNivel").innerHTML=vistaNivel(); $("avisoPaso").textContent=""; }
+
+RENDER.cha = () => {
+  if(!S.comp) return '<div class="aviso alerta">Vuelve atrás y elige una competencia.</div>';
+  return '<div id="cajaCHA">'+vistaCHA()+'</div>';
+};
+function vistaCHA(){
+  const marcaC=S.comp.conocimientos, marcaH=S.comp.habilidades, marcaA=S.comp.actitudes;
+  const et=(esMarco,sel,gen)=> esMarco?'<span class="et-marco">El marco lo vincula</span>'
+      :(sel?'<span class="et-tuya">Añadid'+gen+' por ti</span>':'');
+  let h = '<h3 style="font-size:16px;margin-top:0">Conocimientos</h3>';
+  h += '<p class="pista-campo" style="margin-top:0;margin-bottom:12px">Hechos y conceptos esenciales para comprender los sistemas de IA y sus implicaciones.</p>';
+  AILIT.conocimientos.forEach(b=>{
+    h += `<h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--tinta-3);margin:16px 0 8px">${b.id}. ${esc(b.titulo)}</h4>`;
+    h += b.items.map(i=>`<label class="opcion ${S.con.has(i.id)?'sel':''}">
+      <input type="checkbox" ${S.con.has(i.id)?'checked':''} onchange="alternar('con','${i.id}')">
+      <span class="txt"><span class="cod ${marcaC.includes(i.id)?'':'gris'}">${i.id}</span>${esc(i.texto)}
+      ${et(marcaC.includes(i.id), S.con.has(i.id),'o')}</span></label>`).join("");
+  });
+  h += '<h3 style="font-size:16px;margin-top:26px">Habilidades</h3>';
+  h += '<p class="pista-campo" style="margin-top:0;margin-bottom:12px">Capacidades humanas fundamentales aplicadas a un contexto de IA.</p>';
+  h += AILIT.habilidades.map(x=>`<label class="opcion ${S.hab.has(x.id)?'sel':''}">
+      <input type="checkbox" ${S.hab.has(x.id)?'checked':''} onchange="alternar('hab','${x.id}')">
+      <span class="txt"><b>${esc(x.nombre)}</b>${et(marcaH.includes(x.id),S.hab.has(x.id),'a')}
+      <span class="def">${esc(x.definicion)}</span>
+      <span class="def" style="font-style:italic">${esc(x.pregunta)}</span></span></label>`).join("");
+  h += '<h3 style="font-size:16px;margin-top:26px">Actitudes</h3>';
+  h += '<p class="pista-campo" style="margin-top:0;margin-bottom:12px">Mentalidades y disposiciones que el alumnado adopta al usar sistemas de IA.</p>';
+  h += AILIT.actitudes.map(x=>`<label class="opcion ${S.act.has(x.id)?'sel':''}">
+      <input type="checkbox" ${S.act.has(x.id)?'checked':''} onchange="alternar('act','${x.id}')">
+      <span class="txt"><b>${esc(x.nombre)}</b>${et(marcaA.includes(x.id),S.act.has(x.id),'a')}
+      <span class="def">${esc(x.definicion)}</span></span></label>`).join("");
+
+  const extra = [...S.con].filter(x=>!marcaC.includes(x)).length + [...S.hab].filter(x=>!marcaH.includes(x)).length + [...S.act].filter(x=>!marcaA.includes(x)).length;
+  const falta = marcaC.filter(x=>!S.con.has(x)).length + marcaH.filter(x=>!S.hab.has(x)).length + marcaA.filter(x=>!S.act.has(x)).length;
+  if(extra) h += `<div class="aviso alerta" style="margin-top:16px"><b>Has añadido ${extra} elemento(s) que el marco no vincula a ${codigo()}</b>
+    Es una decisión legítima y quedará señalada en la ficha, pero tendrás que justificarla tú: el marco no la respalda por sí solo.</div>`;
+  if(falta) h += `<div class="aviso alerta" style="margin-top:16px"><b>Has desmarcado ${falta} elemento(s) que el marco sí vincula</b>
+    La actividad quedará incompleta respecto al referente original, salvo que los trabajes en otra sesión.</div>`;
+  return h;
+}
+function alternar(t,id){
+  const s = t==="con"?S.con : t==="hab"?S.hab : S.act;
+  s.has(id) ? s.delete(id) : s.add(id);
+  guardarLocal(); $("cajaCHA").innerHTML = vistaCHA();
+}
+
+RENDER.diseno = () => `
+  ${S.comp&&S.nivel?`<div class="aviso marco"><b>Escenario del marco que estás adaptando</b>${esc(S.comp.niveles[S.nivel].escenario)}</div>`:""}
+  <label class="campo"><span class="et">Descripción de tu actividad, adaptada a tu aula</span>
+    <textarea rows="6" oninput="setCampo('descripcion',this.value)"
+      placeholder="Explica qué harán tus alumnos, en qué orden y con qué materiales. Concreta lo que en el escenario del marco está enunciado de forma general.">${esc(S.descripcion)}</textarea></label>
+  <div class="rejilla2">
+    <label class="campo"><span class="et">Agrupamiento</span>
+      <input type="text" value="${esc(S.agrupamiento)}" oninput="setCampo('agrupamiento',this.value)" placeholder="Ej.: parejas y puesta en común"></label>
+    <label class="campo"><span class="et">Producto final o evidencia</span>
+      <input type="text" value="${esc(S.producto)}" oninput="setCampo('producto',this.value)" placeholder="Ej.: mural comparativo y diario individual"></label>
+  </div>
+  <label class="campo"><span class="et">Recursos y condiciones</span>
+    <textarea rows="3" oninput="setCampo('recursos',this.value)"
+      placeholder="Ej.: proyector, fichas impresas, sin dispositivos para el alumnado.">${esc(S.recursos)}</textarea></label>
+  <div class="aviso calma"><b>¿No tienes dispositivos? No es un impedimento</b>
+    El marco incluye escenarios que no requieren tecnología, y su web oficial permite filtrarlos por nivel tecnológico.
+    Esa clasificación no está publicada escenario por escenario, así que esta herramienta no la reproduce: consúltala en
+    el <a href="${ENLACES.interactivo}" target="_blank" rel="noopener">marco interactivo oficial</a> usando los filtros
+    <i>No tech</i> y <i>Low-tech</i>.</div>`;
+
+RENDER.etica = () => `
+  <p class="pista-campo" style="margin-top:0">Responde con la concreción con la que se lo explicarías a una familia que pregunta. Cada
+  pregunta indica el elemento del marco del que procede.</p>
+  ${ETICA.map(q=>`
+    <div class="tarjeta" style="box-shadow:none;margin-bottom:12px"><div class="cuerpo" style="padding:14px">
+      <p style="font-weight:600;margin-bottom:9px">${esc(q.preg)}</p>
+      ${q.tipo==="opcion"
+        ? q.ops.map((o,i)=>`<label class="opcion ${S.etica[q.id]===o?'sel':''}" style="margin-bottom:7px">
+            <input type="radio" name="${q.id}" ${S.etica[q.id]===o?'checked':''} onchange="setEtica('${q.id}',this.value);pintarCrear()" value="${esc(o)}">
+            <span class="txt">${esc(o)}</span></label>`).join("")
+        : `<textarea rows="2" placeholder="${esc(q.ph)}" oninput="setEtica('${q.id}',this.value)">${esc(S.etica[q.id]||"")}</textarea>`}
+      <p class="pista-campo" style="margin-top:9px"><b>De dónde sale esta pregunta:</b> ${esc(q.ancla)}</p>
+    </div></div>`).join("")}
+  ${!usaIA() && S.etica.usoAlumnado
+    ? '<div class="aviso marco"><b>En esta actividad no se usa IA</b>Las preguntas sobre edad mínima, datos, citación y verificación no se te exigen, aunque responderlas te ayuda a anticipar el momento en que sí la uses. Las dos últimas (alternativa y bienestar) siguen siendo pertinentes: el marco considera que decidir no usar la IA es en sí una decisión que hay que razonar.</div>'
+    : ''}
+  ${S.etica.usoAlumnado && S.etica.usoAlumnado.indexOf("Sí")===0
+    ? '<div class="aviso alerta"><b>Tu alumnado va a usar herramientas directamente</b>Comprueba antes de la sesión: la edad mínima del servicio, la normativa de tu país sobre datos de menores, la política de tu centro y si necesitas informar a las familias. El marco pide adaptar cada escenario «a los contextos, las directrices y la legislación locales».</div>'
+    : ''}`;
+
+RENDER.curriculo = () => `
+  <div class="aviso"><b>${esc(CURRICULO.intro)}</b></div>
+  <ol style="padding-left:20px">${CURRICULO.pasos.map(p=>`<li style="margin-bottom:8px"><b>${esc(p.t.replace(/^\d+\.\s*/,""))}.</b> ${esc(p.d)}</li>`).join("")}</ol>
+  <label class="campo"><span class="et">Vinculación con tu currículo oficial</span>
+    <textarea rows="6" oninput="setCampo('curriculo',this.value)"
+      placeholder="Ej.: Ciencias Sociales, 2.º de secundaria. Competencia: análisis crítico de fuentes de información. Contenido: medios digitales y formación de la opinión pública. Criterio de evaluación: contrasta informaciones procedentes de distintas fuentes.">${esc(S.curriculo)}</textarea></label>
+  <div class="acciones"><button class="btn sec" onclick="verVista('curriculo')">Ver la guía completa y el bloque de España</button></div>`;
+
+RENDER.ficha = () => {
+  const pend = pendientes();
+  return (pend.length
+    ? `<div class="aviso alerta"><b>Quedan ${pend.length} apartado(s) sin completar</b>
+       <ul style="margin:8px 0 0;padding-left:20px">${pend.map(p=>`<li>${esc(p.t)} <button class="btn peq fantasma" onclick="irPaso(${p.i})">Ir al paso ${p.i+1}</button></li>`).join("")}</ul>
+       <br>Puedes generar la ficha igualmente: los apartados vacíos aparecerán marcados como pendientes.</div>`
+    : `<div class="aviso marco"><b>Has completado el itinerario</b>Revisa la ficha y guárdala o expórtala.</div>`)
+  + `<div class="acciones no-print" style="margin-bottom:18px">
+      <button class="btn" onclick="guardarActividad()">Guardar en mis actividades</button>
+      <button class="btn sec" onclick="window.print()">Imprimir o guardar en PDF</button>
+      <button class="btn sec" onclick="exportarWord()">Descargar en Word</button>
+      <button class="btn sec" onclick="copiarTexto()">Copiar al portapapeles</button>
+      <button class="btn fantasma" onclick="reiniciar()">Empezar una actividad nueva</button>
+    </div>
+    <p class="pista-campo no-print" id="estadoAcc" style="min-height:20px"></p>
+    <div id="ficha">${htmlFicha()}</div>
+    <div class="tarjeta no-print" style="margin-top:22px"><div class="cab"><h2>Comprueba lo que has aprendido</h2>
+      <p class="pista">Cinco afirmaciones sobre el marco. Responde y comprueba.</p></div>
+      <div class="cuerpo quiz">${QUIZ.map((q,i)=>`
+        <div class="item"><p>${esc(q.af)}</p>
+          <div class="bots">
+            <button class="btn peq sec" onclick="responder(${i},true)">Verdadero</button>
+            <button class="btn peq sec" onclick="responder(${i},false)">Falso</button>
+          </div>
+          <div class="fb" id="fb${i}"></div>
+        </div>`).join("")}</div></div>`;
+};
+
+function pendientes(){
+  const p=[];
+  if(!S.partida.trim()) p.push({t:"Tu punto de partida",i:1});
+  if(!S.ambito) p.push({t:"Dimensión",i:2});
+  if(!S.comp) p.push({t:"Competencia",i:3});
+  if(!S.nivel) p.push({t:"Nivel de desempeño",i:4});
+  if(!S.descripcion.trim()) p.push({t:"Descripción de la actividad",i:6});
+  const faltaEtica = eticaPendientes();
+  if(faltaEtica.length) p.push({t:"Decisiones éticas y académicas ("+faltaEtica.length+" sin responder)",i:7});
+  if(!S.curriculo.trim()) p.push({t:"Vinculación curricular",i:8});
+  const sinRef = PASOS.filter(x=>x.guia && !(S.ref[x.id]||"").trim());
+  if(sinRef.length) p.push({t:"Preguntas para pensar sin responder ("+sinRef.length+")",i:PASOS.indexOf(sinRef[0])});
+  return p;
+}
+
+function usaIA(){
+  const r=S.etica.usoAlumnado||"";
+  return r.indexOf("No se usa ninguna")!==0;
+}
+function eticaPendientes(){
+  const dependenIA=["edadDatos","datos","citar","verificar"];
+  return ETICA.filter(q=>{
+    if(!usaIA() && dependenIA.indexOf(q.id)>=0) return false;
+    return !((S.etica[q.id]||"").trim());
+  });
+}
+
+function responder(i,v){
+  S.quiz[i]=v; autoguardar();
+  const q=QUIZ[i], fb=$("fb"+i), bien=(v===q.ok);
+  fb.className="fb on "+(bien?"bien":"mal");
+  fb.innerHTML=(bien?"<b>Correcto. </b>":"<b>No es así. </b>")+esc(q.exp);
+}
+
+// ============================================================================
+// FICHA
+// ============================================================================
+function objetivo(){
+  if(!S.comp||!S.nivel) return "";
+  const exp = sinPunto(S.comp.niveles[S.nivel].expectativa);
+  let o = "Al finalizar la secuencia, el alumnado";
+  if(S.curso.trim()) o += " de "+S.curso.trim();
+  o += " deberá haber alcanzado la expectativa que el Marco AILit fija para la competencia "+codigo()
+     + " en su nivel "+nivObj(S.nivel).nombre.toLowerCase()+": «"+exp+"»";
+  o += S.area.trim() ? ", trabajada desde "+S.area.trim()+"." : ".";
+  if(S.partida.trim()) o += " Concreta la intención docente de partida: «"+sinPunto(S.partida.trim().replace(/\s+/g," "))+"».";
+  return o;
+}
+
+function secuencia(){
+  if(!S.comp||!S.nivel) return [];
+  const base = S.descripcion.trim() || S.comp.niveles[S.nivel].escenario;
+  const f = {
+    basico:[
+      "<b>Activación (10-15 min).</b> Partir de ejemplos cercanos al alumnado y recoger sus ideas previas y concepciones erróneas sobre la IA, sin corregirlas todavía.",
+      "<b>Desarrollo guiado.</b> "+base,
+      "<b>Cierre y verbalización.</b> Cada alumno formula con sus palabras lo aprendido; el docente reformula con lenguaje técnicamente preciso y sin atribuir rasgos humanos a la IA."
+    ],
+    intermedio:[
+      "<b>Planteamiento del reto (10 min).</b> Presentar la situación y explicitar los criterios de logro antes de empezar.",
+      "<b>Trabajo en equipos.</b> "+base,
+      "<b>Puesta en común y contraste.</b> Comparar las producciones de los equipos y detectar discrepancias, justificando las decisiones tomadas.",
+      "<b>Cierre metacognitivo.</b> Registro individual de qué se ha decidido, con qué criterio y qué haría falta para decidirlo mejor."
+    ],
+    avanzado:[
+      "<b>Encuadre del problema.</b> Situar el caso, delimitar la pregunta y acordar los criterios de evaluación con el alumnado.",
+      "<b>Indagación autónoma.</b> "+base,
+      "<b>Argumentación y contraste.</b> Defensa razonada de las conclusiones ante el grupo, con réplica y contraargumentación.",
+      "<b>Transferencia.</b> Aplicar el criterio construido a un caso nuevo no trabajado en clase.",
+      "<b>Evaluación de la propia decisión.</b> Justificar por escrito qué se aceptó, qué se revisó y qué se rechazó, y por qué."
+    ]
+  };
+  return f[S.nivel];
+}
+
+function indicadores(){
+  if(!S.comp||!S.nivel) return [];
+  const o=[];
+  o.push("Alcanza la expectativa que el marco fija para el nivel "+nivObj(S.nivel).nombre.toLowerCase()+": «"+sinPunto(S.comp.niveles[S.nivel].expectativa)+"».");
+  [...S.hab].forEach(h=>{ const x=habObj(h); if(x) o.push("Moviliza la habilidad de "+x.nombre.toLowerCase()+": "+minus(x.definicion)); });
+  [...S.act].forEach(a=>{ const x=actObj(a); if(x) o.push("Manifiesta la actitud de "+x.nombre.toLowerCase()+" a lo largo de la tarea."); });
+  return o;
+}
+
+function htmlFicha(){
+  if(!S.ambito||!S.comp||!S.nivel){
+    return '<div class="ficha"><div class="contenido"><p style="text-align:center;color:var(--tinta-3);padding:30px 0">'
+      +'Completa al menos la dimensión, la competencia y el nivel para generar la ficha.</p></div></div>';
+  }
+  const a=S.ambito,c=S.comp,n=nivObj(S.nivel),d=c.niveles[S.nivel];
+  const meta=[S.curso,S.edad,S.area,S.sesiones].map(x=>x.trim()).filter(Boolean).join(" · ");
+  const chip=(ids,vinc,nom)=> ids.length
+    ? ids.map(i=>`<span class="chip ${vinc.includes(i)?'marco':'tuya'}">${esc(nom(i))}</span>`).join("")
+    : '<span style="color:var(--tinta-3)">Sin selección</span>';
+  const pend = '<i style="color:var(--ges)">Pendiente de completar</i>';
+
+  const refs = PASOS.filter(p=>p.guia).map(p=>({p:GUIA[p.guia].preg, r:(S.ref[p.id]||"").trim(), et:p.et}));
+  const eticas = ETICA.map(q=>({p:q.preg, r:(S.etica[q.id]||"").trim()}));
+
+  return `<div class="ficha">
+    <div class="encab" style="background:${a.color};color:${a.colorTexto}">
+      <div class="kicker">Ficha de actividad · Marco AILit</div>
+      <h2>${esc(S.titulo.trim()||"Actividad de alfabetización en IA")}</h2>
+      <div class="meta">${esc(meta||etapaObj().nombre)}</div>
+    </div>
+    <div class="contenido">
+
+      <div class="bl"><h3>Objetivo de aprendizaje</h3><div class="objetivo">${esc(objetivo())}</div></div>
+
+      <div class="bl"><h3>Punto de partida del docente (texto literal)</h3>
+        <p style="font-style:italic">${S.partida.trim()?"«"+esc(sinPunto(S.partida.trim()))+"».":pend}</p></div>
+
+      <div class="bl"><h3>Anclaje en el Marco AILit</h3>
+        <table class="just">
+          <tr><th>Dimensión</th><td><b>${esc(a.nombre)}</b><br><span style="color:var(--tinta-2);font-size:13px">${esc(a.lema)}</span></td></tr>
+          <tr><th>Competencia</th><td><span class="cod">${a.id}-${c.num}</span><span style="font-size:12.5px;color:var(--tinta-3)">código oficial ${esc(a.codigoOficial)} ${c.num}</span><br>${esc(c.enunciado)}</td></tr>
+          <tr><th>Nivel de desempeño</th><td><b>${esc(n.nombre)}</b> — ${esc(n.descripcion)}</td></tr>
+          <tr><th>Expectativa del alumnado<br><span style="font-weight:400;text-transform:none;letter-spacing:0">(literal del marco)</span></th><td>${esc(d.expectativa)}</td></tr>
+          <tr><th>Conocimientos</th><td>${chip([...S.con].sort(), c.conocimientos, i=>i+" · "+(conObj(i)?conObj(i).bloque:""))}</td></tr>
+          <tr><th>Habilidades</th><td>${chip([...S.hab], c.habilidades, i=>habObj(i)?habObj(i).nombre:i)}</td></tr>
+          <tr><th>Actitudes</th><td>${chip([...S.act], c.actitudes, i=>actObj(i)?actObj(i).nombre:i)}</td></tr>
+        </table>
+        <p style="font-size:12.5px;color:var(--tinta-3);margin-top:8px">
+          Fondo azul claro: vinculado por el marco a esta competencia. Borde discontinuo: añadido por el docente, requiere justificación propia.</p>
+      </div>
+
+      <div class="bl"><h3>Contexto del aula</h3>
+        <table class="just">
+          <tr><th>Etapa</th><td>${esc(etapaObj().nombre)}</td></tr>
+          <tr><th>Curso y edad</th><td>${esc([S.curso,S.edad].filter(x=>x.trim()).join(" · ")) || pend}</td></tr>
+          <tr><th>Área o materia</th><td>${esc(S.area)||pend}</td></tr>
+          <tr><th>Sesiones</th><td>${esc(S.sesiones)||pend}</td></tr>
+          <tr><th>Agrupamiento</th><td>${esc(S.agrupamiento)||pend}</td></tr>
+          <tr><th>Recursos y condiciones</th><td>${esc(S.recursos)||pend}</td></tr>
+        </table>
+      </div>
+
+      <div class="bl"><h3>Descripción de la actividad</h3>
+        <p>${S.descripcion.trim()?esc(S.descripcion):pend}</p></div>
+
+      <div class="bl"><h3>Escenario de referencia del marco</h3>
+        <p>${esc(d.escenario)}</p>
+        <p style="font-size:12.5px;color:var(--tinta-3)">Los escenarios «en el aula» del marco son ejemplos adaptables. Deben ajustarse a los contextos, las directrices y la legislación locales.</p></div>
+
+      <div class="bl"><h3>Secuencia didáctica sugerida</h3>
+        <ol>${secuencia().map(x=>`<li>${x}</li>`).join("")}</ol>
+        <p style="font-size:12.5px;color:var(--tinta-3)">Propuesta derivada de esta herramienta, no del marco. Valídala y ajústala.</p></div>
+
+      <div class="bl"><h3>Producto final o evidencia</h3><p>${esc(S.producto)||pend}</p></div>
+
+      <div class="bl"><h3>Indicadores de logro</h3>
+        <ul>${indicadores().map(i=>`<li>${esc(i)}</li>`).join("")}</ul>
+        <p style="font-size:12.5px;color:var(--tinta-3)">El marco recomienda que sea el profesorado quien elabore sus propias rúbricas a partir de las expectativas del alumnado. Estos indicadores son un punto de partida, no una rúbrica cerrada.</p></div>
+
+      <div class="bl"><h3>Decisiones éticas y académicas</h3>
+        ${eticas.map(e=>`<div class="dialogo"><span class="p">${esc(e.p)}</span>${e.r?esc(e.r):pend}</div>`).join("")}</div>
+
+      <div class="bl"><h3>Vinculación con el currículo oficial</h3>
+        <p>${S.curriculo.trim()?esc(S.curriculo):pend}</p>
+        <p style="font-size:12.5px;color:var(--tinta-3)">Redactada y firmada por el docente. Esta herramienta no incorpora el currículo de ningún país ni puede verificar esta correspondencia.</p></div>
+
+      <div class="bl"><h3>Diario de decisiones del docente</h3>
+        ${refs.map(r=>`<div class="dialogo"><span class="p">${esc(r.p)}</span>${r.r?esc(r.r):pend}</div>`).join("")}</div>
+
+      <div class="bl"><h3>Declaración de transparencia</h3>
+        <ul style="font-size:13.5px">
+          <li><b>Procede literalmente del Marco AILit:</b> el enunciado de la competencia, la expectativa del alumnado, el escenario de aula, y los enunciados de conocimientos, habilidades y actitudes.</li>
+          <li><b>Lo ha decidido y redactado el docente:</b> el punto de partida, la descripción, el contexto, el producto, las decisiones éticas, la vinculación curricular y el diario de decisiones.</li>
+          <li><b>Es una plantilla de esta herramienta, no del marco:</b> la secuencia didáctica y la formulación de los indicadores de logro.</li>
+          <li><b>Ningún texto de esta ficha ha sido generado por inteligencia artificial.</b> La composición es determinista.</li>
+        </ul></div>
+
+      <div class="fuente">
+        <b>Referencia del marco:</b> ${esc(AILIT.meta.fuente)} ${esc(AILIT.meta.doi)} · Licencia ${esc(AILIT.meta.licencia)}.<br>
+        En caso de discrepancia entre la obra original y la traducción, solo se considerará válido el texto de la obra original.<br>
+        Ficha compuesta el ${new Date().toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"})} con el Taller AILit.
+      </div>
+    </div></div>`;
+}
+
+// ============================================================================
+// EXPORTACIÓN
+// ============================================================================
+function fichaTexto(){
+  if(!S.comp) return "";
+  const a=S.ambito,c=S.comp,n=nivObj(S.nivel),d=c.niveles[S.nivel],L=[];
+  const P=t=>L.push(t);
+  P((S.titulo.trim()||"Actividad de alfabetización en IA").toUpperCase());
+  P([S.curso,S.edad,S.area,S.sesiones].map(x=>x.trim()).filter(Boolean).join(" · ")); P("");
+  P("OBJETIVO DE APRENDIZAJE"); P(objetivo()); P("");
+  if(S.partida.trim()){ P("PUNTO DE PARTIDA DEL DOCENTE"); P("«"+S.partida.trim()+"»"); P(""); }
+  P("ANCLAJE EN EL MARCO AILit");
+  P("Dimensión: "+a.nombre+" — "+a.lema);
+  P("Competencia "+a.id+"-"+c.num+" (código oficial "+a.codigoOficial+" "+c.num+"): "+c.enunciado);
+  P("Nivel: "+n.nombre);
+  P("Expectativa del marco: "+d.expectativa);
+  P("Conocimientos: "+[...S.con].sort().join(", "));
+  P("Habilidades: "+[...S.hab].map(h=>habObj(h)?habObj(h).nombre:h).join(", "));
+  P("Actitudes: "+[...S.act].map(x=>actObj(x)?actObj(x).nombre:x).join(", ")); P("");
+  P("DESCRIPCIÓN DE LA ACTIVIDAD"); P(S.descripcion.trim()||"(pendiente)"); P("");
+  P("ESCENARIO DE REFERENCIA DEL MARCO"); P(d.escenario); P("");
+  P("SECUENCIA DIDÁCTICA SUGERIDA"); secuencia().forEach((f,i)=>P((i+1)+". "+f.replace(/<[^>]+>/g,""))); P("");
+  P("PRODUCTO FINAL O EVIDENCIA"); P(S.producto.trim()||"(pendiente)"); P("");
+  P("INDICADORES DE LOGRO"); indicadores().forEach(i=>P("- "+i)); P("");
+  P("DECISIONES ÉTICAS Y ACADÉMICAS");
+  ETICA.forEach(q=>{ P("· "+q.preg); P("  "+((S.etica[q.id]||"").trim()||"(pendiente)")); }); P("");
+  P("VINCULACIÓN CURRICULAR"); P(S.curriculo.trim()||"(pendiente)"); P("");
+  P("DIARIO DE DECISIONES DEL DOCENTE");
+  PASOS.filter(p=>p.guia).forEach(p=>{ P("· "+GUIA[p.guia].preg); P("  "+((S.ref[p.id]||"").trim()||"(sin responder)")); }); P("");
+  P("TRANSPARENCIA: los enunciados de competencia, expectativa, escenario, conocimientos, habilidades y actitudes son literales del marco. El resto lo ha redactado el docente, salvo la secuencia y los indicadores, que son plantilla de la herramienta. Ningún texto ha sido generado por IA.");
+  P("");
+  P("REFERENCIA: "+AILIT.meta.fuente+" "+AILIT.meta.doi+" · Licencia "+AILIT.meta.licencia+".");
+  return L.join("\n");
+}
+
+function aviso(t){ const e=$("estadoAcc"); if(e){ e.textContent=t; setTimeout(()=>{if(e.textContent===t)e.textContent="";},6000);} }
+let ALT="";
+function verAlt(t){ modalTexto(t, ALT); }
+function descargar(blob,nombre,alt){
+  try{
+    const u=URL.createObjectURL(blob), a=document.createElement("a");
+    a.href=u; a.download=nombre; a.rel="noopener";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(u),1500);
+    if(ENTORNO.restringido && typeof alt==="string"){
+      ALT=alt;
+      const e=$("estadoAcc");
+      if(e) e.innerHTML='Se ha solicitado la descarga de <b>'+esc(nombre)+'</b>. Las páginas que incrustan contenido suelen bloquear las descargas: si no aparece, usa «Abrir a pantalla completa» o <a href="#" onclick="verAlt(\'Contenido de '+esc(nombre)+'\');return false;">copia el contenido desde aquí</a>.';
+    }
+    return true;
+  }catch(e){
+    if(typeof alt==="string") modalTexto("Descarga bloqueada: "+nombre, alt);
+    else aviso("El navegador ha bloqueado la descarga. Abre la herramienta a pantalla completa.");
+    return false;
+  }
+}
+function nombreArchivo(){
+  const t=(S.titulo.trim()||"actividad-ailit").toLowerCase().normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  return (codigo()?codigo().toLowerCase()+"-":"")+(t||"actividad-ailit");
+}
+function copiarTexto(){
+  if(!S.comp){ aviso("Completa antes dimensión, competencia y nivel."); return; }
+  const t=fichaTexto();
+  if(navigator.clipboard && navigator.clipboard.writeText)
+    navigator.clipboard.writeText(t).then(()=>aviso("Ficha copiada al portapapeles."),()=>copiaManual(t));
+  else copiaManual(t);
+}
+function copiaManual(t){
+  const ta=document.createElement("textarea");
+  ta.value=t; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  let ok=false; try{ ok=document.execCommand("copy"); }catch(e){ ok=false; }
+  document.body.removeChild(ta);
+  ok ? aviso("Ficha copiada al portapapeles.") : modalTexto("Copia manual de la ficha", t);
+}
+function exportarWord(){
+  if(!S.comp){ aviso("Completa antes dimensión, competencia y nivel."); return; }
+  const doc='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
+    +'<head><meta charset="utf-8"><title>'+esc(S.titulo.trim()||"Actividad AILit")+'</title><style>'
+    +'body{font-family:Calibri,Arial,sans-serif;font-size:11pt;color:#12243A}'
+    +'h2{font-size:16pt}h3{font-size:9.5pt;text-transform:uppercase;letter-spacing:.6pt;color:#4A5C70;border-bottom:1.5pt solid #DAE1E9;padding-bottom:2pt}'
+    +'table{border-collapse:collapse;width:100%}td,th{border:1pt solid #DAE1E9;padding:5pt;vertical-align:top;font-size:10pt}'
+    +'th{background:#EDF1F5;width:30%;text-align:left}.encab{padding:10pt;color:#fff}'
+    +'.objetivo{background:#F1FCDC;border-left:4pt solid #CFFA7A;padding:8pt}'
+    +'.chip{background:#EDF1F5;padding:1pt 5pt;margin-right:3pt}.chip.marco{background:#F2F6FB}.chip.tuya{background:#fff;border:1pt dashed #76889B}'
+    +'.dialogo{background:#F2F6FB;padding:7pt;margin-bottom:5pt}.dialogo .p{font-weight:bold;color:#01408D;display:block}'
+    +'.fuente{font-size:8.5pt;color:#4A5C70;border-top:1pt solid #DAE1E9;padding-top:5pt}'
+    +'</style></head><body>'+htmlFicha()+'</body></html>';
+  descargar(new Blob(["﻿"+doc],{type:"application/msword"}), nombreArchivo()+".doc", fichaTexto());
+  if(!ENTORNO.restringido) aviso("Documento de Word generado. Búscalo en tus descargas.");
+}
+
+// ============================================================================
+// BIBLIOTECA
+// ============================================================================
+function guardarActividad(){
+  if(!S.ambito||!S.comp||!S.nivel){ aviso("Selecciona dimensión, competencia y nivel antes de guardar."); return; }
+  BIBLIOTECA.unshift({
+    id: Date.now()+"-"+Math.random().toString(36).slice(2,7),
+    fecha: new Date().toISOString(),
+    titulo: S.titulo.trim()||"Actividad sin título",
+    datos: JSON.parse(JSON.stringify(snapshot()))
+  });
+  guardarLocal(); pintarBiblioteca();
+  aviso(ALMACEN ? "Actividad guardada en este dispositivo." : "Actividad guardada en esta sesión. Exporta el archivo .json para conservarla.");
+}
+function cargarActividad(id){
+  const it=BIBLIOTECA.find(x=>x.id===id); if(!it) return;
+  restaurar(it.datos); RECUPERADO=null;
+  PASO=PASOS.length-1; guardarLocal(); verVista("crear"); pintarCrear();
+}
+function borrarActividad(id){ BIBLIOTECA=BIBLIOTECA.filter(x=>x.id!==id); guardarLocal(); pintarBiblioteca(); }
+
+function pintarBiblioteca(){
+  const c=$("contBib"); if(c) c.textContent = BIBLIOTECA.length? "("+BIBLIOTECA.length+")":"";
+  $("v-biblioteca").innerHTML = `
+  <h2 id="t-biblioteca" style="position:absolute;left:-9999px">Mis actividades</h2>
+  <div class="tarjeta"><div class="cab"><h2>Mis actividades</h2>
+    <p class="pista">Se conservan mientras la pestaña esté abierta</p></div>
+    <div class="cuerpo">
+      ${ALMACEN
+        ? '<div class="aviso marco"><b>Tu trabajo se guarda solo en este dispositivo</b>El progreso y las actividades se '
+          +'guardan automáticamente en este navegador, en tu propio equipo. No se envían a ningún servidor y nadie más '
+          +'puede verlos. Si cambias de ordenador, borras los datos del navegador o usas el modo incógnito, se perderán: '
+          +'para eso está la exportación.</div>'
+        : '<div class="aviso alerta"><b>El guardado automático no está disponible aquí</b>Tu navegador está bloqueando el '
+          +'almacenamiento local, algo habitual cuando la herramienta se ve incrustada en otra página o en modo incógnito. '
+          +'Ábrela a pantalla completa para que se guarde sola, o exporta el archivo .json antes de cerrar.</div>'}
+      <div class="acciones" style="margin-bottom:16px">
+        <button class="btn sec" onclick="exportarBiblioteca()">Exportar todas (.json)</button>
+        <button class="btn sec" onclick="document.getElementById('fImp').click()">Importar archivo</button>
+        <input type="file" id="fImp" accept="application/json,.json" style="display:none" onchange="importarBiblioteca(event)">
+        ${ALMACEN?'<button class="btn fantasma" onclick="borrarLocal(true)">Borrar mis datos de este dispositivo</button>':''}
+      </div>
+      <div id="listaBib"></div>
+    </div></div>`;
+  const l=$("listaBib");
+  if(!BIBLIOTECA.length){ l.innerHTML='<p class="pista-campo" style="margin:0">Todavía no has guardado ninguna actividad.</p>'; return; }
+  l.innerHTML = BIBLIOTECA.map(it=>{
+    const a=AILIT.ambitos.find(x=>x.id===it.datos.ambito), c2=a.competencias.find(x=>x.num===it.datos.comp);
+    return `<div class="item-bib">
+      <div class="franja" style="background:${a.color}"></div>
+      <div class="info"><h4>${esc(it.titulo)}</h4>
+        <div class="sub">${esc(a.nombre)} · ${a.id}-${c2.num} · nivel ${esc(nivObj(it.datos.nivel).nombre.toLowerCase())}${it.datos.curso?" · "+esc(it.datos.curso):""}</div>
+        <div class="sub" style="margin-top:4px">${esc(c2.enunciado)}</div></div>
+      <div class="bots">
+        <button class="btn peq sec" onclick="cargarActividad('${it.id}')">Abrir</button>
+        <button class="btn peq fantasma" onclick="borrarActividad('${it.id}')">Eliminar</button>
+      </div></div>`;
+  }).join("");
+}
+function exportarBiblioteca(){
+  if(!BIBLIOTECA.length){ alert("No hay actividades guardadas todavía."); return; }
+  const j=JSON.stringify({app:"taller-ailit",version:3,actividades:BIBLIOTECA},null,2);
+  descargar(new Blob([j],{type:"application/json"}),"mis-actividades-ailit.json", j);
+}
+function importarBiblioteca(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{
+      const d=JSON.parse(r.result), arr=Array.isArray(d)?d:(d.actividades||[]);
+      if(!arr.length) throw 0;
+      BIBLIOTECA=arr.concat(BIBLIOTECA); guardarLocal(); pintarBiblioteca();
+      alert("Se han importado "+arr.length+" actividades.");
+    }catch(e){ alert("El archivo no tiene el formato esperado."); } };
+  r.readAsText(f); ev.target.value="";
+}
+
+// ============================================================================
+// EXPLORADOR CON BUSCADOR
+// ============================================================================
+let INDICE=[];
+function construirIndice(){
+  INDICE=[];
+  AILIT.ambitos.forEach(a=>a.competencias.forEach(c=>{
+    INDICE.push({t:"Competencia", tit:a.id+"-"+c.num, ruta:a.nombre, txt:c.enunciado, col:a.color, amb:a.id, num:c.num, niv:null});
+    AILIT.niveles.forEach(n=>{
+      INDICE.push({t:"Expectativa", tit:a.id+"-"+c.num+" · "+n.nombre, ruta:a.nombre+" › "+c.enunciado, txt:c.niveles[n.id].expectativa, col:a.color, amb:a.id, num:c.num, niv:n.id});
+      INDICE.push({t:"Escenario de aula", tit:a.id+"-"+c.num+" · "+n.nombre, ruta:a.nombre+" › "+c.enunciado, txt:c.niveles[n.id].escenario, col:a.color, amb:a.id, num:c.num, niv:n.id});
+    });
+  }));
+  AILIT.conocimientos.forEach(b=>b.items.forEach(i=>
+    INDICE.push({t:"Conocimiento", tit:i.id, ruta:b.titulo, txt:i.texto, col:"#01408D", amb:null})));
+  AILIT.habilidades.forEach(h=>INDICE.push({t:"Habilidad", tit:h.nombre, ruta:"Habilidades", txt:h.definicion+" "+h.pregunta, col:"#01408D", amb:null}));
+  AILIT.actitudes.forEach(x=>INDICE.push({t:"Actitud", tit:x.nombre, ruta:"Actitudes", txt:x.definicion, col:"#01408D", amb:null}));
+}
+function buscar(q){
+  const cont=$("resBusca");
+  const s=nrm(q).trim();
+  if(s.length<3){ cont.innerHTML = s.length? '<p class="pista-campo">Escribe al menos tres letras.</p>':''; return; }
+  const res=INDICE.filter(x=>nrm(x.txt+" "+x.tit+" "+x.ruta).indexOf(s)>=0);
+  if(!res.length){ cont.innerHTML='<div class="aviso alerta"><b>Sin resultados para «'+esc(q)+'»</b>Prueba con otra palabra, o explora por facetas (área curricular, ética, impacto social, nivel tecnológico) en el <a href="'+ENLACES.interactivo+'" target="_blank" rel="noopener">marco interactivo oficial</a>.</div>'; return; }
+  cont.innerHTML='<p class="pista-campo"><b>'+res.length+'</b> resultado(s) para «'+esc(q)+'»</p>'
+    + res.slice(0,60).map(x=>`<div class="res" style="border-left-color:${x.col}">
+        <h4>${esc(x.t)}: ${esc(x.tit)}</h4>
+        <div class="ruta">${esc(x.ruta)}</div>
+        <div class="frag">${resaltar(x.txt,q)}</div>
+        ${x.amb?`<div style="margin-top:9px"><button class="btn peq sec" onclick="irADisenar('${x.amb}',${x.num},${x.niv?"'"+x.niv+"'":"null"})">Diseñar una actividad con esto</button></div>`:""}
+      </div>`).join("");
+}
+function resaltar(txt,q){
+  const s=nrm(q).trim(); const base=nrm(txt); let out="",i=0;
+  while(true){
+    const p=base.indexOf(s,i); if(p<0||!s){ out+=esc(txt.slice(i)); break; }
+    out+=esc(txt.slice(i,p))+"<mark>"+esc(txt.slice(p,p+s.length))+"</mark>"; i=p+s.length;
+  }
+  return out;
+}
+function irADisenar(amb,num,niv){
+  S.ambito=AILIT.ambitos.find(a=>a.id===amb);
+  S.comp=S.ambito.competencias.find(c=>c.num===num);
+  S.con=new Set(S.comp.conocimientos); S.hab=new Set(S.comp.habilidades); S.act=new Set(S.comp.actitudes);
+  S.nivel=niv||S.nivel||"basico";
+  PASO=0; verVista("crear"); pintarCrear();
+}
+
+function pintarExplorador(){
+  const nC=AILIT.ambitos.reduce((s,a)=>s+a.competencias.length,0);
+  const nK=AILIT.conocimientos.reduce((s,b)=>s+b.items.length,0);
+  $("v-explorar").innerHTML=`
+  <h2 id="t-explorar" style="position:absolute;left:-9999px">Explorar el marco</h2>
+  <div class="tarjeta"><div class="cab"><h2>Buscar en el marco</h2>
+    <p class="pista">Busca cualquier palabra en los textos literales: competencias, expectativas, escenarios, conocimientos, habilidades y actitudes.</p></div>
+    <div class="cuerpo">
+      <div class="buscador">
+        <label style="flex:1"><span style="position:absolute;left:-9999px">Buscar</span>
+        <input type="text" id="qBusca" placeholder="Ej.: privacidad, sesgo, clima, derechos de autor, chatbot" oninput="buscar(this.value)"></label>
+      </div>
+      <div class="aviso" style="margin-top:14px"><b>Qué no puede hacer este buscador</b>
+        La web oficial permite filtrar además por área curricular, consideración ética, impacto social y nivel
+        tecnológico. Ese etiquetado no está publicado escenario por escenario, así que no se reproduce aquí para no
+        inventarlo. Para esos filtros, usa el <a href="${ENLACES.interactivo}" target="_blank" rel="noopener">marco interactivo oficial</a>.</div>
+      <div id="resBusca" style="margin-top:14px"></div>
+    </div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>El marco de un vistazo</h2></div><div class="cuerpo">
+    <table class="tab">
+      <tr><th>Elemento</th><th style="width:80px">Cantidad</th><th>Detalle</th></tr>
+      <tr><td>Ámbitos</td><td class="c">4</td><td>${AILIT.ambitos.map(a=>esc(a.nombre)).join(" · ")}</td></tr>
+      <tr><td>Competencias</td><td class="c">${nC}</td><td>${AILIT.ambitos.map(a=>a.competencias.length).join(" + ")}</td></tr>
+      <tr><td>Enunciados de conocimiento</td><td class="c">${nK}</td><td>${AILIT.conocimientos.map(b=>b.id+". "+esc(b.titulo)).join(" · ")}</td></tr>
+      <tr><td>Habilidades</td><td class="c">${AILIT.habilidades.length}</td><td>${AILIT.habilidades.map(h=>esc(h.nombre)).join(" · ")}</td></tr>
+      <tr><td>Actitudes</td><td class="c">${AILIT.actitudes.length}</td><td>${AILIT.actitudes.map(a=>esc(a.nombre)).join(" · ")}</td></tr>
+      <tr><td>Niveles</td><td class="c">3</td><td>Básico · Intermedio · Avanzado (no vinculados a edades ni cursos)</td></tr>
+      <tr><td>Expectativas y escenarios</td><td class="c">${nC*3}</td><td>Uno por competencia y nivel</td></tr>
+    </table></div></div>
+
+  ${AILIT.ambitos.map(a=>`
+    <div class="exp-amb">
+      <div class="tit" style="background:${a.color};color:${a.colorTexto}">${esc(a.nombre)}
+        <span class="lema-exp">${esc(a.lema)} · ${a.competencias.length} competencias · código oficial ${esc(a.codigoOficial)}</span></div>
+      <div class="desc">${esc(a.descripcion)}</div>
+      ${a.competencias.map(c=>`
+        <details class="comp"><summary><span class="num" style="background:${a.color};color:${a.colorTexto}">${c.num}</span><span>${esc(c.enunciado)}</span></summary>
+          <div class="det">
+            <div style="margin-bottom:6px">
+              ${c.conocimientos.map(k=>`<span class="chip marco">Conocimiento ${k}</span>`).join("")}
+              ${c.habilidades.map(k=>`<span class="chip">${esc(habObj(k).nombre)}</span>`).join("")}
+              ${c.actitudes.map(k=>`<span class="chip">${esc(actObj(k).nombre)}</span>`).join("")}
+            </div>
+            ${AILIT.niveles.map(n=>`<div class="niv-exp" style="border-left-color:${a.color}">
+              <b>${esc(n.nombre)}</b><p style="margin:4px 0 0">${esc(c.niveles[n.id].expectativa)}</p>
+              <div class="aula"><em>En el aula</em>${esc(c.niveles[n.id].escenario)}</div>
+              <div style="margin-top:8px"><button class="btn peq sec" onclick="irADisenar('${a.id}',${c.num},'${n.id}')">Diseñar con esto</button></div>
+            </div>`).join("")}
+          </div></details>`).join("")}
+    </div>`).join("")}
+
+  <div class="tarjeta"><div class="cab"><h2>Conocimientos: los 17 enunciados</h2></div><div class="cuerpo">
+    ${AILIT.conocimientos.map(b=>`<h4 style="margin:16px 0 8px;color:var(--int)">${b.id}. ${esc(b.titulo)}</h4>
+      <table class="tab">${b.items.map(i=>`<tr><td class="c">${i.id}</td><td>${esc(i.texto)}</td></tr>`).join("")}</table>`).join("")}
+  </div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>Habilidades y actitudes</h2></div><div class="cuerpo">
+    <table class="tab"><tr><th style="width:24%">Habilidad</th><th>Definición y pregunta guía</th></tr>
+      ${AILIT.habilidades.map(h=>`<tr><td><b>${esc(h.nombre)}</b></td><td>${esc(h.definicion)}<br><i style="color:var(--tinta-3)">${esc(h.pregunta)}</i></td></tr>`).join("")}</table>
+    <table class="tab" style="margin-top:16px"><tr><th style="width:24%">Actitud</th><th>Descripción</th></tr>
+      ${AILIT.actitudes.map(a=>`<tr><td><b>${esc(a.nombre)}</b></td><td>${esc(a.definicion)}</td></tr>`).join("")}</table>
+  </div></div>`;
+}
+
+// ============================================================================
+// CURRÍCULO
+// ============================================================================
+function pintarCurriculo(){
+  $("v-curriculo").innerHTML=`
+  <h2 id="t-curriculo" style="position:absolute;left:-9999px">Currículo</h2>
+  <div class="tarjeta"><div class="cab"><h2>Cómo vincular la actividad con tu currículo</h2>
+    <p class="pista">Guía genérica válida en cualquier sistema educativo hispanohablante</p></div>
+    <div class="cuerpo">
+      <p>${esc(CURRICULO.intro)}</p>
+      <ol style="padding-left:20px">${CURRICULO.pasos.map(p=>`<li style="margin-bottom:10px"><b>${esc(p.t.replace(/^\d+\.\s*/,""))}.</b> ${esc(p.d)}</li>`).join("")}</ol>
+      <div class="aviso alerta"><b>Límite honesto</b>Esta herramienta no incorpora el texto del currículo de ningún país
+      y no puede verificar tu redacción. La correspondencia la estableces y la firmas tú.</div>
+    </div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>Bloque específico para España (LOMLOE)</h2>
+    <p class="pista">Orientación terminológica, no texto normativo</p></div>
+    <div class="cuerpo">
+      <p>${esc(CURRICULO.espana.intro)}</p>
+      <table class="tab"><tr><th style="width:30%">Elemento LOMLOE</th><th>Cómo se relaciona con tu actividad</th></tr>
+        ${CURRICULO.espana.filas.map(f=>`<tr><td><b>${esc(f[0])}</b></td><td>${esc(f[1])}</td></tr>`).join("")}</table>
+      <div class="aviso alerta" style="margin-top:16px"><b>Aviso</b>${esc(CURRICULO.espana.aviso)}</div>
+    </div></div>`;
+}
+
+// ============================================================================
+// TRANSPARENCIA
+// ============================================================================
+function pintarTransparencia(){
+  const lista=(arr,cls)=>arr.map(x=>`<div class="aviso ${cls}"><b>${esc(x.t)}</b>${esc(x.d)}</div>`).join("");
+  $("v-transparencia").innerHTML=`
+  <h2 id="t-transparencia" style="position:absolute;left:-9999px">Qué aporta y qué no</h2>
+  <div class="tarjeta"><div class="cab"><h2>Qué aporta esta herramienta</h2>
+    <p class="pista">Frente al marco original y a su web interactiva</p></div>
+    <div class="cuerpo">${lista(TRANSPARENCIA.aporta,"marco")}</div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>Qué no aporta</h2>
+    <p class="pista">Para que no esperes de ella lo que no puede dar</p></div>
+    <div class="cuerpo">${lista(TRANSPARENCIA.noAporta,"calma")}</div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>Limitaciones que no se pueden subsanar</h2>
+    <p class="pista">No son fallos pendientes de arreglo: son límites estructurales</p></div>
+    <div class="cuerpo">${TRANSPARENCIA.limites.map(x=>`<div class="aviso ${x.grave?'alerta':''}"><b>${esc(x.t)}</b>${esc(x.d)}</div>`).join("")}</div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>Cómo se ha construido</h2></div>
+    <div class="cuerpo"><ul>${TRANSPARENCIA.comoSeHizo.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>Privacidad</h2></div><div class="cuerpo">
+    <div class="aviso marco"><b>No hace falta descargar ni instalar nada</b>
+    Esta herramienta se abre y se usa directamente desde la página web, como cualquier otra. Que «funcione en tu
+    navegador» significa que los cálculos ocurren en tu propio dispositivo en lugar de en un servidor, no que tengas que
+    bajarte un archivo.</div>
+    <ul>
+      <li><b>No tiene servidor.</b> No hay base de datos ni sistema al que se envíen tus textos.</li>
+      <li><b>No hace peticiones de red.</b> No usa CDN, ni fuentes externas, ni analítica, ni píxeles de seguimiento.
+        La única excepción es el vídeo de presentación, si el responsable del sitio decide incrustar uno.</li>
+      <li><b>No pide datos personales.</b> No hay registro, ni correo, ni identificación.</li>
+      <li><b>Guarda tu progreso en tu propio equipo.</b> Usa el almacenamiento local del navegador para que no pierdas el
+        trabajo si cierras la pestaña. Esa información no viaja a ninguna parte: se queda en tu dispositivo y puedes
+        borrarla cuando quieras desde el botón de abajo o vaciando los datos del navegador.</li>
+      <li><b>No procesa datos del alumnado.</b> Quien describe la actividad es el docente.</li>
+    </ul>
+    <div class="acciones">${ALMACEN
+      ? '<button class="btn sec" onclick="borrarLocal(true)">Borrar mis datos de este dispositivo</button>'
+      : '<span class="pista-campo">El almacenamiento local está bloqueado en este contexto, así que no hay nada guardado que borrar.</span>'}</div>
+    <p style="margin-top:14px">La página que aloje esta herramienta sí puede registrar visitas, como cualquier sitio web.
+    Eso pertenece al aviso legal de ese sitio, no a esta herramienta.</p>
+  </div></div>
+
+  <div class="tarjeta"><div class="cab"><h2>Fuente, licencia y atribución</h2></div><div class="cuerpo">
+    <p><b>Obra original:</b> ${esc(AILIT.meta.fuente)} <a href="${AILIT.meta.doi}" target="_blank" rel="noopener">${esc(AILIT.meta.doi)}</a>.
+    Obra bajo licencia ${esc(AILIT.meta.licencia)}.</p>
+    <div class="aviso"><b>Nota de adaptación exigida por la licencia</b>
+    Esta es una adaptación de una obra original de la OCDE y la Unión Europea. Las opiniones expresadas y los argumentos
+    empleados en esta adaptación no deben presentarse como representativos de los puntos de vista oficiales de la OCDE,
+    sus países miembros o la Unión Europea.</div>
+    <div class="aviso"><b>Prevalencia del original</b>
+    En caso de discrepancia entre la obra original y la traducción, solo se considerará válido el texto de la obra original.</div>
+    <p style="font-size:13.5px;color:var(--tinta-2)">Esta herramienta no utiliza los logotipos ni la identidad visual de la
+    OCDE o de la Comisión Europea. Reproduce únicamente la paleta cromática de los cuatro ámbitos para facilitar el
+    reconocimiento del marco.</p>
+    <div class="acciones">
+      <a class="btn sec" href="${ENLACES.marcoWeb}" target="_blank" rel="noopener">Marco original</a>
+      <a class="btn sec" href="${ENLACES.interactivo}" target="_blank" rel="noopener">Marco interactivo oficial</a>
+    </div>
+  </div></div>`;
+}
+
+function reiniciar(silencioso){
+  if(!silencioso && !confirm("¿Empezar una actividad nueva? Se vaciará el formulario. Las actividades guardadas no se borran.")) return;
+  ["titulo","edad","curso","area","sesiones","partida","descripcion","agrupamiento","producto","recursos","curriculo"].forEach(k=>S[k]="");
+  S.etapa="primaria"; S.ambito=null; S.comp=null; S.nivel=null;
+  S.con.clear(); S.hab.clear(); S.act.clear(); S.etica={}; S.ref={}; S.quiz={};
+  PASO=0; RECUPERADO=null; guardarLocal(); pintarCrear(); window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// ============================================================================
+// ARRANQUE
+// ============================================================================
+(function recuperarSesion(){
+  const g = leerLocal();
+  if(!g) return;
+  BIBLIOTECA = g.biblioteca || [];
+  if(hayTrabajo(g.estado)){ restaurar(g.estado); PASO = Math.min(g.paso||0, PASOS.length-1); RECUPERADO = g.ts || null; }
+})();
+
+pintarBanner();
+pintarTabs();
+construirIndice();
+pintarInicio();
+pintarCrear();
+pintarExplorador();
+pintarCurriculo();
+pintarBiblioteca();
+pintarTransparencia();
+verVista("inicio");
+
+</script>
+</body>
+</html>
