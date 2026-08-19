@@ -85,7 +85,7 @@ main{max-width:1240px;margin:0 auto;padding:20px 16px 80px}
 .video-caja{
   position:relative;width:100%;padding-top:56.25%;background:#0B1B2B;border-radius:10px;overflow:hidden;margin-bottom:6px;
 }
-.video-caja iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-caja iframe,.video-caja video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 .video-hueco{
   position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
   color:#9FB4C9;text-align:center;padding:20px;font-size:14px;
@@ -358,20 +358,20 @@ const AILIT = {
       id: "1", titulo: "La naturaleza de la IA",
       items: [
         { id: "1.1", texto: "La IA no es humana. Los sistemas de IA utilizan algoritmos para combinar procedimientos paso a paso con inferencias estadísticas (p. ej., ponderaciones y sesgos) con el fin de procesar datos, detectar patrones y generar resultados basados en probabilidades." },
-        { id: "1.2", texto: "Las máquinas «aprenden» infiriendo cómo generar resultados en respuesta a patrones presentes en los datos con los que se las ha entrenado y a la nueva información que reciben. Lo hacen con distintos niveles de autonomía, adaptabilidad y precisión." },
-        { id: "1.3", texto: "La IA generativa utiliza probabilidades para generar resultados avanzados en diversos medios (p. ej., texto, audio, elementos visuales), pero carece de intención y de una verdadera comprensión humana." },
-        { id: "1.4", texto: "Existen numerosos tipos de sistemas de IA, que funcionan de manera diferente en función de su finalidad, su programación y los datos con los que se los ha entrenado. En función del tipo de herramienta, es posible que los usuarios sepan que están interactuando con IA; en otras ocasiones, los sistemas de IA pueden funcionar en segundo plano y su influencia no es evidente." },
-        { id: "1.5", texto: "La IA requiere recursos considerables, como energía, minerales y agua, para satisfacer sus necesidades de potencia de cálculo. La energía y las infraestructuras necesarias para desarrollar y mantener los sistemas de IA contribuyen al aumento de las emisiones de carbono." }
+        { id: "1.2", texto: "Las máquinas «aprenden» infiriendo cómo generar resultados en respuesta a patrones presentes en los datos con los que se las ha entrenado y a la nueva información que reciben. Lo hacen con distintos niveles de autonomía, adaptabilidad y precisión. Estos resultados pueden venir en forma de predicciones, contenidos o recomendaciones que influyen en entornos físicos o virtuales." },
+        { id: "1.3", texto: "La IA generativa utiliza probabilidades para generar resultados avanzados en diversos medios (p. ej., texto, audio, elementos visuales, etc.), pero carece de intención y de una verdadera comprensión humana." },
+        { id: "1.4", texto: "Existen numerosos tipos de sistemas de IA, que funcionan de manera diferente en función de su finalidad, su programación y los datos con los que se los ha entrenado. En función del tipo de herramienta, es posible que los usuarios sepan que están interactuando con IA; en otras ocasiones, los sistemas de IA pueden funcionar en segundo plano o como parte de una herramienta y su influencia no es evidente." },
+        { id: "1.5", texto: "La IA requiere recursos considerables, como energía, minerales y agua, para satisfacer sus necesidades de potencia de cálculo. La energía y las infraestructuras necesarias para desarrollar y mantener los sistemas de IA contribuyen al aumento de las emisiones de carbono. El impacto de la IA en la sostenibilidad a largo plazo, tanto positivo como negativo, depende en gran medida de cómo se implemente y se utilice." }
       ]
     },
     {
       id: "2", titulo: "La IA refleja las decisiones y las perspectivas humanas",
       items: [
-        { id: "2.1", texto: "Para crear y mantener los sistemas de IA, se necesita que las personas diseñen algoritmos, recopilen, gestionen, evalúen y etiqueten datos y moderen los contenidos dañinos. Estos sistemas reflejan decisiones, supuestos y prácticas laborales humanas." },
-        { id: "2.2", texto: "La IA se entrena con enormes conjuntos de datos procedentes de información disponible públicamente, contenidos generados por los usuarios, bases de datos seleccionadas o datos del mundo real. Estos conjuntos pueden incluir materiales protegidos por derechos de autor, datos sintéticos e información no verificada, así como datos obtenidos de forma poco ética o sin consentimiento." },
+        { id: "2.1", texto: "Para crear y mantener los sistemas de IA, se necesita que las personas diseñen algoritmos, recopilen, gestionen, evalúen y etiqueten datos y moderen los contenidos dañinos. Estos sistemas reflejan decisiones, supuestos y prácticas laborales humanas y están condicionados por la desigualdad de las circunstancias a escala mundial." },
+        { id: "2.2", texto: "La IA se entrena con enormes conjuntos de datos procedentes de información disponible públicamente, contenidos generados por los usuarios, bases de datos seleccionadas o datos del mundo real recopilados a través de sensores, interacciones y sistemas digitales. Estos conjuntos de datos pueden incluir materiales protegidos por derechos de autor, datos sintéticos e información no verificada, así como datos privados y públicos obtenidos de forma poco ética o sin consentimiento." },
         { id: "2.3", texto: "Los sistemas de IA pueden recopilar datos durante las interacciones con los usuarios y dichos datos influyen en las decisiones, los procesos y los resultados en tiempo real." },
-        { id: "2.4", texto: "Los sistemas de IA están entrenados para identificar patrones entre los elementos de datos que los seres humanos han seleccionado, categorizado y priorizado. Este entrenamiento también puede incluir el aprendizaje por refuerzo." },
-        { id: "2.5", texto: "En los sistemas de IA existe un sesgo intrínseco, que también puede reflejar sesgos sociales inherentes a los datos de entrenamiento o al diseño de los algoritmos. Los seres humanos pueden empeorar o mitigar estos sesgos, de forma accidental o deliberada." }
+        { id: "2.4", texto: "Los sistemas de IA están entrenados para identificar patrones entre los elementos de datos que los seres humanos han seleccionado, categorizado y priorizado. Este entrenamiento también puede incluir el aprendizaje por refuerzo, en el que los sistemas de IA mejoran su rendimiento mediante interacciones de prueba y error con entornos, guiados por valoraciones y recompensas." },
+        { id: "2.5", texto: "En los sistemas de IA existe un sesgo intrínseco, que también puede reflejar sesgos sociales inherentes a los datos de entrenamiento o al diseño de los algoritmos. Los seres humanos pueden empeorar o mitigar estos sesgos en los sistemas de IA, ya sea de forma accidental o deliberada, durante el diseño, el desarrollo, las pruebas o el uso de la IA. Esto puede tener consecuencias de gran alcance para los usuarios a título individual y para sociedades enteras." }
       ]
     },
     {
@@ -379,14 +379,14 @@ const AILIT = {
       items: [
         { id: "3.1", texto: "La IA puede realizar tareas como el reconocimiento de patrones, la automatización y la creación de contenidos. Carece de emociones, de razonamiento ético, de pensamiento crítico, de contexto y de originalidad, a pesar de que simula estos aspectos en sus resultados." },
         { id: "3.2", texto: "La capacidad de la IA generativa, en particular de los grandes modelos de lenguaje (LLM), para producir contenidos muy avanzados puede dificultar la distinción entre hechos e invenciones, lo que aumenta los riesgos de desinformación e información errónea, «alucinaciones», tergiversación y manipulación." },
-        { id: "3.3", texto: "Los sistemas de IA pueden generar resultados diferentes en respuesta a la misma entrada, en función tanto de la entrada en sí como de la forma en que el sistema está diseñado para seleccionar o priorizar características y parámetros específicos." },
-        { id: "3.4", texto: "Los sistemas de IA y sus algoritmos subyacentes funcionan con distintos grados de transparencia e interpretabilidad. En algunos casos es posible determinar cómo se optimiza un algoritmo; en otras ocasiones, esto es difícil o imposible." }
+        { id: "3.3", texto: "Los sistemas de IA pueden generar resultados diferentes en respuesta a la misma entrada, en función tanto de la entrada en sí como de la forma en que el sistema de IA está diseñado para seleccionar o priorizar características y parámetros específicos." },
+        { id: "3.4", texto: "Los sistemas de IA y sus algoritmos subyacentes funcionan con distintos grados de transparencia e interpretabilidad. En algunos casos, es posible determinar cómo se optimiza un algoritmo para determinadas variables y resultados. En otras ocasiones, esto es difícil o imposible de hacer." }
       ]
     },
     {
       id: "4", titulo: "El papel de la IA en la sociedad",
       items: [
-        { id: "4.1", texto: "Los sistemas de IA pueden influir en las decisiones de muchos ámbitos de la vida cotidiana: filtrado de información, recomendaciones, clasificaciones y reconocimiento de patrones. En todos los usos de la IA, los seres humanos deben ejercer su voluntad y conservar la facultad de tomar decisiones intencionadas y autónomas." },
+        { id: "4.1", texto: "Los sistemas de IA pueden influir en las decisiones de muchos ámbitos de la vida cotidiana. Se utilizan cada vez más para tareas que tienen repercusiones positivas y negativas, como el filtrado de información, las recomendaciones, las clasificaciones y el reconocimiento de patrones. En todos los usos de la IA, los seres humanos deben ejercer su voluntad y conservar la facultad de tomar decisiones intencionadas y autónomas." },
         { id: "4.2", texto: "Los sistemas de IA deben comprenderse, auditarse y regularse para garantizar que su uso maximice los beneficios y minimice los perjuicios para las personas y la sociedad." },
         { id: "4.3", texto: "El diseño responsable y ético de la IA abarca la equidad, la transparencia, la explicabilidad, la rendición de cuentas, el respeto de la privacidad y el cumplimiento de la legislación." }
       ]
@@ -410,12 +410,12 @@ const AILIT = {
   // ACTITUDES: 6
   // --------------------------------------------------------------------------
   actitudes: [
-    { id: "reflexión", nombre: "Reflexión", definicion: "Los alumnos se cuestionan los supuestos y las narrativas en torno al uso de la IA para determinar cómo la IA puede influir en sus propias vidas. Valoran de forma crítica las herramientas y los resultados de la IA y ponen a prueba las nuevas afirmaciones basándose en el razonamiento y las evidencias." },
-    { id: "responsabilidad", nombre: "Responsabilidad", definicion: "Los alumnos reflexionan detenidamente sobre cómo utilizan la IA y reconocen que son responsables de sus propias decisiones. Comprenden la importancia de la transparencia y de la toma de decisiones fundamentadas, incluida la decisión de no utilizar la IA." },
-    { id: "curiosidad", nombre: "Curiosidad", definicion: "Los alumnos sienten interés por explorar qué puede y qué no puede hacer la IA en la actualidad y cómo podría evolucionar en el futuro. Consideran que el aprendizaje es un proceso continuo y aceptan la experimentación." },
-    { id: "innovación", nombre: "Innovación", definicion: "Los alumnos tratan de utilizar la IA para abordar retos del mundo real y aprovechar nuevas oportunidades. Se ven a sí mismos como usuarios empoderados y creadores activos de un mundo marcado por la IA, y no solo como consumidores." },
-    { id: "adaptabilidad", nombre: "Adaptabilidad", definicion: "Los alumnos demuestran perseverancia y flexibilidad a la hora de trabajar con la IA. Saben cómo replantear los problemas y los enfoques en respuesta a resultados sesgados y comportamientos impredecibles, entendiendo que aprender con IA es un proceso iterativo." },
-    { id: "empatía", nombre: "Empatía", definicion: "Los alumnos analizan detenidamente cómo la IA afecta a las personas, a las comunidades y al medioambiente. Evalúan el efecto que las herramientas de IA pueden tener en su propia salud mental y en el bienestar de los demás, y adoptan los puntos de vista de los demás." }
+    { id: "reflexión", nombre: "Reflexión", definicion: "Los alumnos se cuestionan los supuestos y las narrativas en torno al uso de la IA para determinar cómo la IA puede influir en sus propias vidas. Valoran de forma crítica las herramientas y los resultados de la IA, sopesan las oportunidades y los riesgos de su uso y ponen a prueba las nuevas afirmaciones basándose en el razonamiento y las evidencias. Aplican un enfoque perspicaz para evaluar las nuevas tecnologías en distintos casos de uso." },
+    { id: "responsabilidad", nombre: "Responsabilidad", definicion: "Los alumnos reflexionan detenidamente sobre cómo utilizan la IA y reconocen que son responsables de sus propias decisiones. Tienen en cuenta tanto los efectos previstos como los imprevistos de sus acciones y se comprometen a evitar daños a otras personas y al medioambiente. Los alumnos comprenden la importancia de la transparencia y de la toma de decisiones fundamentadas sobre el uso de la IA, incluida la decisión de no utilizar la IA." },
+    { id: "curiosidad", nombre: "Curiosidad", definicion: "Los alumnos sienten interés por explorar qué puede y qué no puede hacer la IA en la actualidad y cómo podría evolucionar en el futuro. Quieren comprender cómo afecta la IA a su vidas y a sus futuras carreras profesionales. Consideran que el aprendizaje es un proceso continuo y aceptan la experimentación, ya que creen que de la exploración surgen descubrimientos significativos." },
+    { id: "innovación", nombre: "Innovación", definicion: "Los alumnos tratan de utilizar la IA para abordar retos del mundo real y aprovechar nuevas oportunidades. Experimentan, prueban diferentes enfoques y piensan de manera creativa para resolver un problema. Los alumnos se ven a sí mismos como usuarios empoderados, responsables de la toma de decisiones y creadores activos de un mundo marcado por la IA, y no solo como consumidores de distintas soluciones tecnológicas. Ven el potencial de la IA para convertirse en una herramienta poderosa en sus propias vidas y en sus comunidades." },
+    { id: "adaptabilidad", nombre: "Adaptabilidad", definicion: "Los alumnos demuestran perseverancia y flexibilidad a la hora de trabajar con la IA. Mantienen la mente abierta a ideas y perspectivas diversas. Saben cómo replantear los problemas y los enfoques en respuesta a resultados sesgados y comportamientos impredecibles. En lugar de limitarse a aceptar el resultado que proporciona una herramienta de IA, los alumnos adaptables entienden que aprender con IA es un proceso iterativo que se va moldeando a partir de las valoraciones y las revisiones. Reconocen que existen muchas formas posibles de resolver un problema." },
+    { id: "empatía", nombre: "Empatía", definicion: "Los alumnos analizan detenidamente cómo la IA afecta a las personas, a las comunidades y al medioambiente. Sopesan las posibles oportunidades y los riesgos del uso de la IA desde la perspectiva de sus posibles repercusiones y entienden que puede generar resultados no deseados que varían para distintos grupos de personas. Además, evalúan el efecto que las herramientas de IA pueden tener en su propia salud mental, así como en el bienestar de los demás. A la hora de plantearse si conviene utilizar la IA o cómo hacerlo, adoptan los puntos de vista de los demás y reflexionan sobre las implicaciones éticas de sus decisiones a corto y largo plazo." }
   ],
 
   // --------------------------------------------------------------------------
@@ -646,7 +646,6 @@ const AILIT = {
     { id: "secundaria", nombre: "Educación Secundaria", edades: "aproximadamente 12 a 18 años" }
   ]
 };
-
 // ============================================================================
 // CAPA FORMATIVA
 // Salvo los nombres de botones de la interfaz, las citas entre comillas
@@ -660,10 +659,25 @@ const ENLACES = {
   doi: "https://doi.org/10.1787/65cd27d4-en"
 };
 
-// Identificador de YouTube del vídeo de presentación.
-// Para activarlo, sustituye la cadena vacía por el identificador del vídeo,
-// por ejemplo: const VIDEO_YOUTUBE = "dQw4w9WgXcQ";
-const VIDEO_YOUTUBE = "";
+const VERSION_APP = "6 · vídeo de YouTube incrustado";
+
+// VÍDEO DE PRESENTACIÓN
+// Opción en uso: identificador del vídeo en YouTube. Se incrusta en la portada
+// y se reproduce dentro de la propia página.
+const VIDEO_YOUTUBE = "Lv4Voxv70uU";
+
+// Opción alternativa, desactivada: nombre de un archivo de vídeo alojado junto
+// a este index.html. Si se escribe aquí un nombre de archivo, tiene prioridad
+// sobre YouTube y se usa el reproductor propio del navegador; YouTube queda
+// entonces como respaldo automático.
+const VIDEO_ARCHIVO = "";
+
+// Dominio del reproductor. Se usa el canónico de YouTube, que es el que la
+// propia plataforma devuelve en su código de inserción, por máxima
+// compatibilidad. La alternativa "www.youtube-nocookie.com" ofrece el modo de
+// privacidad mejorada, pero algunas redes escolares y extensiones de bloqueo lo
+// filtran.
+const VIDEO_DOMINIO = "www.youtube.com";
 
 const GUIA = {
   contexto: {
@@ -809,7 +823,7 @@ const TRANSPARENCIA = {
     { t:"Traduce un marco descriptivo en un procedimiento de diseño", d:"El Marco AILit describe qué debe aprender el alumnado, pero no dice cómo diseñar una actividad. Esta herramienta convierte esa descripción en un itinerario de nueve pasos con una decisión justificada en cada uno." },
     { t:"Deja trazabilidad de cada decisión", d:"La ficha final distingue lo que procede literalmente del marco, lo que has decidido tú y lo que es una plantilla de esta herramienta. Puedes defender la actividad ante una coordinación, un tribunal o un claustro señalando el origen de cada elemento." },
     { t:"Forma mientras produces", d:"Cada paso explica qué es ese elemento del marco, por qué importa y cuál es el error más frecuente, y te pide una decisión razonada que queda registrada en la ficha como diario de decisiones. Al terminar tienes una actividad y, sobre todo, has entendido el marco por dentro." },
-    { t:"Trabaja en castellano y sin ataduras de sistema educativo", d:"Los 133 textos del marco están verificados uno a uno contra la edición oficial en español. El nivel educativo se indica por etapa, edad orientativa y nombre libre del curso, de modo que sirve igual en España y en cualquier país de América Latina." },
+    { t:"Trabaja en castellano y sin ataduras de sistema educativo", d:"Los 170 textos del marco están verificados uno a uno contra la edición oficial en español. El nivel educativo se indica por etapa, edad orientativa y nombre libre del curso, de modo que sirve igual en España y en cualquier país de América Latina." },
     { t:"Obliga a decidir la ética antes de entrar en el aula", d:"Un paso completo, derivado de los conocimientos y las actitudes del propio marco, te hace resolver por escrito la edad mínima, los datos que se introducen, la declaración del uso de IA, la verificación de resultados, la alternativa sin IA y el bienestar del alumnado." },
     { t:"Se usa directamente desde la web y no envía nada", d:"No hay que instalar ni descargar nada: se abre desde la página y funciona igual en un ordenador del aula, en una tableta o en un móvil. El progreso se guarda en el propio dispositivo del docente, nunca en un servidor, y se puede borrar con un botón." }
   ],
@@ -829,13 +843,12 @@ const TRANSPARENCIA = {
   ],
   comoSeHizo: [
     "Los 4 ámbitos, las 19 competencias, los 17 enunciados de conocimiento, las 7 habilidades, las 6 actitudes, las 57 expectativas y los 57 escenarios se transcribieron de la edición oficial en español del marco.",
-    "Cada una de las 133 cadenas de texto se verificó automáticamente contra el PDF original: todas coinciden palabra por palabra.",
+    "Cada una de las 170 cadenas procedentes del marco (19 enunciados de competencia, 57 expectativas, 57 escenarios de aula, 17 enunciados de conocimiento, 7 habilidades con sus preguntas orientadoras y 6 actitudes) se verificó automáticamente contra el PDF oficial: todas coinciden palabra por palabra. La única supresión son las referencias bibliográficas entre paréntesis que el marco intercala en los enunciados de conocimiento, omitidas por legibilidad y consultables en la obra original.",
     "Los colores de los cuatro ámbitos se obtuvieron muestreando directamente los píxeles del PDF oficial, no por aproximación visual.",
-    "El guardado automático emplea el almacenamiento local del navegador: los datos permanecen en el dispositivo del usuario y no existe ningún servidor que pueda recibirlos.",
+    "El guardado automático emplea el almacenamiento local del navegador: los datos permanecen en el dispositivo del usuario y no se envían a ninguna parte, porque el alojamiento se limita a entregar el archivo y no recibe nada de vuelta.",
     "La secuencia didáctica, los indicadores de logro, las preguntas de reflexión y las preguntas éticas son elaboración propia derivada del marco. Cada una indica el elemento del que procede y se identifican como tales en la ficha."
   ]
 };
-
 // ============================================================================
 // LÓGICA DE LA APLICACIÓN
 // ============================================================================
@@ -880,9 +893,11 @@ function setEtica(k,v){ S.etica[k]=v; autoguardar(); }
 
 // ---------------------------------------------------------------------------
 // GUARDADO AUTOMÁTICO EN EL DISPOSITIVO DEL USUARIO
-// Se usa el almacenamiento local del navegador. Nunca sale del equipo: no hay
-// servidor al que enviarlo. Si el navegador lo bloquea (por ejemplo, cuando la
-// herramienta va incrustada en otra página), se degrada sin romper nada.
+// Se usa el almacenamiento local del navegador. Nunca sale del equipo: el
+// alojamiento solo entrega este archivo y la aplicación no realiza ninguna
+// petición de red posterior. Si el navegador bloquea el almacenamiento (por
+// ejemplo, cuando la herramienta va incrustada en otra página), se degrada sin
+// romper nada.
 // ---------------------------------------------------------------------------
 const CLAVE_ALMACEN = "tallerAILit.v1";
 const ALMACEN = (function(){
@@ -978,12 +993,42 @@ function pintarBanner(){
 // ---------------------------------------------------------------------------
 // PORTADA
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// VÍDEO DE PRESENTACIÓN
+// Primero se intenta con el reproductor propio del navegador sobre el archivo
+// alojado junto a la aplicación. Si ese archivo no existe o el navegador no
+// puede reproducirlo, se sustituye automáticamente por el vídeo de YouTube.
+// ---------------------------------------------------------------------------
+function marcoYouTube(){
+  return '<iframe src="https://'+VIDEO_DOMINIO+'/embed/'+esc(VIDEO_YOUTUBE)+'?rel=0&amp;playsinline=1" '
+    +'title="Vídeo de presentación del Taller AILit" frameborder="0" '
+    +'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
+    +'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+}
+function videoRespaldo(){
+  const c = $("cajaVideo"); if(!c || c.dataset.respaldo === "1") return;
+  c.dataset.respaldo = "1";
+  c.innerHTML = VIDEO_YOUTUBE
+    ? marcoYouTube()
+    : '<div class="video-hueco"><b>El vídeo de presentación no está disponible</b>'
+      +'<span>Falta el archivo <code>'+esc(VIDEO_ARCHIVO)+'</code> junto a la aplicación. Puedes continuar sin él: '
+      +'cada paso del itinerario explica lo que necesitas saber en ese momento.</span></div>';
+}
+function bloqueVideo(){
+  if(VIDEO_ARCHIVO){
+    return '<div class="video-caja" id="cajaVideo">'
+      +'<video src="'+esc(VIDEO_ARCHIVO)+'" controls playsinline preload="metadata" '
+      +'onerror="videoRespaldo()" title="Vídeo de presentación del Taller AILit">'
+      +'Tu navegador no puede reproducir este vídeo.</video></div>';
+  }
+  if(VIDEO_YOUTUBE) return '<div class="video-caja" id="cajaVideo">'+marcoYouTube()+'</div>';
+  return '<div class="video-caja" id="cajaVideo"><div class="video-hueco"><b>Espacio reservado para el vídeo de presentación</b>'
+    +'<span>Para activarlo, sube el archivo de vídeo junto a <code>index.html</code> y escribe su nombre en '
+    +'<code>const VIDEO_ARCHIVO</code>.</span></div></div>';
+}
+
 function pintarInicio(){
-  const video = VIDEO_YOUTUBE
-    ? '<div class="video-caja"><iframe src="https://www.youtube-nocookie.com/embed/'+esc(VIDEO_YOUTUBE)+'" title="Vídeo de presentación del Taller AILit" allowfullscreen loading="lazy"></iframe></div>'
-    : '<div class="video-caja"><div class="video-hueco"><b>Espacio reservado para el vídeo de presentación</b>'
-      +'<span>Para activarlo, abre el archivo con un editor de texto, busca <code>const VIDEO_YOUTUBE = ""</code> '
-      +'y escribe entre las comillas el identificador del vídeo de YouTube.</span></div></div>';
+  const video = bloqueVideo();
 
   $("v-inicio").innerHTML = `
   <h2 id="t-inicio" class="oculto" style="position:absolute;left:-9999px">Inicio</h2>
@@ -1002,8 +1047,9 @@ function pintarInicio(){
   <div class="tarjeta"><div class="cuerpo">${video}
     <p class="pista-campo" style="margin-top:8px">Si prefieres ir directamente a la práctica, puedes saltarte el vídeo: cada paso del itinerario explica lo que necesitas saber en ese momento.</p>
     <div class="aviso marco" style="margin-top:12px"><b>No necesitas instalar ni descargar nada</b>
-    Se usa aquí mismo, desde el navegador, sin cuenta ni registro. Tu progreso se guarda automáticamente en tu propio
-    dispositivo para que no pierdas el trabajo, y no se envía a ningún servidor.</div>
+    Se usa aquí mismo, desde esta misma página, sin cuenta ni registro y en cualquier dispositivo. Tu progreso se guarda
+    automáticamente en tu propio equipo para que no pierdas el trabajo: no se envía a ninguna parte y nadie más puede
+    verlo. Los detalles están en <a href="#" onclick="verVista('transparencia');return false">Qué aporta y qué no</a>.</div>
   </div></div>
 
   <div class="tarjeta">
@@ -1043,9 +1089,13 @@ function pintarInicio(){
         <div class="fila err"><span class="ic">×</span><div><strong>Error frecuente</strong>El fallo que se comete casi siempre en ese punto.</div></div>
         <div class="fila"><span class="ic">✎</span><div><strong>Pregunta para pensar</strong>Tu respuesta queda registrada en la ficha final como diario de decisiones.</div></div>
       </div>
-      <div class="aviso calma" style="margin-top:16px"><b>Para formadores y coordinadores de máster</b>
-      El diario de decisiones convierte la ficha en una evidencia de razonamiento, no solo en un producto. Permite
-      evaluar cómo ha pensado el docente, no únicamente qué ha entregado.</div>
+      <div class="aviso calma" style="margin-top:16px"><b>Si utilizas la herramienta en una formación o en un máster</b>
+      Conviene aclararlo, porque suele generar dudas: esta herramienta no registra nada, no tiene panel de seguimiento y
+      no da acceso al trabajo de nadie. Todo se queda en el dispositivo de cada participante. Lo que puedes pedirles es
+      la ficha final, que cada uno descarga o imprime y te entrega por el cauce que ya utilices. Como esa ficha incorpora
+      el diario de decisiones, no recoge solo la actividad diseñada, sino el razonamiento que la sustenta: por qué ese
+      ámbito, esa competencia y ese nivel. Así puedes valorar cómo ha pensado quien la firma, no únicamente qué ha
+      entregado.</div>
     </div>
   </div>`;
 }
@@ -1399,7 +1449,6 @@ function responder(i,v){
   fb.className="fb on "+(bien?"bien":"mal");
   fb.innerHTML=(bien?"<b>Correcto. </b>":"<b>No es así. </b>")+esc(q.exp);
 }
-
 // ============================================================================
 // FICHA
 // ============================================================================
@@ -1665,7 +1714,7 @@ function pintarBiblioteca(){
   $("v-biblioteca").innerHTML = `
   <h2 id="t-biblioteca" style="position:absolute;left:-9999px">Mis actividades</h2>
   <div class="tarjeta"><div class="cab"><h2>Mis actividades</h2>
-    <p class="pista">Se conservan mientras la pestaña esté abierta</p></div>
+    <p class="pista">${ALMACEN?"Se conservan en este navegador, en tu propio dispositivo":"Aquí se conservan solo mientras la pestaña esté abierta"}</p></div>
     <div class="cuerpo">
       ${ALMACEN
         ? '<div class="aviso marco"><b>Tu trabajo se guarda solo en este dispositivo</b>El progreso y las actividades se '
@@ -1881,9 +1930,20 @@ function pintarTransparencia(){
     navegador» significa que los cálculos ocurren en tu propio dispositivo en lugar de en un servidor, no que tengas que
     bajarte un archivo.</div>
     <ul>
-      <li><b>No tiene servidor.</b> No hay base de datos ni sistema al que se envíen tus textos.</li>
-      <li><b>No hace peticiones de red.</b> No usa CDN, ni fuentes externas, ni analítica, ni píxeles de seguimiento.
-        La única excepción es el vídeo de presentación, si el responsable del sitio decide incrustar uno.</li>
+      <li><b>No hay ningún sistema que reciba lo que escribes.</b> El alojamiento entrega el archivo cuando abres la
+        dirección, igual que cualquier página web, y ahí termina su papel: no hay base de datos, ni cuenta de usuario,
+        ni servicio al que viajen tu objetivo, tu descripción de la actividad o tus respuestas.</li>
+      <li><b>La herramienta en sí no hace ninguna petición de red.</b> No usa CDN, ni fuentes externas, ni analítica,
+        ni píxeles de seguimiento: los estilos, la lógica y los textos del marco van dentro del mismo archivo.
+        ${VIDEO_ARCHIVO
+          ? 'El vídeo de presentación se reproduce con el reproductor del propio navegador, a partir de un archivo '
+            +'alojado junto a esta página, así que tampoco supone una conexión con terceros ni instala cookies. '
+            +(VIDEO_YOUTUBE ? 'Solo si ese archivo no estuviera disponible, la portada recurre al vídeo alojado en '
+              +'YouTube, y esa conexión sí se regiría por la política de YouTube. ' : '')
+          : (VIDEO_YOUTUBE
+            ? 'La única conexión externa es el reproductor del vídeo de presentación, que se carga desde YouTube y se '
+              +'rige por su política de privacidad, no por la nuestra. '
+            : '')}Los enlaces al marco original y al DOI solo salen hacia fuera si los pulsas tú.</li>
       <li><b>No pide datos personales.</b> No hay registro, ni correo, ni identificación.</li>
       <li><b>Guarda tu progreso en tu propio equipo.</b> Usa el almacenamiento local del navegador para que no pierdas el
         trabajo si cierras la pestaña. Esa información no viaja a ninguna parte: se queda en tu dispositivo y puedes
@@ -1893,8 +1953,13 @@ function pintarTransparencia(){
     <div class="acciones">${ALMACEN
       ? '<button class="btn sec" onclick="borrarLocal(true)">Borrar mis datos de este dispositivo</button>'
       : '<span class="pista-campo">El almacenamiento local está bloqueado en este contexto, así que no hay nada guardado que borrar.</span>'}</div>
-    <p style="margin-top:14px">La página que aloje esta herramienta sí puede registrar visitas, como cualquier sitio web.
-    Eso pertenece al aviso legal de ese sitio, no a esta herramienta.</p>
+    <p style="margin-top:14px">Todo lo anterior se refiere a la herramienta. La página que la aloja es otra cosa: como
+    cualquier alojamiento web, registra las visitas conforme a su propia política de privacidad, y si además ves la
+    herramienta incrustada dentro de otro sitio se aplica también la política de ese sitio. Eso pertenece al aviso legal
+    de quien publica la página, no a esta herramienta.</p>
+    <p class="pista-campo" style="margin-top:8px">No hace falta creerlo: pulsa <b>Ctrl + U</b> (o <b>Cmd + Opción + U</b>
+    en Mac) para ver el código fuente completo, o abre la pestaña «Red» de las herramientas del navegador y comprueba
+    que, salvo el archivo del vídeo de la portada, la herramienta no genera ninguna petición mientras trabajas.</p>
   </div></div>
 
   <div class="tarjeta"><div class="cab"><h2>Fuente, licencia y atribución</h2></div><div class="cuerpo">
@@ -1913,6 +1978,8 @@ function pintarTransparencia(){
       <a class="btn sec" href="${ENLACES.marcoWeb}" target="_blank" rel="noopener">Marco original</a>
       <a class="btn sec" href="${ENLACES.interactivo}" target="_blank" rel="noopener">Marco interactivo oficial</a>
     </div>
+    <p class="pista-campo" style="margin-top:14px">Versión del archivo: <b>${VERSION_APP}</b>. Si acabas de sustituir el
+    archivo publicado y aquí sigue apareciendo una versión anterior, es la caché del navegador: pulsa Ctrl + F5.</p>
   </div></div>`;
 }
 
